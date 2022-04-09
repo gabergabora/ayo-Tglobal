@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>Create an Account with us Temenos Global</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+   <%- include("./partials/favicon.ejs") -%>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+    <!-- Page -->
+    <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
+    <style>
+      #carouselExampleSlidesOnly .carousel-item{
+        opacity: 0;
+        -webkit-transition: opacity .1s linear;
+        -o-transition: opacity .1s linear;
+        transition: opacity .1s linear;
+    }
+    #carouselExampleSlidesOnly .carousel-item.active{
+        opacity: 1;
+    }
+    #myAlert{
+        top: -200px;
+        -webkit-transition: top .7s ease-in-out;
+        -o-transition: top .7s ease-in-out;
+        transition: top .7s ease-in-out;
+        max-width: 500px;
+        margin: 0 auto ;
+        z-index: 10;
+    }
+    .move{
+        top: 150px !important;
+    }
+    </style>
+  </head>
+
+  <body>
+    <!-- Content -->
+    <div class="alert alert-primary positon-absolute text-center" role="alert" id="myAlert">
+      
+    </div>
+
+    <div class="container-xxl">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-touch="false" data-bs-interval=false>
+                <div class="carousel-inner d-flex align-items-center">
+                  <div class="carousel-item active">
+                    <!-- first Card -->
+                    <div class="card" id="first-card">
+                    <div class="card-body">
+                        <!-- Logo -->
+                        <div class="app-brand justify-content-center mb-2">
+                        <a href="/" class="app-brand-link gap-2 d-block text-center">
+                            <span class="app-brand-logo demo d-block">
+                                <img src="/assets/images/temenos.png" alt="temenosglobal logo" >
+                            </span>
+                            </a>
+                        </div>
+                        <!-- /Logo -->
+                        <h4 class="mb-2 text-center text-dark">Create Account</h4>
+                        <form id="formAuthentication" class="mb-3">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required placeholder="Enter your email" />
+                        </div>
+                            <button class="btn btn-primary d-grid w-25 ms-auto" >next</button>
+                        </form>
+                        <p class="text-center">
+                        <span>Already have an account?</span>
+                        <a href="/login">
+                            <span>Sign in instead</span>
+                        </a>
+                        </p>
+                    </div>
+                    </div>
+                    <!-- ###first Card -->
+        </div>
+
+        <div class="carousel-item">
+                            <!-- second Card -->
+                <div class="card second.card" id="second-card">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="app-brand justify-content-center mb-2">
+                    <a href="/" class="app-brand-link gap-2 d-block text-center">
+                        <span class="app-brand-logo demo d-block">
+                            <img src="/assets/images/temenos.png" alt="temenosglobal logo" >
+                        </span>
+                        </a>
+                    </div>
+                    <!-- /Logo -->
+                    <h3 class="mb-2 text-center">Create Account</h3>
+                    <h4 class="text-dark text-center"> Complete Registeration </h4>
+
+                    <form class="mb-3" method="POST" id="lastform">
+                        <div class="mb-3">
+                            <label for="email" class="form-label"> First Name</label>
+                            <input type="text" class="form-control"  name="first" placeholder=" " required />
+                        </div>
+                        <input type="hidden" name="email" >
+                        <div class="mb-3">
+                            <label for="email" class="form-label"> last Name</label>
+                            <input type="text" class="form-control"  name="last" placeholder=" " required/>
+                        </div>
+                    <div class="mb-3 form-password-toggle">
+                        <label class="form-label" for="password">Password</label>
+                        <div class="input-group input-group-merge">
+                        <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                        aria-describedby="password"
+                        required
+                    />
+                        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-password-toggle">
+                        <label class="form-label" for="password">Confirm Password</label>
+                        <div class="input-group input-group-merge">
+                        <input
+                        type="password"
+                        id="confirmP"
+                        class="form-control"
+                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                        aria-describedby="confrim password"
+                        required
+                    />
+                        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary d-grid w-100">next</button>
+                    </form>
+                    <button class="btn btn-info d-grid w-25 my-3" id="back" >BACK</button>
+                    <p class="text-center">
+                    <span>Already have an account?</span>
+                    <a href="/login">
+                        <span>Sign in instead</span>
+                    </a>
+                    </p>
+                </div>
+                </div>
+                <!-- second Card -->
+                  </div>
+                </div>
+              </div>
+
+    
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="../assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="../assets/js/main.js"></script>
+<script>
+    document.getElementById("formAuthentication").addEventListener("submit", function (e) {
+    // html require and type attribute carry out before here, so if its gets here its a pass
+    e.preventDefault();
+    document.querySelector("input[name='email']").value = document.getElementById("email").value
+    $('#carouselExampleSlidesOnly').carousel("next");
+    });
+    document.getElementById("back").addEventListener("click", function () {
+    return $('#carouselExampleSlidesOnly').carousel("prev");
+    });
+    document.querySelector("#lastform").addEventListener("submit", function (e) {
+    if (document.querySelector("#password").value.trim() !== document.querySelector("#confirmP").value.trim()) {
+        e.preventDefault();
+        var myAlert = document.getElementById('myAlert');
+        myAlert.innerText = "Passwords don't match";
+        myAlert.classList.add("move");
+        setTimeout(function () {
+        return myAlert.classList.remove("move");
+        }, 3000);
+    }
+    });
+</script>
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
