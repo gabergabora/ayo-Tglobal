@@ -73,18 +73,19 @@
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
-              <div class="app-brand justify-content-center">
+              <div class="app-brand justify-content-center mb-2">
                 <a href="/" class="app-brand-link gap-2 d-block text-center">
                   <span class="app-brand-logo demo d-block">
                       <img src="/assets/images/temenos.png" alt="temenosglobal logo" >
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">Temenos Global</span>
+                  <!-- <span class="app-brand-text demo text-body fw-bolder">Temenos Global</span> -->
                 </a>
               </div>
+              <h3 class="mb-2 text-center"> Login </h3>
               <!-- /Logo -->
               <form id="formAuthentication" class="mb-3" method="POST">
                 <div class="mb-4">
-                  <label for="email" class="form-label">Email or Username</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
                     type="text"
                     class="form-control"
@@ -95,12 +96,12 @@
                   />
                 </div>
                 <div class="mb-4 form-password-toggle">
-                  <!-- <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">Password</label>
-                    <a href="auth-forgot-password-basic.html">
+                    <!-- <a href="auth-forgot-password-basic.html">
                       <small>Forgot Password?</small>
-                    </a>
-                  </div> -->
+                    </a> -->
+                  </div>
                   <div class="input-group input-group-merge">
                     <input
                       type="password"
@@ -126,7 +127,7 @@
 
               <p class="text-center">
                 <span>Don't have an account?</span>
-                <a href="auth-register-basic.html">
+                <a href="/register">
                   <span>Create an account</span>
                 </a>
               </p>
