@@ -13,7 +13,16 @@ app.get("/register", function(req,res){
     res.render("register")
 })
 
+app.get("/dashboard", function(req,res){
+    res.render("dashboard")
+})
+
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
     console.log("server running on port "+ PORT)
 })
+
+
+// forgot password
+// 404 page
+// 
