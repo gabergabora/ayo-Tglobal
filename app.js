@@ -17,6 +17,10 @@ app.get("/dashboard", function(req,res){
     res.render("dashboard")
 })
 
+app.get("/invest", function(req,res){
+    res.render("invest")
+})
+
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
     console.log("server running on port "+ PORT)
