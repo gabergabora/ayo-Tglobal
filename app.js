@@ -21,6 +21,10 @@ app.get("/invest", function(req,res){
     res.render("invest")
 })
 
+app.get("/deposit", function(req,res){
+    res.render("deposit")
+})
+
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
     console.log("server running on port "+ PORT)
