@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title> Deposit into your account </title>
+    <!-- headLinks -->
+  <%- include("./partials/headLinks.ejs") -%>
+  <!-- ### headLinks ### -->
+    <style>
+    .app-brand-logo img, .app-brand-logo svg {
+    display: block;
+    width: 40px;
+    margin: 0 auto;
+    }
+    </style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <%- include("./partials/sidenav.ejs") -%>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center ms-auto me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+      <!-- Modal -->
+      <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalCenterTitle"> Copy the address </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col mb-3">
+                  <input class="form-control" type="text" selec id="myInput" value="Readonly input here..." readonly="">
+                  <div class="col-12"></div>
+                  <div class="col-4 p-2 text-light ms-auto text-end flex-column" onclick="myFunction()">
+                    <svg fill="#696cff" xmlns="http://www.w3.org/2000/svg" class="w-25 text-primary" viewBox="0 0 384 512"><path d="M336 64h-53.88C268.9 26.8 233.7 0 192 0S115.1 26.8 101.9 64H48C21.5 64 0 85.48 0 112v352C0 490.5 21.5 512 48 512h288c26.5 0 48-21.48 48-48v-352C384 85.48 362.5 64 336 64zM192 64c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S160 113.7 160 96C160 78.33 174.3 64 192 64zM272 224h-160C103.2 224 96 216.8 96 208C96 199.2 103.2 192 112 192h160C280.8 192 288 199.2 288 208S280.8 224 272 224z"/></svg>
+                    <p class="w-100">copy</p>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="card  mb-4">
+                                    <div class="card-body">
+                                      <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src="../assets/img/icons/unicons/wallet-info.png"
+                                            alt="Credit Card"
+                                            class="rounded"
+                                          />
+                                        </div>
+                                        <div class="dropdown">
+                                          <button
+                                            class="btn p-0"
+                                            type="button"
+                                            id="cardOpt3"
+                                            data-bs-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                          >
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                          </button>
+                                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                            <a class="dropdown-item justify-content-between d-flex" href="javascript:void(0);">
+                                                hide
+                                                  <div class="text-end">
+                                                    <div class="form-check form-switch">
+                                                      <input class="form-check-input hide-amount" data-target="#ballance" type="checkbox" role="switch">
+                                                    </div>
+                                                  </div>
+                                                </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <span class="fw-semibold d-block mb-1">Ballance</span>
+                                      <h3 class="card-title mb-1" id="ballance" data-amount="$12,628">$12,628</h3>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div> 
+                        <div class="row justify-content-center">
+                            <div class="col-12 mb-4">
+                                <div class="card h-100">
+                                  <div class="card-header d-flex align-items-center justify-content-between">
+                                    <h5 class="card-title m-0 me-2"> Transaction History </h5>
+                                    <div class="dropup">
+                                      <button class="btn p-0 dropup" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                      </button>
+                                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID" >
+                                        <div class="dropdown-item px-3 py-2 mt-3">
+                                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio1">
+                                            <label class="form-check-label" for="defaultRadio1"> All </label>
+                                          </div>
+                                          <div class="dropdown-item px-3 py-2 mt-3">
+                                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio2" checked="">
+                                            <label class="form-check-label" for="defaultRadio2"> Withdrawal </label>
+                                          </div>
+                                          <div class="dropdown-item px-3 py-2 mt-3">
+                                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio2" checked="">
+                                            <label class="form-check-label" for="defaultRadio2"> Deposits </label>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card-body">
+                                    <ul class="p-0 m-0">
+                                      <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                          <img src="../assets/img/icons/unicons/cc-success.png" alt="User" class="rounded">
+                                        </div>
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                            <small class="text-muted d-block mb-1">Deposit</small>
+                                            <h6 class="mb-0">Bitcoin</h6>
+                                          </div>
+                                          <div class="user-progress d-flex align-items-center gap-1">
+                                            <h6 class="mb-0">8,200</h6>
+                                            <span class="text-muted">USD</span>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                          <img src="../assets/img/icons/unicons/cc-warning.png" alt="User" class="rounded">
+                                        </div>
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                            <small class="text-muted d-block mb-1">Withdrawal</small>
+                                            <h6 class="mb-0">Paypal</h6>
+                                          </div>
+                                          <div class="user-progress d-flex align-items-center gap-1">
+                                            <h6 class="mb-0">2,170</h6>
+                                            <span class="text-muted">USD</span>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                          <img src="../assets/img/icons/unicons/cc-success.png" alt="User" class="rounded">
+                                        </div>
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                            <small class="text-muted d-block mb-1">deposit</small>
+                                            <h6 class="mb-0">wifi-money</h6>
+                                          </div>
+                                          <div class="user-progress d-flex align-items-center gap-1">
+                                            <h6 class="mb-0">21,000</h6>
+                                            <span class="text-muted">USD</span>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="d-flex mb-4 pb-1">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                          <img src="../assets/img/icons/unicons/cc-success.png" alt="User" class="rounded">
+                                        </div>
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                            <small class="text-muted d-block mb-1">Credit Card</small>
+                                            <h6 class="mb-0">Ordered Food</h6>
+                                          </div>
+                                          <div class="user-progress d-flex align-items-center gap-1">
+                                            <h6 class="mb-0">-838.71</h6>
+                                            <span class="text-muted">USD</span>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                        </div> 
+                     </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / Content -->
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    	<%- include("./partials/footerLinks.ejs") -%>
+<script>
+        document.querySelector(".hide-amount")
+        const allHiders = Array.from(document.getElementsByClassName("hide-amount"))
+        for(i=0; i< allHiders.length ; i++){
+            allHiders[i].addEventListener("change", function(e){
+                let amount_box = document.querySelector(e.target.getAttribute("data-target"))
+                if(e.target.checked){
+                    amount_box.innerText = "***"
+                }else{
+                    amount_box.innerText = amount_box.getAttribute("data-amount")
+                }
+            })
+        }
+</script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>

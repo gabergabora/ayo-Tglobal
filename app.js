@@ -29,6 +29,10 @@ app.get("/withdraw", function(req,res){
     res.render("withdraw")
 })
 
+app.get("/history", function(req,res){
+    res.render("transactions")
+})
+
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
     console.log("server running on port "+ PORT)
