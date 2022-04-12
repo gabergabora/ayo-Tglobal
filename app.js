@@ -33,6 +33,9 @@ app.get("/history", function(req,res){
     res.render("transactions")
 })
 
+app.get("/loan", function(req,res){
+    res.render("loan")
+})
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){
     console.log("server running on port "+ PORT)
