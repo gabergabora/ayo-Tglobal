@@ -41,6 +41,100 @@
     .list-group-item{
       margin-bottom: 0px;
     }
+    ul.pricing-item-list{
+        list-style-type: none;
+        }
+        .pricing-grid-item-inner:hover .pricing-item-amount:before{
+            width: 100%;
+            background-color: red;
+            left: 100%;
+        }
+        .pricing-item-list li {
+        color: #636363;
+        font-size: 18px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+        align-items: baseline;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .pricing-item-list li .pricing-list-arrow {
+          -webkit-box-flex: 0;
+          flex: 0 0 15px;
+          -ms-flex: 0 1 auto;
+          max-width: 15px;
+          width: 15px;
+          margin-right: 12px;
+          font-size: 15px;
+      }
+      .pricing-item-amount {
+      padding: 30px;
+      text-align: center;
+      -webkit-transition: all .3s linear;
+      transition: all .3s linear;
+      position: relative;
+      }
+      .pricing_blue{
+          background-color: rgba(41,72,255,.2) !important;
+      }
+      .pricing_green{
+      background-color:rgba(41, 255, 105, 0.2)!important ;
+      }
+      .pricing_red{
+      background-color:rgba(255, 102, 41, 0.2)!important ;
+      }
+      .pricing-item-amount h4 {
+      font-size: 49px;
+      font-weight: 400;
+      color: #2948ff;
+      position: relative;
+      -webkit-transition: all .5s linear;
+      transition: all .5s linear;
+      }
+      .pricing-item-body {
+      padding: 20px;
+      height: 100%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: start;
+      -ms-flex-align: start;
+      align-items: flex-start;
+  }
+  .pricing-item-list li .pricing-list-arrow {
+    -webkit-box-flex: 0;
+    flex: 0 0 15px;
+    -ms-flex: 0 1 auto;
+    max-width: 15px;
+    width: 15px;
+    margin-right: 12px;
+    font-size: 15px;
+}
+.pricing-item-list li .pricing-list-arrow {
+  -webkit-box-flex: 0;
+  flex: 0 0 15px;
+  -ms-flex: 0 1 auto;
+  max-width: 15px;
+  width: 15px;
+  margin-right: 12px;
+  font-size: 15px;
+    }
+.pricing-item-body .btn1 {
+    color: #fff;
+    margin-top: auto;
+}
+
+.orange-gradient {
+    background: -webkit-gradient(linear,left top,right top,from(#f20f10),to(#ec600d));
+    background: linear-gradient(90deg,#f20f10 0%,#ec600d 100%);
+}
     </style>
   </head>
 
@@ -51,7 +145,6 @@
         <!-- Menu -->
         <%- include("./partials/sidenav.ejs") -%>
         <!-- / Menu -->
-
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
@@ -74,7 +167,7 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="row justify-content-center">
-                    <div class="col-md-10 col-lg-8">
+                    <div class="col-md-12 col-lg-11">
                         <div class="row ">
                           <div class="col-md-6 mb-4 ">
                             <div class="card">
@@ -120,17 +213,12 @@
                                   <ul class="nav nav-pills mb-3" role="tablist">
                                     <li class="nav-item">
                                       <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
-                                        crypto
+                                        single plans
                                       </button>
                                     </li>
                                     <li class="nav-item">
                                       <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
-                                        Real estate
-                                      </button>
-                                    </li>
-                                    <li class="nav-item">
-                                      <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-messages" aria-controls="navs-pills-top-messages" aria-selected="false">
-                                        holdings
+                                        marrathon cycle
                                       </button>
                                     </li>
                                   </ul>
@@ -140,86 +228,91 @@
                                       <div class="container">
                                         <div class="row justify-content-center">
 
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Basic plan
-                                                  <img src="/assets/images/dashboard/crypto.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 20 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $100</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $999</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
+                                          <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card">
+                                              <div class="py-2">
+                                                <div class="pricing-grid-item-inner">
+                                                  <div class="pricing-item-header py-3">
+                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Basic</h3>
                                                   </div>
-                                                  <form method="post" class="my-2">
+                                                  <div class="pricing-item-amount pricing_blue">
+                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
+                                                  </div>
+                                                  <div class="pricing-item-body px-3">
+                                                  <ul class="pricing-item-list">
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  20% (ROI)</li>
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
+                                                  </ul>
+                                                  <form method="post" class="my-2 w-100">
                                                     <div class="py-2">
                                                       <input type="number" name="amount" class="form-control" placeholder="put amount">
                                                     </div>
-                                                    <button class="btn btn-outline-primary"> invest</button>
+                                                    <button class="btn btn-outline-primary form-control "> invest</button>
                                                   </form>
-                                                </div>
+                                                  </div>
+                                                  
                                               </div>
                                             </div>
                                           </div>
+                                        </div>
 
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Standard plan
-                                                  <img src="/assets/images/dashboard/crypto.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 30 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $1,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $9,999</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
-                                                    <form method="post" class="my-2">
+                                          <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card">
+                                              <div class="py-2">
+                                                <div class="pricing-grid-item-inner">
+                                                  <div class="pricing-item-header py-3">
+                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Standard</h3>
+                                                  </div>
+                                                  <div class="pricing-item-amount pricing_green">
+                                                  <h4 style="font-size:20px"><small>$</small>45,000 - Infinity</h4>
+                                                  </div>
+                                                  <div class="pricing-item-body px-3">
+                                                    <ul class="pricing-item-list">
+                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  40% (ROI)</li>
+                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
+                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
+                                                    </ul>
+                                                    <form method="post" class="my-2 w-100">
                                                       <div class="py-2">
                                                         <input type="number" name="amount" class="form-control" placeholder="put amount">
                                                       </div>
-                                                      <button class="btn btn-outline-primary"> invest</button>
+                                                      <button class="btn btn-outline-success form-control "> invest</button>
                                                     </form>
-                                                  </div>
-                                                </div>
+                                                    </div>
                                               </div>
                                             </div>
+                                          </div>
                                           </div>
 
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Premium plan
-                                                  <img src="/assets/images/dashboard/crypto.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 40 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $10,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $100,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
-                                                    <form method="post" class="my-2">
-                                                      <div class="py-2">
-                                                        <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                      </div>
-                                                      <button class="btn btn-outline-primary"> invest</button>
-                                                    </form>
+                                          <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card">
+                                              <div class="py-2">
+                                                <div class="pricing-grid-item-inner">
+                                                  <div class="pricing-item-header py-3">
+                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Partinership</h3>
                                                   </div>
-                                                </div>
+                                                  <div class="pricing-item-amount pricing_red">
+                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
+                                                  </div>
+                                                  <div class="pricing-item-body px-3">
+                                                  <ul class="pricing-item-list">
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  20% (ROI)</li>
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
+                                                  </ul>
+                                                  <form method="post" class="my-2 w-100">
+                                                    <div class="py-2">
+                                                      <input type="number" name="amount" class="form-control" placeholder="put amount">
+                                                    </div>
+                                                    <button class="btn btn-outline-danger form-control "> invest</button>
+                                                  </form>
+                                                  </div>
+                                                  
                                               </div>
                                             </div>
                                           </div>
+                                        </div>
                                         </div>
                                       </div>
                                     </div>
@@ -230,180 +323,92 @@
                                       <div class="container">
                                         <div class="row justify-content-center">
 
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Basic plan
-                                                  <img src="/assets/images/dashboard/realestate.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 20 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $100</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $999</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
+                                          <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card">
+                                              <div class="py-2">
+                                                <div class="pricing-grid-item-inner">
+                                                  <div class="pricing-item-header py-3">
+                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Basic</h3>
                                                   </div>
-                                                  <form method="post" class="my-2">
+                                                  <div class="pricing-item-amount pricing_blue">
+                                                  <h4 style="font-size:20px"><small >$</small>50 - 10,000</h4>
+                                                  </div>
+                                                  <div class="pricing-item-body px-3">
+                                                  <ul class="pricing-item-list">
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  5% (ROI)/day</li>
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 5 cycles</li>
+                                                  </ul>
+                                                  <form method="post" class="my-2 w-100">
                                                     <div class="py-2">
                                                       <input type="number" name="amount" class="form-control" placeholder="put amount">
                                                     </div>
-                                                    <button class="btn btn-outline-primary"> invest</button>
+                                                    <button class="btn btn-outline-primary form-control "> invest</button>
                                                   </form>
-                                                </div>
+                                                  </div>
+                                                  
                                               </div>
                                             </div>
                                           </div>
+                                        </div>
 
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Standard plan
-                                                  <img src="/assets/images/dashboard/realestate.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 30 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $1,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $9,999</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
-                                                    <form method="post" class="my-2">
+                                          <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card">
+                                              <div class="py-2">
+                                                <div class="pricing-grid-item-inner">
+                                                  <div class="pricing-item-header py-3">
+                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Standard</h3>
+                                                  </div>
+                                                  <div class="pricing-item-amount pricing_green">
+                                                  <h4 style="font-size:20px"><small>$</small>50 - 10,000</h4>
+                                                  </div>
+                                                  <div class="pricing-item-body px-3">
+                                                    <ul class="pricing-item-list">
+                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  10% (ROI)/day</li>
+                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 10 cycles</li>
+                                                    </ul>
+                                                    <form method="post" class="my-2 w-100">
                                                       <div class="py-2">
                                                         <input type="number" name="amount" class="form-control" placeholder="put amount">
                                                       </div>
-                                                      <button class="btn btn-outline-primary"> invest</button>
+                                                      <button class="btn btn-outline-success form-control "> invest</button>
                                                     </form>
-                                                  </div>
-                                                </div>
+                                                    </div>
                                               </div>
                                             </div>
+                                          </div>
                                           </div>
 
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Premium plan
-                                                  <img src="/assets/images/dashboard/realestate.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 40 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $10,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $100,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
-                                                    <form method="post" class="my-2">
-                                                      <div class="py-2">
-                                                        <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                      </div>
-                                                      <button class="btn btn-outline-primary"> invest</button>
-                                                    </form>
+                                          <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card">
+                                              <div class="py-2">
+                                                <div class="pricing-grid-item-inner">
+                                                  <div class="pricing-item-header py-3">
+                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Partinership</h3>
                                                   </div>
-                                                </div>
+                                                  <div class="pricing-item-amount pricing_red">
+                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
+                                                  </div>
+                                                  <div class="pricing-item-body px-3">
+                                                  <ul class="pricing-item-list">
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  15% (ROI)/days</li>
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 15 cycles</li>
+                                                  </ul>
+                                                  <form method="post" class="my-2 w-100">
+                                                    <div class="py-2">
+                                                      <input type="number" name="amount" class="form-control" placeholder="put amount">
+                                                    </div>
+                                                    <button class="btn btn-outline-danger form-control "> invest</button>
+                                                  </form>
+                                                  </div>
+                                                  
                                               </div>
                                             </div>
                                           </div>
+                                        </div>
                                         </div>
                                       </div>
                                     </div>
                                     <!-- ## second pane ## -->
-
-                                    <!-- third pane -->
-                                    <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
-                                      <div class="container">
-                                        <div class="row justify-content-center">
-
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Basic plan
-                                                  <img src="/assets/images/dashboard/stock.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 20 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $100</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $999</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
-                                                  </div>
-                                                  <form method="post" class="my-2">
-                                                    <div class="py-2">
-                                                      <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                    </div>
-                                                    <button class="btn btn-outline-primary"> invest</button>
-                                                  </form>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Standard plan
-                                                  <img src="/assets/images/dashboard/stock.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 30 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $1,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $9,999</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
-                                                    <form method="post" class="my-2">
-                                                      <div class="py-2">
-                                                        <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                      </div>
-                                                      <button class="btn btn-outline-primary"> invest</button>
-                                                    </form>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-
-                                          <div class="col-md-6 mb-3">
-                                            <div class="card h-100">
-                                              <div class="card-body">
-                                                <h5 class="card-title d-flex align-items-center">
-                                                  Premium plan
-                                                  <img src="/assets/images/dashboard/stock.png" alt="..." class="plan-sec-img d-block" srcset="">
-                                                </h5>
-                                                <h1 class="text-center display-1"> 40 <sub><small>%</small></sub></h1>
-                                                <div>
-                                                  <div class="demo-inline-spacing mt-3">
-                                                    <div class="list-group list-group-flush">
-                                                      <p  class="list-group-item list-group-item-action">min <span class="text-success"> $10,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action">max <span class="text-success"> $100,000</span></p>
-                                                      <p  class="list-group-item list-group-item-action"> # days</p>
-                                                    </div>
-                                                    <form method="post" class="my-2">
-                                                      <div class="py-2">
-                                                        <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                      </div>
-                                                      <button class="btn btn-outline-primary"> invest</button>
-                                                    </form>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <!-- ### third pane ## -->
                                   </div>
                                 </div>
                               </div>
