@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title> Your Dashboard </title>
+    <!-- headLinks -->
+  <%- include("../partials/headLinks.ejs") -%>
+  <!-- ### headLinks ### -->
+    <style>
+    .app-brand-logo img, .app-brand-logo svg {
+    display: block;
+    width: 40px;
+    margin: 0 auto;
+    }
+    .bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
+    color: #696cff;
+    background-color: rgba(255, 105, 230, 0.16) !important;
+    }
+    .avatar-container{
+      background-color: rgba(120, 105, 255, 0.16) ;
+      border-radius: 10px;
+    }
+    li.user-short{
+      cursor: pointer;
+    }
+    </style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <%- include("./partials/admin-sidenav.ejs") -%>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center ms-auto me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+ 
+                <!-- Modal -->
+                <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                      <div class=" mb-4">
+                        <div class="card-body">
+                          <form>
+                            <div class="mb-3">
+                              <label class="form-label" for="basic-default-fullname">Full Name</label>
+                              <input type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="basic-default-company">Company</label>
+                              <input type="text" class="form-control" id="basic-default-company" placeholder="ACME Inc.">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="basic-default-email">Email</label>
+                              <div class="input-group input-group-merge">
+                                <input type="text" id="basic-default-email" class="form-control" placeholder="john.doe" aria-label="john.doe" aria-describedby="basic-default-email2">
+                                <span class="input-group-text" id="basic-default-email2">@example.com</span>
+                              </div>
+                              <div class="form-text">You can use letters, numbers &amp; periods</div>
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="basic-default-phone">Phone No</label>
+                              <input type="text" id="basic-default-phone" class="form-control phone-mask" placeholder="658 799 8941">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="basic-default-message">Message</label>
+                              <textarea id="basic-default-message" class="form-control" placeholder="Hi, Do you have a moment to talk Joe?"></textarea>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                              <button type="submit" class="btn btn-primary"> update</button>
+                              <button type="submit" class="btn btn-danger">delete</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-8">
+                      <div class="row">
+                             <!-- welcome (first grid) -->
+                             <div class="col-12 mb-4 ">
+                              <div class="card">
+                                <div class="d-flex align-items-end row">
+                                  <div class="col-sm-7">
+                                    <div class="card-body">
+                                      <h5 class="card-title text-primary">Welcome Boss! 🎉</h5>
+                                      <p class="mb-4">
+                                        You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
+                                        your profile.
+                                      </p>
+            
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-5 text-center text-sm-left">
+                                    <div class="card-body pb-0 px-0 px-md-4">
+                                      <img
+                                        src="../assets/img/illustrations/man-with-laptop-light.png"
+                                        height="140"
+                                        alt="View Badge User"
+                                        data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                                        data-app-light-img="illustrations/man-with-laptop-light.png"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                          <!-- #### -->
+                      </div>
+                        <div class="row">
+                          <div class="col-12 mb-4">
+                            <div class="card h-100">
+                              <div class="card-header d-flex align-items-center justify-content-between">
+                                <h5 class="card-title m-0 me-2"> Accounts </h5>
+                                <div class="dropdown">
+                                  <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                  </button>
+                                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID" >
+                                    <a class="dropdown-item" href="javascript:void(0);">Clients</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Brokers</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card-body">
+                                <ul class="p-0 m-0">
+                                  <li class="d-flex mb-4 pb-1 user-short" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                    <div class="avatar flex-shrink-0 me-3">
+                                      <div class="avatar-container h-100 d-flex align-items-center justify-content-center">
+                                        <i class="bx bx-user"></i>
+                                      </div>
+                                    </div>
+                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                      <div class="me-2">
+                                        <small class="text-muted d-block mb-1"> Eze-ego</small>
+                                        <h6 class="mb-0">client</h6>
+                                      </div>
+                                      <div class="user-progress d-flex flex-column align-items-center gap-1">
+                                        <h6 class="mb-0">3days</h6>
+                                        <span class="text-muted">ago</span>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / Content -->
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    	<%- include("../partials/footerLinks.ejs") -%>
+
+    <script>
+    </script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
