@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title> Deposit into your account </title>
+    <!-- headLinks -->
+  <%- include("./partials/headLinks.ejs") -%>
+  <!-- ### headLinks ### -->
+    <style>
+    .app-brand-logo img, .app-brand-logo svg {
+    display: block;
+    width: 40px;
+    margin: 0 auto;
+    }
+    .form-check label{
+        cursor: pointer;
+    }  
+    ul.progress-group{
+        list-style: none;
+    }
+    ul li.progress-item {
+        margin: 1rem 0;
+        /* position: relative; */
+        display: flex;
+        align-items: center;
+
+    }
+    li.progress-item::before{
+        display: block;
+        content: "";
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        /* background-color:#007bff; */
+        border: 2px dashed #007bff;
+        margin-right: 20px;
+    }  
+  
+    </style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <%- include("./partials/sidenav.ejs") -%>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center ms-auto me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="row">
+                            <div class="col-md-6 mb-4 ">
+                                <div class="card">
+                                    <div class="card-body">
+                                      <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src="../assets/img/icons/unicons/wallet-info.png"
+                                            alt="Credit Card"
+                                            class="rounded"
+                                          />
+                                        </div>
+                                        <div class="dropdown">
+                                          <button
+                                            class="btn p-0"
+                                            type="button"
+                                            id="cardOpt3"
+                                            data-bs-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                          >
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                          </button>
+                                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                            <a class="dropdown-item justify-content-between d-flex" href="javascript:void(0);">
+                                                hide
+                                                  <div class="text-end">
+                                                    <div class="form-check form-switch">
+                                                      <input class="form-check-input hide-amount" data-target="#ballance" type="checkbox" role="switch">
+                                                    </div>
+                                                  </div>
+                                                </a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <span class="fw-semibold d-block mb-1">Funding Ballance</span>
+                                      <h3 class="card-title mb-2" id="ballance" data-amount="$12,628">$12,628</h3>
+                                    </div>
+                                  </div>
+                              </div>
+           
+                              <div class="col-md-6 mb-4 ">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                      <div class="avatar flex-shrink-0">
+                                        <img
+                                          src="../assets/img/icons/unicons/chart-success.png"
+                                          alt="chart success"
+                                          class="rounded"
+                                        />
+                                      </div>
+                                      <div class="dropdown">
+                                        <button
+                                          class="btn p-0"
+                                          type="button"
+                                          id="cardOpt6"
+                                          data-bs-toggle="dropdown"
+                                          aria-haspopup="true"
+                                          aria-expanded="false"
+                                        >
+                                          <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                                            <a class="dropdown-item justify-content-between d-flex" href="javascript:void(0);">
+                                                hide
+                                                  <div class="text-end">
+                                                    <div class="form-check form-switch">
+                                                      <input class="form-check-input hide-amount" data-target="#sh-term" type="checkbox" role="switch">
+                                                    </div>
+                                                  </div>
+                                                </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span class="fw-semibold d-block mb-2">short-term ballance </span>
+                                    <h3 class="card-title text-nowrap mb-1" id="sh-term" data-amount="$4,679" >$4,679</h3>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 mb-4 ">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                      <div class="avatar flex-shrink-0">
+                                        <img
+                                          src="../assets/img/icons/unicons/chart-success.png"
+                                          alt="chart success"
+                                          class="rounded"
+                                        />
+                                      </div>
+                                      <div class="dropdown">
+                                        <button
+                                          class="btn p-0"
+                                          type="button"
+                                          id="cardOpt6"
+                                          data-bs-toggle="dropdown"
+                                          aria-haspopup="true"
+                                          aria-expanded="false"
+                                        >
+                                          <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                                            <a class="dropdown-item justify-content-between d-flex" href="javascript:void(0);">
+                                                hide
+                                                  <div class="text-end">
+                                                    <div class="form-check form-switch">
+                                                      <input class="form-check-input hide-amount" data-target="#cycles" type="checkbox" role="switch">
+                                                    </div>
+                                                  </div>
+                                                </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <span class="fw-semibold d-block mb-2">cycles ballance </span>
+                                    <h3 class="card-title text-nowrap mb-1" id="cycles" data-amount="$4,679" >$4,679</h3>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>  
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg 8">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <form>
+                                         <h3> Transfer funds</h3>
+                                         <div class="mb-3">
+                                            <label for="defaultSelect" class="form-label">From</label>
+                                            <select id="defaultSelect" class="form-select">
+                                              <option>From wallet </option>
+                                              <option value="1"> Funding ballance</option>
+                                              <option value="2">cycles ballance</option>
+                                              <option value="3">short-term ballance</option>
+                                            </select>
+                                          </div>
+                                          <div class="mb-3">
+                                            <label for="defaultSelect1" class="form-label">To</label>
+                                            <select id="defaultSelect1" class="form-select">
+                                              <option> To wallet</option>
+                                              <option value="1"> Funding ballance</option>
+                                              <option value="2">cycles ballance</option>
+                                              <option value="3">short-term ballance</option>
+                                            </select>
+                                          </div>
+                                          <div class="mb-3">
+                                            <label class="form-label" for="basic-default-phone">Amount</label>
+                                            <input type="text" id="basic-default-phone" class="form-control phone-mask" placeholder="withdraw from availabe ballance">
+                                          </div>
+                                          <button type="submit" class="btn btn-primary"> withdraw</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                     </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / Content -->
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    	<%- include("./partials/footerLinks.ejs") -%>
+<script>
+        document.querySelector(".hide-amount")
+        const allHiders = Array.from(document.getElementsByClassName("hide-amount"))
+        for(i=0; i< allHiders.length ; i++){
+            allHiders[i].addEventListener("change", function(e){
+                let amount_box = document.querySelector(e.target.getAttribute("data-target"))
+                if(e.target.checked){
+                    amount_box.innerText = "***"
+                }else{
+                    amount_box.innerText = amount_box.getAttribute("data-amount")
+                }
+            })
+        }
+</script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>

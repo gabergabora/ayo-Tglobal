@@ -26,6 +26,10 @@ user_getRoute.get("/deposit", function(req,res){
     res.render("deposit")
 })
 
+user_getRoute.get("/transfer", function(req,res){
+    res.render("transfer")
+})
+
 user_getRoute.get("/withdraw", function(req,res){
     res.render("withdraw")
 })
