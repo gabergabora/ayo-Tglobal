@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
     fundingBallance : {type : Number, default : 0},
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
+    walletAddress : String,
     lastLoggedIn : Date,
 }, {
     minimize : false,
