@@ -76,9 +76,22 @@
 
   <body>
     <!-- Content -->
-    <div class="alert alert-primary positon-absolute text-center" role="alert" id="myAlert">
-      
-    </div>
+     <% if(messages.error){ %>
+         <div class="alert alert-primary alert-dismissible move" role="alert" id="myAlert">
+             <%= messages.error %>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>
+           <script>
+        setTimeout(function () {
+        return myAlert.classList.remove("move");
+        }, 3000);
+           </script>
+       <% }else{ %>
+        <div class="alert alert-primary alert-dismissible text-center" role="alert" id="myAlert">
+            This is a primary dismissible alert — check it out!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+     <%  } %>
 
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
@@ -101,7 +114,7 @@
                         <h4 class="mb-2 text-center text-dark">Create Account</h4>
                         <form id="formAuthentication" class="mb-3">
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">Email <small class="text-danger">*</small></label>
                             <input type="email" class="form-control" id="email" required placeholder="Enter your email" />
                         </div>
                             <button class="btn btn-primary d-grid w-25 ms-auto" >next</button>
@@ -135,16 +148,16 @@
 
                     <form class="mb-3" method="POST" id="lastform">
                         <div class="mb-3">
-                            <label for="email" class="form-label"> First Name</label>
-                            <input type="text" class="form-control"  name="first" placeholder=" " required />
+                            <label for="email" class="form-label"> First Name <small class="text-danger">*</small></label>
+                            <input type="text" class="form-control"  name="firstName" placeholder=" " required />
                         </div>
                         <input type="hidden" name="email" >
                         <div class="mb-3">
-                            <label for="email" class="form-label"> last Name</label>
-                            <input type="text" class="form-control"  name="last" placeholder=" " required/>
+                            <label for="email" class="form-label"> last Name <small class="text-danger">*</small> </label>
+                            <input type="text" class="form-control"  name="lastName" placeholder=" " required/>
                         </div>
                     <div class="mb-3 form-password-toggle">
-                        <label class="form-label" for="password">Password</label>
+                        <label class="form-label" for="password">Password <small class="text-danger">*</small> </label>
                         <div class="input-group input-group-merge">
                         <input
                         type="password"
@@ -159,7 +172,7 @@
                         </div>
                     </div>
                     <div class="mb-3 form-password-toggle">
-                        <label class="form-label" for="password">Confirm Password</label>
+                        <label class="form-label" for="password">Confirm Password <small class="text-danger">*</small> </label>
                         <div class="input-group input-group-merge">
                         <input
                         type="password"
@@ -172,9 +185,9 @@
                         <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                         </div>
                     </div>
-                    <button class="btn btn-primary d-grid w-100">next</button>
+                    <button class="btn btn-primary d-grid w-100"> sign up</button>
                     </form>
-                    <button class="btn btn-info d-grid w-25 my-3" id="back" >BACK</button>
+                    <button class="btn btn-info d-grid w-25 my-3" id="back" > back </button>
                     <p class="text-center">
                     <span>Already have an account?</span>
                     <a href="/login">
@@ -225,7 +238,7 @@
         var myAlert = document.getElementById('myAlert');
         myAlert.innerText = "Passwords don't match";
         myAlert.classList.add("move");
-        setTimeout(function () {
+        return setTimeout(function () {
         return myAlert.classList.remove("move");
         }, 3000);
     }
