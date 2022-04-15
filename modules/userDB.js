@@ -10,6 +10,13 @@ const userSchema = mongoose.Schema({
     password :{type : String,required : [true, "make sure all inputs are filled"],},
     firstName :{type : String,required : [true, "make sure all inputs are filled"],},
     lastName : {type : String,required : [true, "make sure all inputs are filled"]},
+    fundingBallance : {type : Number, default : 0},
+    shortBallance : {type : Number, default : 0},
+    cyclesBallance : {type : Number, default : 0},
+    lastLoggedIn : Date,
+}, {
+    minimize : false,
+    timestamps : true,
 })
 
 USER = mongoose.model("user", userSchema)

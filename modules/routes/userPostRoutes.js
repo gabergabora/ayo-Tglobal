@@ -17,6 +17,7 @@ function(req,res, next){
             return showError(req,"/register",  "this email isn't available", res)
         }
             else {
+                req.body.email = req.body.email.toLowerCase()
                 USER.create(req.body, function(err){
                 if(err){
                     console.log(err.message)

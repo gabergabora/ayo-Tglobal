@@ -30,6 +30,8 @@ passport.use("user",new localStrategy(
             if(data){
                 try{
                     if(data.password === password){
+                        USER.updateOne({email : data.email},{lastLoggedIn : new Date()},
+                        function(err){if(err) return console.log("error trying to update user logins", err)})
                         return done(null,data)
                     }else{
                         return done(null, false, {message : "wrong username or password"})

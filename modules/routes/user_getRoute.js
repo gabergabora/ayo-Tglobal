@@ -2,10 +2,11 @@ const express = require("express")
 const user_getRoute = express.Router()
 
 const isAuth = function(req,res, next){
-    res.locals.reqUrl = req.url
     if(!req.isAuthenticated()){
        return res.redirect("/login")
     }
+    res.locals.reqUrl = req.url
+    res.locals.user = req.user
     return next() 
 }
 
@@ -17,8 +18,11 @@ user_getRoute.get("/login", function(req,res){
  })
 
  
-user_getRoute.get("/register", isAuth, function(req,res){
-    res.render("register")
+user_getRoute.get("/register", function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect("/dashboard")
+    }
+    return  res.render("register")
 })
 
 user_getRoute.get("/dashboard",isAuth, function(req,res){
