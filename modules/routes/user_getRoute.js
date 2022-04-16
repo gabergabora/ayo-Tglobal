@@ -25,6 +25,13 @@ user_getRoute.get("/register", function(req,res){
     return  res.render("register")
 })
 
+user_getRoute.get("/register/:id", function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect("/dashboard")
+    }
+    return  res.render("register")
+})
+
 user_getRoute.get("/dashboard",isAuth, function(req,res){
     res.render("dashboard")
 })

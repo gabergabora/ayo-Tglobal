@@ -8,7 +8,8 @@ function(req,res){
 const History = mongoose.Schema({
     title : String,
     amount : Number,
-    means : {type : String, default : "USDT"}
+    means : {type : String, default : "USDT"},
+    status : {type : Boolean, default : false}
 }, {timestamps : true})
 const userSchema = mongoose.Schema({
     email : {type : String,  required : [true, "make sure all inputs are filled"],},
@@ -18,6 +19,7 @@ const userSchema = mongoose.Schema({
     fundingBallance : {type : Number, default : 0},
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
+    referrals : [String],
     History : [History],
     walletAddress : String,
     lastLoggedIn : Date,
