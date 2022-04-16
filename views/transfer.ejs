@@ -74,6 +74,19 @@
               </a>
             </div>
           </nav>
+          <!-- just server validation -->
+      <% if(messages.error){ %>
+        <div class="alert alert-primary alert-dismissible text-center" role="alert" id="myAlert">
+            <%= messages.error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <script>
+            myAlert.classList.add("move")
+          setTimeout(function () {
+          return myAlert.classList.remove("move");
+          }, 3000);
+          </script>
+      <% } %>
 
           <!-- / Navbar -->
           <!-- Content wrapper -->
@@ -86,115 +99,42 @@
                             <div class="col-md-6 mb-4 ">
                                     <%- include("./partials/ballances/fundingBallance.ejs") -%>
                               </div>
-           
                               <div class="col-md-6 mb-4 ">
-                                <div class="card">
-                                  <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                      <div class="avatar flex-shrink-0">
-                                        <img
-                                          src="../assets/img/icons/unicons/chart-success.png"
-                                          alt="chart success"
-                                          class="rounded"
-                                        />
-                                      </div>
-                                      <div class="dropdown">
-                                        <button
-                                          class="btn p-0"
-                                          type="button"
-                                          id="cardOpt6"
-                                          data-bs-toggle="dropdown"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                        >
-                                          <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                            <a class="dropdown-item justify-content-between d-flex" href="javascript:void(0);">
-                                                hide
-                                                  <div class="text-end">
-                                                    <div class="form-check form-switch">
-                                                      <input class="form-check-input hide-amount" data-target="#sh-term" type="checkbox" role="switch">
-                                                    </div>
-                                                  </div>
-                                                </a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <span class="fw-semibold d-block mb-2">short-term ballance </span>
-                                    <h3 class="card-title text-nowrap mb-1" id="sh-term" data-amount="$4,679" >$4,679</h3>
-                                  </div>
-                                </div>
+                                <%- include("./partials/ballances/cyclesBallance.ejs") -%>
                               </div>
                               <div class="col-md-6 mb-4 ">
-                                <div class="card">
-                                  <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                      <div class="avatar flex-shrink-0">
-                                        <img
-                                          src="../assets/img/icons/unicons/chart-success.png"
-                                          alt="chart success"
-                                          class="rounded"
-                                        />
-                                      </div>
-                                      <div class="dropdown">
-                                        <button
-                                          class="btn p-0"
-                                          type="button"
-                                          id="cardOpt6"
-                                          data-bs-toggle="dropdown"
-                                          aria-haspopup="true"
-                                          aria-expanded="false"
-                                        >
-                                          <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                            <a class="dropdown-item justify-content-between d-flex" href="javascript:void(0);">
-                                                hide
-                                                  <div class="text-end">
-                                                    <div class="form-check form-switch">
-                                                      <input class="form-check-input hide-amount" data-target="#cycles" type="checkbox" role="switch">
-                                                    </div>
-                                                  </div>
-                                                </a>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <span class="fw-semibold d-block mb-2">cycles ballance </span>
-                                    <h3 class="card-title text-nowrap mb-1" id="cycles" data-amount="$4,679" >$4,679</h3>
-                                  </div>
-                                </div>
+                                <%- include("./partials/ballances/shortTermBallance.ejs") -%>
                               </div>
                         </div>  
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center mb-5">
                             <div class="col-md-10 col-lg 8">
                                 <div class="card mb-4">
                                     <div class="card-body">
-                                        <form>
+                                        <form method="POST">
                                          <h3> Transfer funds</h3>
                                          <div class="mb-3">
                                             <label for="defaultSelect" class="form-label">From</label>
-                                            <select id="defaultSelect" class="form-select">
-                                              <option>From wallet </option>
-                                              <option value="1"> Funding ballance</option>
-                                              <option value="2">cycles ballance</option>
-                                              <option value="3">short-term ballance</option>
+                                            <select id="defaultSelect" name="from" class="form-select" required>
+                                              <option value="">From wallet </option>
+                                              <option value="fundingBallance"> Funding ballance</option>
+                                              <option value="cyclesBallance">cycles ballance</option>
+                                              <option value="shortBallance">short-term ballance</option>
                                             </select>
                                           </div>
                                           <div class="mb-3">
                                             <label for="defaultSelect1" class="form-label">To</label>
-                                            <select id="defaultSelect1" class="form-select">
-                                              <option> To wallet</option>
-                                              <option value="1"> Funding ballance</option>
-                                              <option value="2">cycles ballance</option>
-                                              <option value="3">short-term ballance</option>
+                                            <select name="to" id="defaultSelect1" class="form-select" required>
+                                              <option value=""> To wallet</option>
+                                              <option value="fundingBallance"> Funding ballance</option>
+                                              <option value="cyclesBallance">cycles ballance</option>
+                                              <option value="shortBallance">short-term ballance</option>
                                             </select>
                                           </div>
                                           <div class="mb-3">
-                                            <label class="form-label" for="basic-default-phone">Amount</label>
-                                            <input type="text" id="basic-default-phone" class="form-control phone-mask" placeholder="withdraw from availabe ballance">
+                                            <label class="form-label" for="basic-default-phone" >Amount</label>
+                                            <input type="number" id="basic-default-phone" name="amount" required class="form-control phone-mask" placeholder="move ballance">
                                           </div>
-                                          <button type="submit" class="btn btn-primary"> withdraw</button>
+                                          <button type="submit" class="btn btn-primary"> Transfer</button>
                                         </form>
                                     </div>
                                 </div>
@@ -221,6 +161,9 @@
       <!-- hide ballance fxn -->
       <%- include("./partials/hideBallance.ejs") -%>
       <!-- ### -->
+      <script>
+
+      </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>

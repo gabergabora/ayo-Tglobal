@@ -73,6 +73,37 @@ router.post("/withdraw", function(req,res){
 
 })
 
+router.post("/transfer", function(req,res){
+    let update = {}
+    const {amount, to, from} = req.body
+    console.log(req.body)
+   if(Number(amount) && to && from){
+       USER.findOne({email : req.user.email}, function(err, data){
+           if(err){
+               console.log(err.message,"the error occured in.." )
+               return showError(req,"/transfer", "an error occured, please report this problem to management", res)
+           }
+           if(data[from] > Number(amount)){
+               update[from] = data[from] - Number(amount)
+               update[to] = data[to] + Number(amount)
+               console.log("this is the value of the update ", update)
+                USER.updateOne({email : req.user.email}, update)
+                .then(()=>{
+                    res.redirect("/transfer")
+                })
+                .catch(err=> {
+                    console.log(err.message, "error when trying to update")
+                    return showError(req,"/transfer", "an error occured, trying to update your ballances,report this problem", res)
+                })
+           }else{
+            return showError(req,"/transfer", "insufficient Ballance", res)
+           }
+       })
+   }else{
+    return showError(req,"/transfer", "your transfer couldn't go through", res)
+   }
+})
+
 
 
 
