@@ -5,6 +5,11 @@ function(req,res){
     console.log("DB connected successfully")
 })
 
+const withdrawHistory = mongoose.Schema({
+    title : String,
+    amount : Number,
+    means : {type : String, default : "USDT"}
+}, {timestamps : true})
 const userSchema = mongoose.Schema({
     email : {type : String,  required : [true, "make sure all inputs are filled"],},
     password :{type : String,required : [true, "make sure all inputs are filled"],},
@@ -13,6 +18,7 @@ const userSchema = mongoose.Schema({
     fundingBallance : {type : Number, default : 0},
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
+    withdrawHistory,
     walletAddress : String,
     lastLoggedIn : Date,
 }, {

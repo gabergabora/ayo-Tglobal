@@ -57,4 +57,9 @@ user_getRoute.get("/account",isAuth, function(req,res){
     res.render("account")
 })
 
+user_getRoute.get("/logout",isAuth, function(req,res){
+    req.logout()
+    res.redirect("/login")
+})
+
 module.exports = user_getRoute

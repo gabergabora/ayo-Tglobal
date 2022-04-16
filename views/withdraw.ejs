@@ -48,7 +48,19 @@
         border: 2px dashed #007bff;
         margin-right: 20px;
     }  
-  
+    #myAlert{
+        top: -300px;
+        -webkit-transition: top .7s ease-in-out;
+        -o-transition: top .7s ease-in-out;
+        transition: top .7s ease-in-out;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto ;
+        z-index: 10;
+    }
+    .move{
+        top: 150px !important;
+    }
     </style>
   </head>
 
@@ -74,7 +86,26 @@
               </a>
             </div>
           </nav>
-
+        <!-- error message  -->
+        <!-- Content -->
+        <% if(messages.error){ %>
+          <div class="alert alert-primary alert-dismissible text-center" role="alert" id="myAlert">
+              <%= messages.error %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <script>
+              myAlert.classList.add("move")
+            setTimeout(function () {
+            return myAlert.classList.remove("move");
+            }, 3000);
+            </script>
+        <% }else{ %>
+        <div class="alert alert-primary alert-dismissible text-center" role="alert" id="myAlert">
+            This is a primary dismissible alert — check it out!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <%  } %>
+        <!-- ##### -->
           <!-- / Navbar -->
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -91,11 +122,11 @@
                             <div class="col-md-10 col-lg 8">
                                 <div class="card mb-4">
                                     <div class="card-body">
-                                        <form>
+                                        <form method="POST">
                                          <h3> Withdraw</h3>
                                           <div class="mb-3">
-                                            <label class="form-label" for="basic-default-phone">Amount</label>
-                                            <input type="text" id="basic-default-phone" class="form-control phone-mask" placeholder="withdraw from availabe ballance">
+                                            <label class="form-label" for="withdrawalAmount">Amount</label>
+                                            <input type="number" name="amount" class="form-control phone-mask" id="withdrawalAmount" placeholder="withdraw from availabe ballance">
                                           </div>
                                           <button type="submit" class="btn btn-primary"> withdraw</button>
                                         </form>
@@ -109,8 +140,7 @@
                                             <li class="progress-item"> Please note; you can only withdraw from funding ballance</li>
                                             <li class="progress-item">  Make sure your wallet address is correct in account settings</li>
                                             <li class="progress-item"> Go ahead with withdrawal</li>
-                                            <li class="progress-item"> an email will be sent to you</li>
-                                            <li class="progress-item"> if you don't receive an email, check your spam</li>
+                                            <li class="progress-item"> email will be sent to you (check your spam)</li>
                                         </ul>
                                 </div>
                             </div>
@@ -132,20 +162,32 @@
     </div>
     <!-- / Layout wrapper -->
 
-    	<%- include("./partials/footerLinks.ejs") -%>
+      <%- include("./partials/footerLinks.ejs") -%>
+      <!-- hide ballace script -->
+      <%- include("./partials/hideBallance.ejs") -%>
+      <!-- #### -->
 <script>
-        document.querySelector(".hide-amount")
-        const allHiders = Array.from(document.getElementsByClassName("hide-amount"))
-        for(i=0; i< allHiders.length ; i++){
-            allHiders[i].addEventListener("change", function(e){
-                let amount_box = document.querySelector(e.target.getAttribute("data-target"))
-                if(e.target.checked){
-                    amount_box.innerText = "***"
-                }else{
-                    amount_box.innerText = amount_box.getAttribute("data-amount")
-                }
-            })
-        }
+    
+        const ballance = Number(document.getElementById("ballance").getAttribute("data-amount"))
+
+        document.querySelector("form").addEventListener("submit", function(e){
+          e.preventDefault()
+          if(!Number(document.getElementById("withdrawalAmount").value)){
+            return e.preventDefault()
+          }
+           if(Number(document.getElementById("withdrawalAmount").value) > ballance){
+             console.log("cannot pass")
+            e.preventDefault()
+            var myAlert = document.getElementById('myAlert');
+            myAlert.innerText = "Insufficient Ballance";
+            myAlert.classList.add("move");
+            return setTimeout(function () {
+            return myAlert.classList.remove("move");
+            }, 3000);
+           }
+           return document.querySelector("form").submit()
+        })
+
 </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

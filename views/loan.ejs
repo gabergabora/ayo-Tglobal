@@ -177,20 +177,9 @@
     <!-- / Layout wrapper -->
 
     	<%- include("./partials/footerLinks.ejs") -%>
-<script>
-        document.querySelector(".hide-amount")
-        const allHiders = Array.from(document.getElementsByClassName("hide-amount"))
-        for(i=0; i< allHiders.length ; i++){
-            allHiders[i].addEventListener("change", function(e){
-                let amount_box = document.querySelector(e.target.getAttribute("data-target"))
-                if(e.target.checked){
-                    amount_box.innerText = "***"
-                }else{
-                    amount_box.innerText = amount_box.getAttribute("data-amount")
-                }
-            })
-        }
-</script>
+    <!-- hide ballances -->
+    <%- include("./partials/hideBallance.ejs") -%>
+    <!-- #### -->
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>

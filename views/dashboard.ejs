@@ -238,30 +238,9 @@
 
     	<%- include("./partials/footerLinks.ejs") -%>
 
-    <script>
-        document.querySelector(".hide-amount")
-        // const eye = document.getElementById("ballance-eye")
-        // const ballance = document.getElementById("ballance")
-        const allHiders = Array.from(document.getElementsByClassName("hide-amount"))
-        for(i=0; i< allHiders.length ; i++){
-            allHiders[i].addEventListener("change", function(e){
-                let amount_box = document.querySelector(e.target.getAttribute("data-target"))
-                if(e.target.checked){
-                    amount_box.innerText = "***"
-                }else{
-                    amount_box.innerText = amount_box.getAttribute("data-amount")
-                }
-            })
-        }
-        // eye.addEventListener("click", function(e){
-        //     eye.classList.toggle("text-primary")
-        //     if(eye.classList.contains("text-primary")){
-        //         ballance.innerText =  "***"
-        //     }else{
-        //         ballance.innerText =  ballance.getAttribute("data-ballance-value")
-        //     }
-        // })
-    </script>
+      <!-- hide ballances -->
+      <%- include("./partials/hideBallance.ejs") -%>
+      <!-- ###### -->
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
