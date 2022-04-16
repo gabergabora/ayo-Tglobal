@@ -57,7 +57,7 @@ router.post("/withdraw", function(req,res){
         if(user){
             if(user.fundingBallance > Number(amount)){
                 USER.updateOne({email : req.user.email}, {fundingBallance :  user.fundingBallance - Number(amount),
-                        $push : {withdrawHistory : {title : "withdraw", amount : Number(amount)}}})
+                        $push : {history : {title : "withdraw", amount : Number(amount)}}})
                         .then(()=>{res.redirect("/withdraw")})
                     .catch(err=> showError(req,"/withdraw", "an error occured, please report this problem to management", res) )
             }else{

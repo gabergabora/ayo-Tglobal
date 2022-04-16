@@ -5,7 +5,7 @@ function(req,res){
     console.log("DB connected successfully")
 })
 
-const withdrawHistory = mongoose.Schema({
+const History = mongoose.Schema({
     title : String,
     amount : Number,
     means : {type : String, default : "USDT"}
@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
     fundingBallance : {type : Number, default : 0},
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
-    withdrawHistory,
+    History : [History],
     walletAddress : String,
     lastLoggedIn : Date,
 }, {
