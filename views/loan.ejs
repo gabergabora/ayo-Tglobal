@@ -28,10 +28,34 @@
     h1.massive{
         font-size: 5em;
     }
+    #myAlert{
+        top: -200px;
+        -webkit-transition: top .7s ease-in-out;
+        -o-transition: top .7s ease-in-out;
+        transition: top .7s ease-in-out;
+        max-width: 500px;
+        margin: 0 auto ;
+        z-index: 10;
+    }
+    .move{
+        top: 150px !important;
+    }
     </style>
   </head>
 
   <body>
+    <% if(messages.error){ %>
+      <% console.log(messages) %>
+      <div class="alert alert-primary alert-dismissible move" role="alert" id="myAlert">
+          <%= messages.error %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <script>
+     setTimeout(function () {
+     return myAlert.classList.remove("move");
+     }, 3000);
+        </script>
+    <% } %>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -93,10 +117,15 @@
                             <div class="col-md-6 mb-4">
                               <%- include("./partials/ballances/fundingBallance.ejs") -%>
                             </div>
+                            <div class="row">
+                              <div class="col-12">
+                                <h2 class="title"> Apply for Loan</h2>
+                              </div>
+                            </div>
                         </div> 
-                        <div class="row">
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="card mb-4 ">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 col-md-5 col-lg-4">
+                                <div class="card mb-4" style="min-width:300px;">
                                     <h1 class="massive text-center py-5">
                                         <sup class="text-success">$</sup>
                                         2000
@@ -104,20 +133,21 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">VAT</li>
                                             <li class="list-group-item">Tax</li>
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" >
+                                            <form method="POST" class="list-group-item form px-0" data-target="check1">
+                                                <div class="form-check ps-5 pb-2">
+                                                    <input class="form-check-input" type="checkbox" id="check1">
                                                     <label class="form-check-label" for="defaultCheck3"> Terms and Condition </label>
                                                   </div>
-                                            </li>
-                                            <button class="btn btn-info py-3" >
+                                              <input class="form-control"  name="amount" type="hidden" value="2000" >
+                                              <button class="btn btn-info py-3 w-100" >
                                                 Apply
-                                            </button>
+                                              </button>
+                                            </form>
                                           </ul>
                                   </div>
                                </div>
-                               <div class="col-sm-6 col-lg-4">
-                                <div class="card mb-4">
+                               <div class="col-sm-6 col-md-5 col-lg-4">
+                                <div class="card mb-4"  style="min-width:300px;">
                                     <h1 class="massive text-center py-5">
                                         <sup class="text-success">$</sup>
                                         5000
@@ -125,20 +155,21 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">Cras justo odio</li>
                                             <li class="list-group-item">Dapibus ac facilisis in</li>
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" >
+                                            <form method="POST" class="list-group-item form px-0" data-target="check2">
+                                                <div class="form-check ps-5 pb-2">
+                                                    <input class="form-check-input" type="checkbox" id="check2">
                                                     <label class="form-check-label" for="defaultCheck3"> Terms and Condition </label>
                                                   </div>
-                                            </li>
-                                            <button class="btn btn-info py-3" >
+                                              <input class="form-control"  name="amount" type="hidden" value="5000" >
+                                              <button class="btn btn-info py-3 w-100" >
                                                 Apply
                                             </button>
+                                            </form>
                                           </ul>
                                   </div>
                                </div>
-                               <div class="col-sm-6 col-lg-4">
-                                <div class="card mb-4">
+                               <div class="col-sm-6 col-md-5 col-lg-4">
+                                <div class="card mb-4"  style="min-width:300px;">
                                     <h1 class="massive text-center py-5">
                                         <sup class="text-success">$</sup>
                                         7000
@@ -146,15 +177,16 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">VAT</li>
                                             <li class="list-group-item"> gas fee</li>
-                                            <li class="list-group-item">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" >
+                                            <form method="POST" class="list-group-item form px-0" data-target="check3">
+                                                <div class="form-check ps-5 pb-2">
+                                                    <input class="form-check-input" type="checkbox" id="check3">
                                                     <label class="form-check-label" for="defaultCheck3"> Terms and Condition </label>
                                                   </div>
-                                            </li>
-                                            <button class="btn btn-info py-3" >
+                                              <input class="form-control"  name="amount" type="hidden" value="7000" >
+                                              <button class="btn btn-info py-3 w-100" >
                                                 Apply
                                             </button>
+                                            </form>
                                           </ul>
                                   </div>
                                </div>
@@ -180,6 +212,16 @@
     <!-- hide ballances -->
     <%- include("./partials/hideBallance.ejs") -%>
     <!-- #### -->
+    <script>
+      for(i=0; i<document.getElementsByClassName("form").length; i++){
+        document.getElementsByClassName("form")[i].addEventListener("submit", function(e){
+          if(!document.getElementById(e.target.getAttribute("data-target")).checked){
+            return  e.preventDefault();
+          }
+        })
+      }
+      
+    </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>

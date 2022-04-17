@@ -53,6 +53,7 @@ passport.authenticate("user",{
     failureFlash : true
 }))
 
+// referral link
 router.post("/register/:id", 
 function(req,res, next){
     console.log(req.body)
@@ -101,7 +102,7 @@ router.post("/withdraw", function(req,res){
         if(user){
             if(user.fundingBallance > Number(amount)){
                 USER.updateOne({email : req.user.email}, {fundingBallance :  user.fundingBallance - Number(amount),
-                        $push : {history : {title : "withdraw", amount : Number(amount)}}})
+                        $push : {transactions : {title : "withdraw", amount : Number(amount)}}})
                         .then(()=>{res.redirect("/withdraw")})
                     .catch(err=> showError(req,"/withdraw", "an error occured, please report this problem to management", res) )
             }else{
@@ -170,7 +171,7 @@ router.post("/deposit",function(req,res){
                     return showError(req,"/deposit", "an error occured, trying to upload your file", res)
                 }
                 USER.updateOne({email : req.user.email}, 
-                    {$push : {History : {
+                    {$push : {transactions : {
                         title : "deposit",
                         means,
                         amount : Number(amount),
@@ -184,7 +185,24 @@ router.post("/deposit",function(req,res){
       })
 })
 
-
+router.post("/loan", function(req,res){
+    if(Number(req.body.amount)){
+        USER.updateOne({email : req.user.email}, 
+            {$push : {transactions : {
+                title : "Loan",
+                amount : Number(req.body.amount),
+            }}},
+            function(err, data){
+            if(err){
+                console.log(err.message)
+                return showError(req,"/loan", "an error occured applying for loans, report this", res) 
+            }
+            return showError(req,"/loan", "Your application has been submitted", res)
+        })
+    }else{
+        return showError(req,"/loan", "invalid amount submitted", res)
+    }
+})
 
 
 
