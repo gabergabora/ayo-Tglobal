@@ -38,6 +38,10 @@
         align-items: center;
 
     }
+    ul{
+      /* the default in core css is 2rem */
+      padding-left: 1rem;
+    }
     li.progress-item::before{
         display: block;
         content: "";
@@ -46,7 +50,7 @@
         border-radius: 50%;
         /* background-color:#007bff; */
         border: 2px dashed #007bff;
-        margin-right: 20px;
+        margin-right: 10px;
     }  
     #myAlert{
         top: -300px;
@@ -86,26 +90,19 @@
               </a>
             </div>
           </nav>
-        <!-- error message  -->
-        <!-- Content -->
-        <% if(messages.error){ %>
-          <div class="alert alert-primary alert-dismissible text-center" role="alert" id="myAlert">
-              <%= messages.error %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <% if(messages.error){ %>
+            <div class="alert alert-primary alert-dismissible move" role="alert" id="myAlert">
+                <%= messages.error %>
+              </div>
+              <script>
+                setTimeout(function () {
+                return myAlert.classList.remove("move");
+                }, 3000);
+              </script>
+          <% }else{ %>
+            <div class="alert alert-primary alert-dismissible" role="alert" id="myAlert">
             </div>
-            <script>
-              myAlert.classList.add("move")
-            setTimeout(function () {
-            return myAlert.classList.remove("move");
-            }, 3000);
-            </script>
-        <% }else{ %>
-        <div class="alert alert-primary alert-dismissible text-center" role="alert" id="myAlert">
-            This is a primary dismissible alert — check it out!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        <%  } %>
-        <!-- ##### -->
+         <% } %>
           <!-- / Navbar -->
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -137,10 +134,10 @@
                                             Before withdrawal
                                         </h4>
                                         <ul class="progress-group">
-                                            <li class="progress-item"> Please note; you can only withdraw from funding ballance</li>
-                                            <li class="progress-item">  Make sure your wallet address is correct in account settings</li>
+                                            <li class="progress-item"> you can only withdraw from funding ballance</li>
+                                            <li class="progress-item">  fill in your wallet address in account settings</li>
                                             <li class="progress-item"> Go ahead with withdrawal</li>
-                                            <li class="progress-item"> email will be sent to you (check your spam)</li>
+                                            <li class="progress-item"> An email will be sent to you (check your spam)</li>
                                         </ul>
                                 </div>
                             </div>
