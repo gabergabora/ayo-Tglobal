@@ -1,10 +1,23 @@
 const express = require("express")
 const router = express.Router()
 const passport = require("passport")
-
+const upload = require("../multer").single("receipt")
+const multer = require("multer")
+const fs = require("fs")
+const path = require("path")
 // local modules
 const {USER} = require("../userDB")
 const showError = require("../error.js")
+var cloudinary = require('cloudinary').v2;
+
+// cloudinary config
+cloudinary.config({ 
+    cloud_name: process.env.CLOUDINARY_NAME, 
+    api_key: process.env.CLOUDINARY_KEY, 
+    api_secret: process.env.CLOUDINARY_SECRET,
+    secure: true
+  });
+
 
 router.use(express.urlencoded({extended: true}))
 // router.use(function(req,res,next){
@@ -134,8 +147,42 @@ router.post("/transfer", function(req,res){
     return showError(req,"/transfer", "your transfer couldn't go through", res)
    }
 })
+let loc = path.join(__dirname,'../../uploads')
+router.post("/deposit",function(req,res){
+    upload(req, res, function (err) {
+       const {means, amount} = req.body
+        if (err instanceof multer.MulterError) {
+          return showError(req,"/deposit", "a run time error occured, please report this to the management", res)
+        } else if (err) {
+          console.log("error occured in multer", err.message)
+          // An unknown error occurred when uploading.
+          return showError(req,"/deposit", err.message, res)
+        }
+        // Everything went fine.
+        cloudinary.uploader.upload(loc+"/"+req.file.filename, {
+            folder : "receipt",
+            use_filename :true, 
+            // unique_filename : true,
+          },
+            function(error, result) {
+                if(error){
+                    console.log(error)
+                    return showError(req,"/deposit", "an error occured, trying to upload your file", res)
+                }
+                USER.updateOne({email : req.user.email}, 
+                    {$push : {History : {
+                        title : "deposit",
+                        means,
+                        amount : Number(amount),
+                        imageurl:  result.secure_url
+                    }}})
+                    .then(()=> {
+                        return showError(req,"/deposit", "succesfully submitted, awaiting confirmation", res)
+                    })
+            });
 
-
+      })
+})
 
 
 

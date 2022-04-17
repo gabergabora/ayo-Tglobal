@@ -8,8 +8,10 @@ function(req,res){
 const History = mongoose.Schema({
     title : String,
     amount : Number,
+    imageurl : String,
     means : {type : String, default : "USDT"},
-    status : {type : Boolean, default : false}
+    status : {type : String, default : "pending"},
+    confirmed : {type : String, default : false}, 
 }, {timestamps : true})
 const userSchema = mongoose.Schema({
     email : {type : String,  required : [true, "make sure all inputs are filled"],},

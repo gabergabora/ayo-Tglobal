@@ -48,7 +48,19 @@
         border: 2px dashed #007bff;
         margin-right: 20px;
     }  
-  
+    #myAlert{
+        top: -200px;
+        -webkit-transition: top .7s ease-in-out;
+        -o-transition: top .7s ease-in-out;
+        transition: top .7s ease-in-out;
+        max-width: 500px;
+        width: 100%;
+        margin: 0 auto ;
+        z-index: 10;
+    }
+    .move{
+        top: 150px !important;
+    }  
     </style>
   </head>
 
@@ -74,7 +86,18 @@
               </a>
             </div>
           </nav>
-
+  <!-- Content -->
+  <% if(messages.error){ %>
+    <div class="alert alert-primary alert-dismissible move" role="alert" id="myAlert">
+        <%= messages.error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <script>
+   setTimeout(function () {
+   return myAlert.classList.remove("move");
+   }, 3000);
+      </script>
+  <% } %>
           <!-- / Navbar -->
       <!-- Modal -->
       <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
@@ -92,7 +115,7 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col mb-3">
-                  <input class="form-control" type="text" selec id="myInput" value="Readonly input here..." readonly="">
+                  <input class="form-control" type="text" id="myInput" value="" readonly="">
                   <div class="col-12"></div>
                   <div class="col-4 p-2 text-light ms-auto text-end flex-column" onclick="myFunction()">
                     <svg fill="#696cff" xmlns="http://www.w3.org/2000/svg" class="w-25 text-primary" viewBox="0 0 384 512"><path d="M336 64h-53.88C268.9 26.8 233.7 0 192 0S115.1 26.8 101.9 64H48C21.5 64 0 85.48 0 112v352C0 490.5 21.5 512 48 512h288c26.5 0 48-21.48 48-48v-352C384 85.48 362.5 64 336 64zM192 64c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S160 113.7 160 96C160 78.33 174.3 64 192 64zM272 224h-160C103.2 224 96 216.8 96 208C96 199.2 103.2 192 112 192h160C280.8 192 288 199.2 288 208S280.8 224 272 224z"/></svg>
@@ -123,16 +146,16 @@
                                             <div class="card-body">
                                             <div class="row gy-3">
                                                 <div class="form-check mt-3">
-                                                    <input name="payment-method" class="form-check-input" type="radio" value="" id="defaultRadio1">
-                                                    <label class="form-check-label" for="defaultRadio1"> Bitcoin</label>
+                                                    <input name="payment-method" value="theBTCADDRESS" class="form-check-input" type="radio"  id="defaultRadio1">
+                                                    <label class="form-check-label" for="defaultRadio1" > Bitcoin</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input name="payment-method" class="form-check-input" type="radio" value="" id="defaultRadio2" >
+                                                    <input name="payment-method" value="theETHADDRESS" class="form-check-input" type="radio"  id="defaultRadio2" >
                                                     <label class="form-check-label" for="defaultRadio2"> Etherium </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" name="payment-method" type="radio" value="" id="disabledRadio1">
-                                                    <label class="form-check-label" for="disabledRadio1"> Paypal </label>
+                                                    <input class="form-check-input" value="thePAYPALADDRESS" name="payment-method" type="radio"  id="disabledRadio1">
+                                                    <label class="form-check-label"  for="disabledRadio1"> Paypal </label>
                                                 </div>
                                                 <div class="form-check">
                                                     <button 
@@ -168,17 +191,27 @@
                                         </div>
                                     </div>
                                     <div class="col-12 order-md-1 order-0">
-                                        <form  method="post">
+                                        <form  method="POST" enctype="multipart/form-data">
                                             <div class="card mb-4">
                                                 <div class="card-body">
+                                                  <div class="mb-3">
+                                                    <label for="defaultSelect" class="form-label">Currency of deposit</label>
+                                                    <select id="defaultSelect" name="means" class="form-select" required="">
+                                                      <option value=""> Means of payment </option>
+                                                      <option value="bitcoin"> BITCOIN</option>
+                                                      <option value="etherium">ETHERIUM</option>
+                                                      <option value="paypal">PAYPAL</option>
+                                                    </select>
+                                                  </div>
                                                     <div class="mb-3">
                                                         <label for="formFile" class="form-label">Amount deposited</label>
-                                                        <input class="form-control" type="number" id="disabledRadio2" placeholder="amount deposited in dollars" >
+                                                        <input class="form-control" required name="amount" type="number" id="disabledRadio2" placeholder="amount deposited in dollars" >
                                                     </div>
                                                     <div class="mb-3">
-                                                            <label for="formFile" class="form-label">Upload Receipt</label>
-                                                            <input class="form-control" type="file" id="formFile">
+                                                            <label for="formFile"  class="form-label">Upload Receipt</label>
+                                                            <input class="form-control" required name="receipt" type="file" id="formFile">
                                                     </div>
+                                                     <button type="submit" class="btn btn-primary"> Deposit</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -219,6 +252,17 @@
         /* Alert the copied text */
         alert("Copied");
         }
+        var myModalEl = document.getElementById('modalCenter')
+        myModalEl.addEventListener("show.bs.modal", function(event){
+          let paymentMeans = document.querySelectorAll("input[type='radio']")
+          for(i=0; i< paymentMeans.length; i++){
+            if(paymentMeans[i].checked){
+              return document.getElementById("myInput").value = paymentMeans[i].value
+            }
+          }
+          console.log("model has been opened")
+
+        })
 </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
