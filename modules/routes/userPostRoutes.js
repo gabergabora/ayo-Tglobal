@@ -5,10 +5,15 @@ const upload = require("../multer").single("receipt")
 const multer = require("multer")
 const fs = require("fs")
 const path = require("path")
+const {addDays} =  require("date-fns")
+
 // local modules
 const {USER} = require("../userDB")
 const showError = require("../error.js")
+const NORMAL = require("../staticDB")
 var cloudinary = require('cloudinary').v2;
+const getInvestments = require("./user_getRoute").getInvestments
+
 
 // cloudinary config
 cloudinary.config({ 
@@ -129,6 +134,7 @@ router.post("/transfer", function(req,res){
                return showError(req,"/transfer", "an error occured, please report this problem to management", res)
            }
            if(data[from] > Number(amount)){
+               if(data[from] == data[to]) return res.redirect("/transfer")
                update[from] = data[from] - Number(amount)
                update[to] = data[to] + Number(amount)
                console.log("this is the value of the update ", update)
@@ -203,7 +209,43 @@ router.post("/loan", function(req,res){
         return showError(req,"/loan", "invalid amount submitted", res)
     }
 })
-
-
+// getInvestments
+// haven't stopped user from investing if they have a running inv
+console.log(new Date(addDays(Date.now(), 5)).getTime())
+router.post("/invest", function(req,res){
+    if(req.user[req.body.type] >= Number(req.body.amount)){
+        if(req.body.type == "shortBallance"){
+            NORMAL.findOne({title : req.body.title}, function(err,plan){
+                if(err){
+                 console.log(err)
+                return showError(req,"/invest", "an error occured applying trying to locate your plan, please report this", res) 
+                }
+                if(!plan) return showError(req,"/invest", "couldn't find your selected plan", res)
+                if(Number(req.body.amount) >= plan.min && Number(req.body.amount) <= plan.max){
+                    USER.updateOne({email : req.user.email}, {
+                        shortBallance : req.user.shortBallance - Number(req.body.amount),
+                        $push : {
+                            normalInvestments :{
+                                title : plan.title,
+                                roi : plan.roi,
+                                expiry : new Date(addDays(Date.now(), plan.duration)).getTime(),
+                                amount : Number(req.body.amount),
+                                profit : (Number(req.body.amount) * (plan.roi/100))
+                            }
+                         }
+                    }).then(()=> res.redirect("/invest"))
+                    .catch(err=>{
+                            console.log(err.message)
+                            return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+                    })
+                }else{
+                    return showError(req,"/invest", `can't invest $${req.body.amount} in ${req.body.title} `, res) 
+                }
+            })
+        }
+    }else{
+        return showError(req,"/invest", "insufficient ballance", res)
+    }
+})
 
 module.exports = router

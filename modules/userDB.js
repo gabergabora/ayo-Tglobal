@@ -13,6 +13,16 @@ const transaction = mongoose.Schema({
     status : {type : String, default : "pending"},
     confirmed : {type : String, default : false}, 
 }, {timestamps : true})
+
+const normalInvestment = mongoose.Schema({
+    title : String,
+    roi : Number,
+    duration : Number,
+    expiry : Number,
+    amount : Number,
+    paid : {type : Boolean, default : false},
+    profit : Number
+})
 const userSchema = mongoose.Schema({
     email : {type : String,  required : [true, "make sure all inputs are filled"],},
     password :{type : String,required : [true, "make sure all inputs are filled"],},
@@ -21,6 +31,7 @@ const userSchema = mongoose.Schema({
     fundingBallance : {type : Number, default : 0},
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
+    normalInvestments: [normalInvestment],
     referrals : [String],
     transactions : [transaction],
     walletAddress : String,
@@ -29,6 +40,8 @@ const userSchema = mongoose.Schema({
     minimize : false,
     timestamps : true,
 })
+
+require("./staticDB")
 
 USER = mongoose.model("user", userSchema)
 

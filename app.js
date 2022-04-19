@@ -7,7 +7,7 @@ const localStrategy = require("passport-local").Strategy
 require("dotenv").config()
 
 // local modules
-const getUserRoute = require("./modules/routes/user_getRoute")
+const getUserRoute = require("./modules/routes/user_getRoute").user_getRoute
 const adminRoute = require("./modules/routes/admin_getRoutes")
 const {USER} = require("./modules/userDB")
 const passportAuth = require("./modules/auth.js")

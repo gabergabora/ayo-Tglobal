@@ -11,7 +11,6 @@ function fileFilter (req, file, cb) {
 
 
   let loc = path.join(__dirname,'../uploads')
-  console.log(loc)
   const storage = multer.diskStorage({
     destination: loc ,
     filename: function (req, file, cb) {

@@ -1,5 +1,6 @@
 const express = require("express")
 const user_getRoute = express.Router()
+const NORMAL = require("../staticDB")
 
 const isAuth = function(req,res, next){
     if(!req.isAuthenticated()){
@@ -8,6 +9,14 @@ const isAuth = function(req,res, next){
     res.locals.reqUrl = req.url
     res.locals.user = req.user
     return next() 
+}
+const getInvestments = function(req,res, next){
+    return NORMAL.find({}, function(err, data){
+        if(err) return res.send("an error occured on the server, please report this problem")
+        res.locals.normalInvestments = data
+        next()
+        return data
+    })
 }
 
 user_getRoute.get("/login", function(req,res){
@@ -36,7 +45,7 @@ user_getRoute.get("/dashboard",isAuth, function(req,res){
     res.render("dashboard")
 })
 
-user_getRoute.get("/invest",isAuth, function(req,res){
+user_getRoute.get("/invest",isAuth, getInvestments, function(req,res){
     res.render("invest")
 })
 
@@ -69,4 +78,4 @@ user_getRoute.get("/logout",isAuth, function(req,res){
     res.redirect("/login")
 })
 
-module.exports = user_getRoute
+module.exports = {user_getRoute, getInvestments}

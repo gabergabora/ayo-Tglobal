@@ -77,14 +77,20 @@
       transition: all .3s linear;
       position: relative;
       }
-      .pricing_blue{
+      .pricing_0{
           background-color: rgba(41,72,255,.2) !important;
       }
-      .pricing_green{
+      .pricing_1{
       background-color:rgba(41, 255, 105, 0.2)!important ;
       }
-      .pricing_red{
+      .pricing_2{
       background-color:rgba(255, 102, 41, 0.2)!important ;
+      }
+      .pricing_3{
+      background-color:rgba(0, 0, 0, 0.2)!important ;
+      }
+      .pricing_gold{
+        background-color: rgba(255, 170, 0, 0.5) !important;
       }
       .pricing-item-amount h4 {
       font-size: 49px;
@@ -135,6 +141,24 @@
     background: -webkit-gradient(linear,left top,right top,from(#f20f10),to(#ec600d));
     background: linear-gradient(90deg,#f20f10 0%,#ec600d 100%);
 }
+#myAlert{
+        top: -300px;
+        -webkit-transition: top .7s ease-in-out;
+        -o-transition: top .7s ease-in-out;
+        transition: top .7s ease-in-out;
+        max-width: 500px;
+        margin: 0 auto ;
+        z-index: 10;
+        position: absolute;
+        width: 100%; 
+        left: 50%;
+        -webkit-transform: translateX(-50%) ;
+        -moz-transform: translateX(-50%) ;
+        transform: translateX(-50%) ;
+    }
+    .move{
+        top: 150px !important;
+    }
     </style>
   </head>
 
@@ -161,6 +185,16 @@
           </nav>
 
           <!-- / Navbar -->
+          <% if(messages.error){ %>
+            <div class="alert alert-primary  text-center alert-dismissible move" role="alert" id="myAlert">
+                <%= messages.error %>
+              </div>
+              <script>
+           setTimeout(function () {
+           return myAlert.classList.remove("move");
+           }, 3000);
+              </script>
+          <% } %>
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -169,9 +203,6 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 col-lg-11">
                         <div class="row ">
-                          <div class="col-md-6 mb-4 ">
-                            <%- include("./partials/ballances/fundingBallance.ejs") -%>
-                          </div>
                             <div class="col-12">
                                 <div class="nav-align-top mb-4">
                                   <ul class="nav nav-pills mb-3" role="tablist">
@@ -186,97 +217,52 @@
                                       </button>
                                     </li>
                                   </ul>
-                                  <div class="tab-content">
+                                  <div class="tab-content px-0">
                                       <!-- first pane -->
                                     <div class="tab-pane fade active show" id="navs-pills-top-home" role="tabpanel">
                                       <div class="container">
-                                        <div class="row justify-content-center">
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Basic</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_blue">
-                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
-                                                  <ul class="pricing-item-list">
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  20% (ROI)</li>
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
-                                                  </ul>
-                                                  <form method="post" class="my-2 w-100">
-                                                    <div class="py-2">
-                                                      <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                    </div>
-                                                    <button class="btn btn-outline-primary form-control "> invest</button>
-                                                  </form>
-                                                  </div>
-                                                  
-                                              </div>
-                                            </div>
+                                        <div class="row">
+                                          <div class="col-md-6 mb-4 ">
+                                            <%- include("./partials/ballances/shortTermBallance.ejs") -%>
                                           </div>
                                         </div>
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Standard</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_green">
-                                                  <h4 style="font-size:20px"><small>$</small>45,000 - Infinity</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
+                                        <div class="row justify-content-center">
+                                         <% normalInvestments.sort((a,b)=> a.max - b.max ).forEach((investment, index)=>{%>
+                                            <div class="col-md-6 col-lg-4 mb-3">
+                                              <div class="card">
+                                                <div class="py-2">
+                                                  <div class="pricing-grid-item-inner">
+                                                    <div class="pricing-item-header py-3">
+                                                    <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> <%= investment.title %></h3>
+                                                    </div>
+                                                    <div class="pricing-item-amount pricing_<%=index%>">
+                                                      <%# if min investment is less than one#%>
+                                                      <% if(!investment.min){ %>
+                                                        <h4 style="font-size:20px"> < <small >$</small> <%= investment.max %> </h4>
+                                                      <%}else{ %>
+                                                        <h4 style="font-size:20px"><small >$</small> <%= investment.min.toLocaleString('en-US') %> - <%= investment.max.toLocaleString('en-US') %> </h4>
+                                                     <% } %>
+                                                    </div>
+                                                    <div class="pricing-item-body px-3">
                                                     <ul class="pricing-item-list">
-                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  40% (ROI)</li>
-                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
-                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
+                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  <%= investment.roi %>% (ROI)</li>
+                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : <%= investment.duration %> days</li>
                                                     </ul>
                                                     <form method="post" class="my-2 w-100">
+                                                      <input type="hidden" name="title" class="form-control" value="<%= investment.title %>">
+                                                      <input type="hidden" name="type" class="form-control" value="shortBallance">
                                                       <div class="py-2">
                                                         <input type="number" name="amount" class="form-control" placeholder="put amount">
                                                       </div>
-                                                      <button class="btn btn-outline-success form-control "> invest</button>
+                                                      <button class="btn btn-outline-primary form-control "> invest</button>
                                                     </form>
                                                     </div>
+                                                    
+                                                </div>
                                               </div>
                                             </div>
-                                          </div>
-                                          </div>
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Partinership</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_red">
-                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
-                                                  <ul class="pricing-item-list">
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  20% (ROI)</li>
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
-                                                  </ul>
-                                                  <form method="post" class="my-2 w-100">
-                                                    <div class="py-2">
-                                                      <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                    </div>
-                                                    <button class="btn btn-outline-danger form-control "> invest</button>
-                                                  </form>
-                                                  </div>
-                                                  
-                                              </div>
                                             </div>
-                                          </div>
-                                        </div>
+                                        <%  }) %>
                                         </div>
                                       </div>
                                     </div>
@@ -285,83 +271,35 @@
                                     <!-- second pane -->
                                     <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
                                       <div class="container">
-                                        <div class="row justify-content-center">
-
+                                        <div class="row">
+                                          <div class="col-md-6 mb-4 ">
+                                            <%- include("./partials/ballances/cyclesBallance.ejs") -%>
+                                          </div>
+                                        </div>
+                                        <div class="row">
                                           <div class="col-md-6 col-lg-4 mb-3">
                                             <div class="card">
                                               <div class="py-2">
                                                 <div class="pricing-grid-item-inner">
                                                   <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Basic</h3>
+                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Cycles</h3>
                                                   </div>
-                                                  <div class="pricing-item-amount pricing_blue">
-                                                  <h4 style="font-size:20px"><small >$</small>50 - 10,000</h4>
+                                                  <div class="pricing-item-amount pricing_gold">
+                                                  <h4 style="font-size:20px" class="text-white"><small >$</small>50 - unlimited</h4>
                                                   </div>
                                                   <div class="pricing-item-body px-3">
                                                   <ul class="pricing-item-list">
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  5% (ROI)/day</li>
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 5 cycles</li>
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  30% (ROI)/day</li>
+                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 10 cycles</li>
                                                   </ul>
                                                   <form method="post" class="my-2 w-100">
+                                                    <input type="hidden" name="roi" class="form-control" value="30">
+                                                    <input type="hidden" name="min" class="form-control" value="50">
+                                                    <input type="hidden" name="type" class="form-control" value="cyclesBallance">
                                                     <div class="py-2">
                                                       <input type="number" name="amount" class="form-control" placeholder="put amount">
                                                     </div>
                                                     <button class="btn btn-outline-primary form-control "> invest</button>
-                                                  </form>
-                                                  </div>
-                                                  
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Standard</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_green">
-                                                  <h4 style="font-size:20px"><small>$</small>50 - 10,000</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
-                                                    <ul class="pricing-item-list">
-                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  10% (ROI)/day</li>
-                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 10 cycles</li>
-                                                    </ul>
-                                                    <form method="post" class="my-2 w-100">
-                                                      <div class="py-2">
-                                                        <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                      </div>
-                                                      <button class="btn btn-outline-success form-control "> invest</button>
-                                                    </form>
-                                                    </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          </div>
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Partinership</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_red">
-                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
-                                                  <ul class="pricing-item-list">
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  15% (ROI)/days</li>
-                                                  <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 15 cycles</li>
-                                                  </ul>
-                                                  <form method="post" class="my-2 w-100">
-                                                    <div class="py-2">
-                                                      <input type="number" name="amount" class="form-control" placeholder="put amount">
-                                                    </div>
-                                                    <button class="btn btn-outline-danger form-control "> invest</button>
                                                   </form>
                                                   </div>
                                                   
