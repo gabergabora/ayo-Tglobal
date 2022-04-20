@@ -8,11 +8,10 @@ const path = require("path")
 const {addDays} =  require("date-fns")
 
 // local modules
-const {USER, TRANSACTION} = require("../userDB")
+const {USER, TRANSACTION, SHORTINVS} = require("../userDB")
 const showError = require("../error.js")
 const NORMAL = require("../staticDB")
 var cloudinary = require('cloudinary').v2;
-const getInvestments = require("./user_getRoute").getInvestments
 
 
 // cloudinary config
@@ -102,7 +101,7 @@ router.post("/account", function(req,res){
 router.post("/withdraw", function(req,res){
     const {amount} = req.body
     if(!Number(amount)) return showError(req,"/withdraw", "your Withdrawal amount value was not accepted", res)
-            if(req.user.fundingBallance > Number(amount)){
+            if(req.user.fundingBallance >= Number(amount)){
                 USER.updateOne({email : req.user.email}, 
                     {$inc : {fundingBallance :  - Number(amount)}},
                     function(err){
@@ -133,7 +132,7 @@ router.post("/transfer", function(req,res){
     const {amount, to, from} = req.body
     console.log(req.body)
    if(Number(amount) && to && from){
-           if(req.user[from] > Number(amount)){
+           if(req.user[from] >= Number(amount)){
                if(req.user[from] == req.user[to]) return res.redirect("/transfer")
                update[from] = req.user[from] - Number(amount)
                update[to] = req.user[to] + Number(amount)
@@ -223,17 +222,21 @@ router.post("/invest", function(req,res){
                 if(!plan) return showError(req,"/invest", "couldn't find your selected plan", res)
                 if(Number(req.body.amount) >= plan.min && Number(req.body.amount) <= plan.max){
                     USER.updateOne({email : req.user.email}, {
-                        shortBallance : req.user.shortBallance - Number(req.body.amount),
-                        $push : {
-                            normalInvestments :{
-                                title : plan.title,
-                                roi : plan.roi,
-                                expiry : new Date(addDays(Date.now(), plan.duration)).getTime(),
-                                amount : Number(req.body.amount),
-                                profit : (Number(req.body.amount) * (plan.roi/100))
-                            }
-                         }
-                    }).then(()=> res.redirect("/invest"))
+                        $inc : {shortBallance : - Number(req.body.amount)},
+                    }).then(()=> {
+                        SHORTINVS.create({
+                            user : req.user.email,
+                            title : plan.title,
+                            roi : plan.roi,
+                            expiry : new Date(addDays(Date.now(), plan.duration)).getTime(),
+                            amount : Number(req.body.amount),
+                            profit : (Number(req.body.amount) * (plan.roi/100))
+                        }).then(()=>  res.redirect("/invest"))
+                        .catch(err=> {
+                            console.log(err.message)
+                            return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+                        })
+                    })
                     .catch(err=>{
                             console.log(err.message)
                             return showError(req,"/invest", "an error occured on the server, please report this problem", res) 

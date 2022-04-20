@@ -16,7 +16,8 @@ const transaction = mongoose.Schema({
 }, {timestamps : true})
 
 
-const normalInvestment = mongoose.Schema({
+const shortInvestment = mongoose.Schema({
+    user : String,
     title : String,
     roi : Number,
     duration : Number,
@@ -35,7 +36,6 @@ const userSchema = mongoose.Schema({
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
     client : {type : Boolean, default : false},
-    normalInvestments: [normalInvestment],
     referrals : [String],
     walletAddress : String,
     lastLoggedIn : Date,
@@ -48,6 +48,8 @@ require("./staticDB")
 
 USER = mongoose.model("user", userSchema)
 TRANSACTION = mongoose.model("transactions", transaction)
+SHORTINVS = mongoose.model("shortInvestments", shortInvestment)
 
 module.exports.USER = USER
 module.exports.TRANSACTION = TRANSACTION
+module.exports.SHORTINVS = SHORTINVS
