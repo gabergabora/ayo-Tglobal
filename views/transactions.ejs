@@ -90,8 +90,8 @@
                                   </div>
                                   <div class="card-body">
                                     <ul class="p-0 m-0">
-                                      <%if(user.transactions.length){%>
-                                        <% user.transactions.sort(function(a,b){ new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() }).forEach(item => { %>
+                                      <%if(transactions.length){%>
+                                        <% transactions.sort(function(a,b){ new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() }).forEach(item => { %>
                                           <li class="d-flex mb-4 pb-1">
                                             <%if(item.title == "deposit") {%>
                                               <div class="avatar flex-shrink-0 me-3">

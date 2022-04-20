@@ -8,7 +8,7 @@ const path = require("path")
 const {addDays} =  require("date-fns")
 
 // local modules
-const {USER} = require("../userDB")
+const {USER, TRANSACTION} = require("../userDB")
 const showError = require("../error.js")
 const NORMAL = require("../staticDB")
 var cloudinary = require('cloudinary').v2;
@@ -102,24 +102,29 @@ router.post("/account", function(req,res){
 router.post("/withdraw", function(req,res){
     const {amount} = req.body
     if(!Number(amount)) return showError(req,"/withdraw", "your Withdrawal amount value was not accepted", res)
-    USER.findOne({email : req.user.email})
-    .then(user =>{
-        if(user){
-            if(user.fundingBallance > Number(amount)){
-                USER.updateOne({email : req.user.email}, {fundingBallance :  user.fundingBallance - Number(amount),
-                        $push : {transactions : {title : "withdraw", amount : Number(amount)}}})
-                        .then(()=>{res.redirect("/withdraw")})
-                    .catch(err=> showError(req,"/withdraw", "an error occured, please report this problem to management", res) )
+            if(req.user.fundingBallance > Number(amount)){
+                USER.updateOne({email : req.user.email}, 
+                    {$inc : {fundingBallance :  - Number(amount)}},
+                    function(err){
+                    if(err){
+                        console.log(err)
+                        return showError(req,"/withdraw", "an error occured during withdrawal", res)
+                    }
+                    TRANSACTION.create({
+                        user : req.user.email,
+                        title : "withdraw",
+                        amount : Number(amount)
+                    }).then(data=>{
+                        return res.redirect("/withdraw")
+                    })
+                    .catch(err=> {
+                        console.log(err)
+                        return showError(req,"/withdraw", "an error occured during withdrawal", res)
+                    })
+                })
             }else{
                 return showError(req,"/withdraw", "insufficient ballance", res)
             }
-        }else{return showError(req,"/withdraw", "please login and try again, an error occured", res)}
-
-    })
-    .catch(err=>{
-        console.log(err.message, "message occured trying to find user")
-        return showError(req,"/withdraw", "an error occured, please report this problem to management", res)
-    })
 
 })
 
@@ -128,16 +133,10 @@ router.post("/transfer", function(req,res){
     const {amount, to, from} = req.body
     console.log(req.body)
    if(Number(amount) && to && from){
-       USER.findOne({email : req.user.email}, function(err, data){
-           if(err){
-               console.log(err.message,"the error occured in.." )
-               return showError(req,"/transfer", "an error occured, please report this problem to management", res)
-           }
-           if(data[from] > Number(amount)){
-               if(data[from] == data[to]) return res.redirect("/transfer")
-               update[from] = data[from] - Number(amount)
-               update[to] = data[to] + Number(amount)
-               console.log("this is the value of the update ", update)
+           if(req.user[from] > Number(amount)){
+               if(req.user[from] == req.user[to]) return res.redirect("/transfer")
+               update[from] = req.user[from] - Number(amount)
+               update[to] = req.user[to] + Number(amount)
                 USER.updateOne({email : req.user.email}, update)
                 .then(()=>{
                     res.redirect("/transfer")
@@ -149,7 +148,6 @@ router.post("/transfer", function(req,res){
            }else{
             return showError(req,"/transfer", "insufficient Ballance", res)
            }
-       })
    }else{
     return showError(req,"/transfer", "your transfer couldn't go through", res)
    }
@@ -165,7 +163,7 @@ router.post("/deposit",function(req,res){
           // An unknown error occurred when uploading.
           return showError(req,"/deposit", err.message, res)
         }
-        // Everything went fine.
+               // Everything went fine.
         cloudinary.uploader.upload(loc+"/"+req.file.filename, {
             folder : "receipt",
             use_filename :true, 
@@ -176,15 +174,18 @@ router.post("/deposit",function(req,res){
                     console.log(error)
                     return showError(req,"/deposit", "an error occured, trying to upload your file", res)
                 }
-                USER.updateOne({email : req.user.email}, 
-                    {$push : {transactions : {
-                        title : "deposit",
-                        means,
-                        amount : Number(amount),
-                        imageurl:  result.secure_url
-                    }}})
-                    .then(()=> {
+                TRANSACTION.create({
+                    user : req.user.email,
+                    title : "deposit",
+                    means,
+                    amount : Number(amount),
+                    imageurl:  result.secure_url
+                })
+                  .then(()=> {
                         return showError(req,"/deposit", "succesfully uploaded, awaiting confirmation", res)
+                    }).catch(err=>{
+                        console.log(err)
+                        return showError(req,"/deposit", "an error occured in trying to make deposit", res)
                     })
             });
 
@@ -193,17 +194,16 @@ router.post("/deposit",function(req,res){
 
 router.post("/loan", function(req,res){
     if(Number(req.body.amount)){
-        USER.updateOne({email : req.user.email}, 
-            {$push : {transactions : {
-                title : "Loan",
-                amount : Number(req.body.amount),
-            }}},
-            function(err, data){
-            if(err){
-                console.log(err.message)
-                return showError(req,"/loan", "an error occured applying for loans, report this", res) 
-            }
+        TRANSACTION.create({
+            user : req.body.email,
+            title : "loan", 
+            amount : Number(req.body.amount)
+        }).then(()=>{
             return showError(req,"/loan", "Your application has been submitted", res)
+        })
+        .catch(err=> {
+            console.log(err)
+            return showError(req,"/loan", "an error occured applying for loans, report this", res) 
         })
     }else{
         return showError(req,"/loan", "invalid amount submitted", res)

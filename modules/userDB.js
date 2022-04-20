@@ -6,6 +6,7 @@ function(req,res){
 })
 
 const transaction = mongoose.Schema({
+    user : String,
     title : String,
     amount : Number,
     imageurl : String,
@@ -13,6 +14,7 @@ const transaction = mongoose.Schema({
     status : {type : String, default : "pending"},
     confirmed : {type : Boolean, default : false}, 
 }, {timestamps : true})
+
 
 const normalInvestment = mongoose.Schema({
     title : String,
@@ -23,6 +25,7 @@ const normalInvestment = mongoose.Schema({
     paid : {type : Boolean, default : false},
     profit : Number
 })
+
 const userSchema = mongoose.Schema({
     email : {type : String,  required : [true, "make sure all inputs are filled"],},
     password :{type : String,required : [true, "make sure all inputs are filled"],},
@@ -34,7 +37,6 @@ const userSchema = mongoose.Schema({
     client : {type : Boolean, default : false},
     normalInvestments: [normalInvestment],
     referrals : [String],
-    transactions : [transaction],
     walletAddress : String,
     lastLoggedIn : Date,
 }, {
@@ -45,5 +47,7 @@ const userSchema = mongoose.Schema({
 require("./staticDB")
 
 USER = mongoose.model("user", userSchema)
+TRANSACTION = mongoose.model("transactions", transaction)
 
 module.exports.USER = USER
+module.exports.TRANSACTION = TRANSACTION

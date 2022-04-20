@@ -1,6 +1,7 @@
 const express = require("express")
 const user_getRoute = express.Router()
 const NORMAL = require("../staticDB")
+const { TRANSACTION } = require("../userDB")
 
 const isAuth = function(req,res, next){
     if(!req.isAuthenticated()){
@@ -16,6 +17,17 @@ const getInvestments = function(req,res, next){
         res.locals.normalInvestments = data
         next()
         return data
+    })
+}
+
+const getTransactions = function(req,res,next){
+    return TRANSACTION.find({user : req.user.email}, function(err, data){
+        if(err){
+            console.log(err.message)
+            return res.send("an error occured on the server, please report this problem")
+        }
+        res.locals.transactions = data
+        next()
     })
 }
 
@@ -61,7 +73,7 @@ user_getRoute.get("/withdraw",isAuth, function(req,res){
     res.render("withdraw")
 })
 
-user_getRoute.get("/history",isAuth, function(req,res){
+user_getRoute.get("/history",isAuth,getTransactions, function(req,res){
     res.render("transactions")
 })
 
