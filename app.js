@@ -12,6 +12,7 @@ const adminRoute = require("./modules/routes/admin_getRoutes")
 const {USER} = require("./modules/userDB")
 const passportAuth = require("./modules/auth.js")
 const userPostRoute = require("./modules/routes/userPostRoutes")
+const adminPostRoute = require("./modules/routes/adminPostRoutes")
 
 app.set("view engine", "ejs")
 app.use("/assets",express.static("assets"))
@@ -55,6 +56,7 @@ app.use("/", userPostRoute)
 
 // getRoutes admin
 app.use("/admin", adminRoute)
+app.use('/admin', adminPostRoute)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function(){

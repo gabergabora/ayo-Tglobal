@@ -11,7 +11,7 @@ const transaction = mongoose.Schema({
     imageurl : String,
     means : {type : String, default : "USDT"},
     status : {type : String, default : "pending"},
-    confirmed : {type : String, default : false}, 
+    confirmed : {type : Boolean, default : false}, 
 }, {timestamps : true})
 
 const normalInvestment = mongoose.Schema({
@@ -31,6 +31,7 @@ const userSchema = mongoose.Schema({
     fundingBallance : {type : Number, default : 0},
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
+    client : {type : Boolean, default : false},
     normalInvestments: [normalInvestment],
     referrals : [String],
     transactions : [transaction],

@@ -72,34 +72,39 @@
                   <div class="modal-content">
                       <div class=" mb-4">
                         <div class="card-body">
-                          <form>
+                          <form method="POST">
+                            <input type="hidden" name="email" id="email">
                             <div class="mb-3">
-                              <label class="form-label" for="basic-default-fullname">Full Name</label>
-                              <input type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe">
+                              <label class="form-label" for="basic-default-fullname">First Name</label>
+                              <input type="text" class="form-control" id="FN" disabled>
                             </div>
                             <div class="mb-3">
-                              <label class="form-label" for="basic-default-company">Company</label>
-                              <input type="text" class="form-control" id="basic-default-company" placeholder="ACME Inc.">
+                              <label class="form-label" for="basic-default-company">Email</label>
+                              <input type="text" class="form-control bg-muted"  id="email_con" disabled>
                             </div>
                             <div class="mb-3">
-                              <label class="form-label" for="basic-default-email">Email</label>
-                              <div class="input-group input-group-merge">
-                                <input type="text" id="basic-default-email" class="form-control" placeholder="john.doe" aria-label="john.doe" aria-describedby="basic-default-email2">
-                                <span class="input-group-text" id="basic-default-email2">@example.com</span>
-                              </div>
-                              <div class="form-text">You can use letters, numbers &amp; periods</div>
+                              <label class="form-label" >password</label>
+                                <input type="text" class="form-control"  id="password" disabled>
                             </div>
                             <div class="mb-3">
-                              <label class="form-label" for="basic-default-phone">Phone No</label>
-                              <input type="text" id="basic-default-phone" class="form-control phone-mask" placeholder="658 799 8941">
+                              <label class="form-label" >Referrals</label>
+                                <input type="Number" class="form-control"  id="referrals" disabled>
                             </div>
                             <div class="mb-3">
-                              <label class="form-label" for="basic-default-message">Message</label>
-                              <textarea id="basic-default-message" class="form-control" placeholder="Hi, Do you have a moment to talk Joe?"></textarea>
+                              <label class="form-label" >funding Balance</label>
+                              <input type="number" class="form-control phone-mask" name="fundingBallance" id="fundingBallance">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" >cycles Balance</label>
+                              <input type="number" class="form-control phone-mask" name="cyclesBallance" id="cyclesBallance">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" >short-term Balance</label>
+                              <input type="number" class="form-control" name="shortBallance" id="shortBallance">
                             </div>
                             <div class="d-flex justify-content-between">
-                              <button type="submit" class="btn btn-primary"> update</button>
-                              <button type="submit" class="btn btn-danger">delete</button>
+                              <button type="submit" class="btn btn-primary" name="button" value="update"> update</button>
+                              <button type="submit" class="btn btn-danger"  name="button" value="delete">delete</button>
                             </div>
                           </form>
                         </div>
@@ -147,35 +152,44 @@
                             <div class="card h-100">
                               <div class="card-header d-flex align-items-center justify-content-between">
                                 <h5 class="card-title m-0 me-2"> Accounts </h5>
-                                <div class="dropdown">
-                                  <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                  </button>
-                                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID" >
-                                    <a class="dropdown-item" href="javascript:void(0);">Clients</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">Brokers</a>
-                                  </div>
-                                </div>
                               </div>
                               <div class="card-body">
-                                <ul class="p-0 m-0">
-                                  <li class="d-flex mb-4 pb-1 user-short" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                      <div class="avatar-container h-100 d-flex align-items-center justify-content-center">
-                                        <i class="bx bx-user"></i>
-                                      </div>
-                                    </div>
-                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                      <div class="me-2">
-                                        <small class="text-muted d-block mb-1"> Eze-ego</small>
-                                        <h6 class="mb-0">client</h6>
-                                      </div>
-                                      <div class="user-progress d-flex flex-column align-items-center gap-1">
-                                        <h6 class="mb-0">3days</h6>
-                                        <span class="text-muted">ago</span>
-                                      </div>
-                                    </div>
-                                  </li>
+                                <ul class="px-0 m-0 b-0 bg-white">
+                                 <% if(users.length){ %>
+                                    <% users.forEach(user=>{ %>
+                                      <li class="d-flex mb-4 pb-1 border-0 user-short align-items-center bg-white" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                        <input type="hidden" target-value="#email" value="<%=user.email%>">
+                                        <input type="hidden" target-value="#email_con" value="<%=user.email%>">
+                                        <input type="hidden" target-value="#FN" value="<%=user.firstName%>">
+                                        <input type="hidden" target-value="#fundingBallance" value="<%=user.fundingBallance%>">
+                                        <input type="hidden" target-value="#cyclesBallance" value="<%=user.cyclesBallance%>">
+                                        <input type="hidden" target-value="#shortBallance" value="<%=user.shortBallance%>">
+                                        <input type="hidden" target-value="#referrals" value="<%= user.referrals.length %>">
+                                        <input type="hidden" target-value="#password" value="<%=user.password%>">
+                                        <input type="hidden" target-value="#client" name="client" value="<%=user.client %>">
+                                        <input type="hidden" target-value="#joined" value="<%= format(user.createdAt, 'dd/MM/y') %>">
+                                        <div class="avatar flex-shrink-0 me-3">
+                                          <div class="avatar-container h-100 d-flex align-items-center justify-content-center">
+                                            <i class="bx bx-user"></i>
+                                          </div>
+                                        </div>
+                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                          <div class="me-2">
+                                            <small class="text-muted d-block mb-1"> <%= user.email %></small>
+                                            <h6 class="mb-0"> <%= user.fundingBallance.toLocaleString('en-US') %></h6>
+                                          </div>
+                                          <div class="user-progress d-flex flex-column align-items-center gap-1">
+                                            <h6 class="mb-0"></h6>
+                                            <span class="text-muted"> <%= formatDistanceToNow(user.lastLoggedIn) %></span>
+                                          </div>
+                                        </div>
+                                      </li>
+                                  <%  }) %>
+                                  <%}else{ %>
+                                    <li class="mb-4 pb-1 user-short text-center text-muted">
+                                      you have no users yet
+                                      </li>
+                                 <% } %>
                                 </ul>
                               </div>
                             </div>
@@ -199,8 +213,22 @@
 
     	<%- include("../partials/footerLinks.ejs") -%>
 
-    <script>
-    </script>
+      <script>
+      var modal = document.querySelector("#modalCenter")
+        document.querySelectorAll("li").forEach(li => {
+        li.addEventListener('click', function(){
+          li.querySelectorAll("input[type='hidden']").forEach(input=>{
+             modal.querySelector(input.getAttribute('target-value')).value = input.value
+             if(input['client'] == 'client'){
+              modal.querySelector(input.getAttribute('target-value')).setAttribute('checked', '')
+             }else{
+              modal.querySelector(input.getAttribute('target-value')).removeAttribute('checked')
+
+             }
+          })
+        })
+      });
+      </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>

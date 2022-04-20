@@ -184,7 +184,7 @@ router.post("/deposit",function(req,res){
                         imageurl:  result.secure_url
                     }}})
                     .then(()=> {
-                        return showError(req,"/deposit", "succesfully submitted, awaiting confirmation", res)
+                        return showError(req,"/deposit", "succesfully uploaded, awaiting confirmation", res)
                     })
             });
 
