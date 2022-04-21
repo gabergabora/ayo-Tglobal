@@ -81,6 +81,7 @@
                                      <div class="">
                                          <p> user: <small class="ms-auto" id="email_con" > </small> </p>
                                          <p> amount : <small class="ms-auto" id="amount_con"> </small> </p>
+                                         <p> paid through : <small class="ms-auto" id="means"> </small> </p>
                                          <p> deposited on : <small class="ms-auto" id="createdAt"> </small></p>
                                      </div>
                                     </p>
@@ -89,7 +90,8 @@
                             </div>
                             <form method="POST">
                               <input type="hidden" name="amount" id="amount">
-                              <input type="hidden" name="email" id='email'>
+                              <input type="hidden" name="id" id='email'>
+                              <input type="hidden" name="userID" id='user-id'>
                                 <div class="d-flex justify-content-between">
                                     <button type="submit" name='button' value="confirm" class="btn btn-success">confirm</button>
                                     <button type="submit" name="button" value="decline" class="btn btn-danger"> decline</button>
@@ -142,12 +144,13 @@
                               </div>
                               <div class="card-body">
                                 <ul class="p-0 m-0 ">
-                                  <% if(transactionsArr.length){ %>
-                                  <% transactionsArr.forEach(item=>{ %>
-                                      <% item.transactions.forEach(transaction=>{%>
+                                  <% if(transactions.length){ %>
+                                  <% transactions.forEach(transaction=>{ %>
                                         <li class="d-flex align-items-center bg-white mb-4 pb-1 user-short" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                                          <input type="hidden" target-value='#email' value="<%= item.email %>" >
-                                          <input type="hidden" target-value='#email_con' value="<%= item.email %>" >
+                                          <input type="hidden" target-value='#email' value="<%= transaction._id %>" >
+                                          <input type="hidden" target-value='#user-id' value="<%= transaction.user %>" >
+                                          <input type="hidden" target-value='#means' value="<%= transaction.means %>" >
+                                          <input type="hidden" target-value='#email_con' value="<%= transaction.email %>" >
                                           <input type="hidden" target-value='#amount' value="<%= transaction.amount %>" >
                                           <input type="hidden" target-value='#amount_con' value="<%= transaction.amount %>" >
                                           <input type="hidden" target-value='#img' value="<%= transaction.imageurl %>" >
@@ -159,7 +162,7 @@
                                           </div>
                                           <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                             <div class="me-2">
-                                              <small class="text-muted d-block mb-1"> <%= item.email %></small>
+                                              <small class="text-muted d-block mb-1"> <%= transaction.email %></small>
                                               <h6 class="mb-0"> $<%= transaction.amount.toLocaleString('en-US') %></h6>
                                             </div>
                                             <div class="user-progress d-flex flex-column align-items-center gap-1">
@@ -168,10 +171,9 @@
                                             </div>
                                           </div>
                                         </li>
-                                     <% }) %>
                                   <% }) %>
                                   <%}else{%>
-                                    <li class="mb-4 pb-1 user-short text-center text-muted">
+                                    <li class="mb-4 pb-1 user-short text-center text-muted" style="list-style-type: none;">
                                       you have no deposits to confirm
                                       </li>
                                     <%} %>
@@ -206,7 +208,6 @@
               if(input.getAttribute('target-value') == '#img'){
                 modal.querySelector('img').setAttribute('src', input.value)
               }else{
-              console.log(input.value)
                modal.querySelector(input.getAttribute('target-value')).value = input.value
                modal.querySelector(input.getAttribute('target-value')).innerText = input.value
               }

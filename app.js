@@ -31,7 +31,6 @@ app.get("/", function(req,res){
     }
 })
 
-
 // getRoutes for user
 app.use("/", getUserRoute)
 
@@ -46,8 +45,6 @@ app.post('/login',
   failureRedirect: '/login', 
   failureFlash : true 
 }));
-
-
 
 
 //   user post routes

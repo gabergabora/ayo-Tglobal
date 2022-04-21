@@ -1,6 +1,6 @@
 const express = require("express")
 const user_getRoute = express.Router()
-const NORMAL = require("../staticDB")
+const ADMIN = require("../adminDB")
 const { TRANSACTION } = require("../userDB")
 
 const isAuth = function(req,res, next){
@@ -12,16 +12,17 @@ const isAuth = function(req,res, next){
     return next() 
 }
 const getInvestments = function(req,res, next){
-    return NORMAL.find({}, function(err, data){
+    return ADMIN.findOne({}, function(err, data){
         if(err) return res.send("an error occured on the server, please report this problem")
-        res.locals.normalInvestments = data
+        res.locals.accounts = data.accounts
+        res.locals.normalInvestments = data.normalInvestments
         next()
         return data
     })
 }
 
 const getTransactions = function(req,res,next){
-    return TRANSACTION.find({user : req.user.email}, function(err, data){
+    return TRANSACTION.find({email : req.user.email}, function(err, data){
         if(err){
             console.log(err.message)
             return res.send("an error occured on the server, please report this problem")
@@ -61,7 +62,7 @@ user_getRoute.get("/invest",isAuth, getInvestments, function(req,res){
     res.render("invest")
 })
 
-user_getRoute.get("/deposit",isAuth, function(req,res){
+user_getRoute.get("/deposit",isAuth,getInvestments, function(req,res){
     res.render("deposit")
 })
 
@@ -73,7 +74,7 @@ user_getRoute.get("/withdraw",isAuth, function(req,res){
     res.render("withdraw")
 })
 
-user_getRoute.get("/history",isAuth,getTransactions, function(req,res){
+user_getRoute.get("/history",isAuth, getTransactions, function(req,res){
     res.render("transactions")
 })
 

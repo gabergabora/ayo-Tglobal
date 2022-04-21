@@ -95,26 +95,51 @@
                                 <h5 class="mb-0"> Account settings</h5>
                               </div>
                               <div class="card-body">
-                                <form>
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-icon-default-fullname">Name</label>
                                     <div class="input-group input-group-merge">
                                       <span id="basic-icon-default-fullname2" style="background-color: #eceef1;" class="input-group-text"><i class="bx bx-user"></i></span>
-                                      <input type="text" class="form-control" id="basic-icon-default-fullname" disabled value="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2">
+                                      <input type="text" class="form-control" id="basic-icon-default-fullname" disabled value="John Doe" aria-label="<%= admin.name %>" aria-describedby="basic-icon-default-fullname2">
                                     </div>
                                   </div>
-                                  <div class="mb-3">
-                                    <label class="form-label" for="basic-icon-default-company">Wallet Address</label>
-                                    <div class="input-group input-group-merge">
-                                      <span id="basic-icon-default-company2" class="input-group-text"><i class="bx bx-buildings"></i></span>
-                                      <input type="text" id="basic-icon-default-company" class="form-control" placeholder="crypto wallet" aria-label="ACME Inc." aria-describedby="basic-icon-default-company2">
+                                 <% admin.accounts.forEach(account=>{ %>
+                                    <div class="mb-3">
+                                      <label class="form-label" for="basic-icon-default-company"><%= account.title.toUpperCase() %> Address</label>
+                                      <div class="input-group input-group-merge">
+                                        <span class="input-group-text" style="background-color: #eceef1;"><i class="bx bx-buildings"></i></span>
+                                        <input type="text"  class="form-control" disabled value="<%= account.address %>">
+                                        <form class="input-group-text p-0" method='POST' action="accountdelete" style="background-color: #eceef1;" method="POST">
+                                          <input type="hidden" name="address" value='<%= account.address %>'>
+                                          <button type="submit" class="d-block h-100 btn bg-white border-0">
+                                            <i class='bx bx-trash text-danger'></i>
+                                          </button>
+                                        </form>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <button type="submit" class="btn btn-primary ms-auto">Update</button>
-                                </form>
+                                 <% }) %>
                               </div>
                             </div>
                           </div>
+                     </div>
+                     <div class="col-md-10 col-lg-8">
+                      <form class="card mb-4" method="POST" action="accountadd">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                          <h5 class="mb-0"> Add Account</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                              <label class="form-label" >Title</label>
+                                <input type="text" name="title" class="form-control"  >
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" >Address</label>
+                                <input type="text" name="address" class="form-control"  >
+                            </div>
+                            <button class="btn btn-outline-success">
+                              Add
+                            </button>
+                        </div>
+                      </form>
                      </div>
                     </div>
                 </div>

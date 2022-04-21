@@ -1,4 +1,5 @@
-
+const md5 = require('md5')
+const ADMIN = require('./adminDB')
 module.exports = passportAuth = function(app, session, passport, localStrategy, USER){
     // session
 app.use(session({
@@ -30,6 +31,34 @@ passport.use("user",new localStrategy(
             if(data){
                 try{
                     if(data.password === password){
+                        // md5 hash this password
+                        USER.updateOne({email : data.email},{lastLoggedIn : new Date()},
+                        function(err){if(err) return console.log("error trying to update user logins", err)})
+                        return done(null,data)
+                    }else{
+                        return done(null, false, {message : "wrong email or password"})
+                    }
+                }catch(err){
+                    console.log(err.message)
+                    req.flash("error", "couldn't sign you in, please report this problem")
+                    done(err)
+                }
+            }
+        })
+    })
+)
+
+passport.use("admin",new localStrategy({passReqToCallback: true},
+    (req,user,password,done)=>{
+        ADMIN.findOne({email: user.toLowerCase()},
+         function(err,data){
+            if(err) { return done(err)}
+            if(!data){
+                return done(null, false, {message : "no user found"})
+            }
+            if(data){
+                try{
+                    if(data.password === md5(password)){
                         USER.updateOne({email : data.email},{lastLoggedIn : new Date()},
                         function(err){if(err) return console.log("error trying to update user logins", err)})
                         return done(null,data)
@@ -47,13 +76,18 @@ passport.use("user",new localStrategy(
 )
 
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, { id : user.id, admin : user.admin});
   });
   
-  passport.deserializeUser(function(id, done) {
-    USER.findById(id, function (err, user) {
-      done(err, user);
-    });
+  passport.deserializeUser(function(user, done) {
+      if(user.admin){
+          return ADMIN.findById(user.id, function(err,user){
+              done(err, user)
+          })
+      }
+        return USER.findById(user.id, function (err, user) {
+            done(err, user);
+        });
   });
 
 }

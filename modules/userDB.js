@@ -6,7 +6,9 @@ function(req,res){
 })
 
 const transaction = mongoose.Schema({
+    // i added the email and Id incase a user decides to change their email
     user : String,
+    email : String,
     title : String,
     amount : Number,
     imageurl : String,
@@ -18,6 +20,7 @@ const transaction = mongoose.Schema({
 
 const shortInvestment = mongoose.Schema({
     user : String,
+    email : String,
     title : String,
     roi : Number,
     duration : Number,
@@ -44,7 +47,7 @@ const userSchema = mongoose.Schema({
     timestamps : true,
 })
 
-require("./staticDB")
+require("./adminDB")
 
 USER = mongoose.model("user", userSchema)
 TRANSACTION = mongoose.model("transactions", transaction)

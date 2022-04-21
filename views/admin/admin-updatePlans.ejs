@@ -15,7 +15,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title> Update Investment plans </title>
+    <title> Buy Stocks | invetments </title>
     <!-- headLinks -->
   <%- include("../partials/headLinks.ejs") -%>
   <!-- ### headLinks ### -->
@@ -77,14 +77,23 @@
       transition: all .3s linear;
       position: relative;
       }
-      .pricing_blue{
+      .default{
+        background-color: rgba(41,72,255,.2) ;
+      }
+      .pricing_0{
           background-color: rgba(41,72,255,.2) !important;
       }
-      .pricing_green{
+      .pricing_1{
       background-color:rgba(41, 255, 105, 0.2)!important ;
       }
-      .pricing_red{
+      .pricing_2{
       background-color:rgba(255, 102, 41, 0.2)!important ;
+      }
+      .pricing_3{
+      background-color:rgba(0, 0, 0, 0.2)!important ;
+      }
+      .pricing_gold{
+        background-color: rgba(255, 170, 0, 0.5) !important;
       }
       .pricing-item-amount h4 {
       font-size: 49px;
@@ -135,6 +144,24 @@
     background: -webkit-gradient(linear,left top,right top,from(#f20f10),to(#ec600d));
     background: linear-gradient(90deg,#f20f10 0%,#ec600d 100%);
 }
+#myAlert{
+        top: -300px;
+        -webkit-transition: top .7s ease-in-out;
+        -o-transition: top .7s ease-in-out;
+        transition: top .7s ease-in-out;
+        max-width: 500px;
+        margin: 0 auto ;
+        z-index: 10;
+        position: absolute;
+        width: 100%; 
+        left: 50%;
+        -webkit-transform: translateX(-50%) ;
+        -moz-transform: translateX(-50%) ;
+        transform: translateX(-50%) ;
+    }
+    .move{
+        top: 150px !important;
+    }
     </style>
   </head>
 
@@ -161,6 +188,16 @@
           </nav>
 
           <!-- / Navbar -->
+          <% if(messages.error){ %>
+            <div class="alert alert-primary  text-center alert-dismissible move" role="alert" id="myAlert">
+                <%= messages.error %>
+              </div>
+              <script>
+           setTimeout(function () {
+           return myAlert.classList.remove("move");
+           }, 3000);
+              </script>
+          <% } %>
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -169,45 +206,6 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 col-lg-11">
                         <div class="row ">
-                          <div class="col-md-6 mb-4 ">
-                            <div class="card">
-                                <div class="card-body">
-                                  <div class="card-title d-flex align-items-start justify-content-between">
-                                    <div class="avatar flex-shrink-0">
-                                        <img
-                                        src="../assets/img/icons/unicons/wallet-info.png"
-                                        alt="Credit Card"
-                                        class="rounded"
-                                      />
-                                    </div>
-                                    <div class="dropdown">
-                                      <button
-                                        class="btn p-0"
-                                        type="button"
-                                        id="cardOpt3"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                      >
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                      </button>
-                                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                        <a class="dropdown-item justify-content-between d-flex" href="javascript:void(0);">
-                                            hide
-                                              <div class="text-end">
-                                                <div class="form-check form-switch">
-                                                  <input class="form-check-input hide-amount" data-target="#ballance" type="checkbox" role="switch">
-                                                </div>
-                                              </div>
-                                            </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <span class="fw-semibold d-block mb-1">Ballance</span>
-                                  <h3 class="card-title mb-1" id="ballance" data-amount="$12,628">$12,628</h3>
-                                </div>
-                              </div>
-                          </div>
                             <div class="col-12">
                                 <div class="nav-align-top mb-4">
                                   <ul class="nav nav-pills mb-3" role="tablist">
@@ -222,122 +220,80 @@
                                       </button>
                                     </li>
                                   </ul>
-                                  <div class="tab-content">
+                                  <div class="tab-content px-0">
                                       <!-- first pane -->
                                     <div class="tab-pane fade active show" id="navs-pills-top-home" role="tabpanel">
                                       <div class="container">
                                         <div class="row justify-content-center">
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> Basic</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_blue">
-                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
-                                                  <ul class="pricing-item-list">
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  20% (ROI)</li>
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
-                                                  </ul>
-                                                  <form method="post" class="my-2 w-100">
-                                                    <button class="btn btn-outline-danger form-control "> Delete</button>
-                                                  </form>
-                                                  </div>
-                                                  
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> Standard</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_green">
-                                                  <h4 style="font-size:20px"><small>$</small>45,000 - Infinity</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
+                                         <% normalInvestments.sort((a,b)=> a.max - b.max ).forEach((investment, index)=>{%>
+                                            <div class="col-md-6 col-lg-4 mb-3">
+                                              <div class="card">
+                                                <div class="py-2">
+                                                  <div class="pricing-grid-item-inner">
+                                                    <div class="pricing-item-header py-3">
+                                                    <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> <%= investment.title %></h3>
+                                                    </div>
+                                                    <div class="pricing-item-amount default pricing_<%=index%> ">
+                                                      <%# if min investment is less than one#%>
+                                                      <% if(!investment.min){ %>
+                                                        <h4 style="font-size:20px"> < <small >$</small> <%= investment.max %> </h4>
+                                                      <%}else{ %>
+                                                        <h4 style="font-size:20px"><small >$</small> <%= investment.min.toLocaleString('en-US') %> - <%= investment.max.toLocaleString('en-US') %> </h4>
+                                                     <% } %>
+                                                    </div>
+                                                    <div class="pricing-item-body px-3">
                                                     <ul class="pricing-item-list">
-                                                    <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  40% (ROI)</li>
-                                                    <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
-                                                    <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
+                                                    <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  <%= investment.roi %>% (ROI)</li>
+                                                    <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : <%= investment.duration %> days</li>
                                                     </ul>
-                                                    <form method="post" class="my-2 w-100">
-                                                      <button class="btn btn-outline-danger form-control "> Delete</button>
+                                                    <form method="POST" class="my-2 w-100">
+                                                      <input type="hidden" name="title" class="form-control" value="<%= investment.title %>">
+                                                      <input type="hidden" name="type" class="form-control" value="normalInvestments">
+                                                      <button class="btn btn-outline-danger form-control" name="button" value="delete"> delete</button>
                                                     </form>
                                                     </div>
+                                                    
+                                                </div>
                                               </div>
                                             </div>
-                                          </div>
-                                          </div>
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> Partinership</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_red">
-                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
-                                                  <ul class="pricing-item-list">
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  20% (ROI)</li>
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : 3 days</li>
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 30 days</li>
-                                                  </ul>
-                                                  <form method="post" class="my-2 w-100">
-                                                    <button class="btn btn-outline-danger form-control "> Delete</button>
-                                                  </form>
-                                                  </div>
-                                                  
-                                              </div>
                                             </div>
-                                          </div>
-                                        </div>
+                                        <%  }) %>
                                         </div>
                                         <div class="row justify-content-center">
-                                            <div class="col-md-12 col-lg-6 mb-3">
-                                            <div class="card mb-4">
-                                                <div class="card-header d-flex justify-content-between align-items-center">
-                                                  <h5 class="mb-0"> SHORT INVESTMENTS</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                  <form>
-                                                    <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-fullname"> Title</label>
-                                                      <input type="text" class="form-control" id="1basic-default-fullname" placeholder="Investment title">
+                                          <div class="col-md-12 col-lg-6 mb-3">
+                                          <div class="card mb-4">
+                                              <div class="card-header d-flex justify-content-between align-items-center">
+                                                <h5 class="mb-0"> SHORT INVESTMENTS</h5>
+                                              </div>
+                                              <div class="card-body">
+                                                <form method="POST">
+                                                  <input type="hidden" name="type" class="form-control" value="normalInvestments">
+                                                  <div class="mb-3">
+                                                    <label class="form-label" for="basic-default-fullname"> Title</label>
+                                                    <input type="text" class="form-control" name='title' id="1basic-default-fullname" placeholder="Investment title" required>
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label class="form-label" for="basic-default-company">min</label>
+                                                    <input type="number" class="form-control" name='min' id="1basic-default-company" placeholder="minimum investment" required>
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label class="form-label" for="basic-default-max">max</label>
+                                                      <input type="number" id="1basic-default-max" name="max" class="form-control" required placeholder="maximum investment" aria-label="john.doe" aria-describedby="basic-default-email2">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label class="form-label" for="basic-default-phone">Percentage</label>
+                                                    <input type="number" id="1basic-default-phone" name="roi" class="form-control phone-mask" required placeholder="percentage return (ROI)">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                      <label class="form-label" for="basic-default-cycles">Duration</label>
+                                                      <input type="number" id="1basic-default-cycles" name='duration' class="form-control phone-mask" required placeholder="Duration of investment">
                                                     </div>
-                                                    <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-company">min</label>
-                                                      <input type="number" class="form-control" id="1basic-default-company" placeholder="minimum investment">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-max">max</label>
-                                                        <input type="number" id="1basic-default-max" class="form-control" placeholder="maximum investment" aria-label="john.doe" aria-describedby="basic-default-email2">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-phone">Percentage</label>
-                                                      <input type="number" id="1basic-default-phone" class="form-control phone-mask" placeholder="percentage return (ROI)">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="basic-default-cycles">Duration</label>
-                                                        <input type="number" id="1basic-default-cycles" class="form-control phone-mask" placeholder="Duration of investment">
-                                                      </div>
-                                                    <button type="submit" class="btn btn-primary">Add</button>
-                                                  </form>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                  <button type="submit" class="btn btn-primary" name="button" value="add" >Add</button>
+                                                </form>
+                                              </div>
+                                          </div>
+                                          </div>
+                                          </div>
                                       </div>
                                     </div>
                                     <!-- ## first pane ## -->
@@ -345,120 +301,76 @@
                                     <!-- second pane -->
                                     <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
                                       <div class="container">
+                                        <div class="row">
+                                          <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card">
+                                              <div class="py-2">
+                                                <div class="pricing-grid-item-inner">
+                                                  <div class="pricing-item-header py-3">
+                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> Cycles</h3>
+                                                  </div>
+                                                  <div class="pricing-item-amount pricing_gold">
+                                                  <h4 style="font-size:20px" class="text-white"><small >$</small>50 - unlimited</h4>
+                                                  </div>
+                                                  <div class="pricing-item-body px-3">
+                                                  <ul class="pricing-item-list">
+                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  30% (ROI)/day</li>
+                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 10 cycles</li>
+                                                  </ul>
+                                                  <form method="post" class="my-2 w-100">
+                                                    <input type="hidden" name="roi" class="form-control" value="30">
+                                                    <input type="hidden" name="min" class="form-control" value="50">
+                                                    <input type="hidden" name="type" class="form-control" value="cyclesBallance">
+                                                    <div class="py-2">
+                                                      <input type="number" name="amount" class="form-control" placeholder="put amount">
+                                                    </div>
+                                                    <button class="btn btn-outline-primary form-control "> invest</button>
+                                                  </form>
+                                                  </div>
+                                                  
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        </div>
                                         <div class="row justify-content-center">
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> Basic</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_blue">
-                                                  <h4 style="font-size:20px"><small >$</small>50 - 10,000</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
-                                                  <ul class="pricing-item-list">
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  5% (ROI)/day</li>
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 5 cycles</li>
-                                                  </ul>
-                                                  <form method="post" class="my-2 w-100">
-                                                    <button class="btn btn-outline-danger form-control"> Delete</button>
-                                                  </form>
-                                                  </div>
-                                                  
+                                          <div class="col-md-12 col-lg-6 mb-3">
+                                          <div class="card mb-4">
+                                              <div class="card-header d-flex justify-content-between align-items-center">
+                                                <h5 class="mb-0"> CYCLES INVESTMENTS</h5>
                                               </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> Standard</h3>
+                                              <div class="card-body">
+                                                <form>
+                                                  <div class="mb-3">
+                                                    <label class="form-label" for="basic-default-fullname"> Name</label>
+                                                    <input type="text" class="form-control" id="basic-default-fullname" placeholder="Investment title">
                                                   </div>
-                                                  <div class="pricing-item-amount pricing_green">
-                                                  <h4 style="font-size:20px"><small>$</small>50 - 10,000</h4>
+                                                  <div class="mb-3">
+                                                    <label class="form-label" for="basic-default-company">min</label>
+                                                    <input type="number" class="form-control" id="basic-default-company" placeholder="minimum investment">
                                                   </div>
-                                                  <div class="pricing-item-body px-3">
-                                                    <ul class="pricing-item-list">
-                                                    <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  10% (ROI)/day</li>
-                                                    <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 10 cycles</li>
-                                                    </ul>
-                                                    <form method="post" class="my-2 w-100">
-                                                      <button class="btn btn-outline-danger form-control "> Delete</button>
-                                                    </form>
+                                                  <div class="mb-3">
+                                                    <label class="form-label" for="basic-default-max">max</label>
+                                                      <input type="number" id="basic-default-max" class="form-control" placeholder="maximum investment" aria-label="john.doe" aria-describedby="basic-default-email2">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label class="form-label" for="basic-default-phone">Percentage</label>
+                                                    <input type="number" id="basic-default-phone" class="form-control phone-mask" placeholder="percentage return (ROI)">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                      <label class="form-label" for="basic-default-cycles">number of cycles</label>
+                                                      <input type="number" id="basic-default-cycles" class="form-control phone-mask" placeholder="number of cycles">
                                                     </div>
+                                                    <div class="mb-3">
+                                                      <label class="form-label" for="basic-default-cycles">days per cycles</label>
+                                                      <input type="number" id="basic-default-cycles" class="form-control phone-mask" placeholder="How many days make one cycle">
+                                                    </div>
+                                                  <button type="submit" class="btn btn-primary">Add</button>
+                                                </form>
                                               </div>
-                                            </div>
                                           </div>
-                                          </div>
-
-                                          <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card">
-                                              <div class="py-2">
-                                                <div class="pricing-grid-item-inner">
-                                                  <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> Partinership</h3>
-                                                  </div>
-                                                  <div class="pricing-item-amount pricing_red">
-                                                  <h4 style="font-size:20px"><small >$</small>25,000 - 45,000</h4>
-                                                  </div>
-                                                  <div class="pricing-item-body px-3">
-                                                  <ul class="pricing-item-list">
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  15% (ROI)/days</li>
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 15 cycles</li>
-                                                  </ul>
-                                                  <form method="post" class="my-2 w-100">
-                                                    <button class="btn btn-outline-danger form-control "> Delete</button>
-                                                  </form>
-                                                  </div>
-                                                  
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        </div>
-                                     <div class="row justify-content-center">
-                                            <div class="col-md-12 col-lg-6 mb-3">
-                                            <div class="card mb-4">
-                                                <div class="card-header d-flex justify-content-between align-items-center">
-                                                  <h5 class="mb-0"> CYCLES INVESTMENTS</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                  <form>
-                                                    <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-fullname"> Name</label>
-                                                      <input type="text" class="form-control" id="basic-default-fullname" placeholder="Investment title">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-company">min</label>
-                                                      <input type="number" class="form-control" id="basic-default-company" placeholder="minimum investment">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-max">max</label>
-                                                        <input type="number" id="basic-default-max" class="form-control" placeholder="maximum investment" aria-label="john.doe" aria-describedby="basic-default-email2">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-phone">Percentage</label>
-                                                      <input type="number" id="basic-default-phone" class="form-control phone-mask" placeholder="percentage return (ROI)">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="basic-default-cycles">number of cycles</label>
-                                                        <input type="number" id="basic-default-cycles" class="form-control phone-mask" placeholder="number of cycles">
-                                                      </div>
-                                                      <div class="mb-3">
-                                                        <label class="form-label" for="basic-default-cycles">days per cycles</label>
-                                                        <input type="number" id="basic-default-cycles" class="form-control phone-mask" placeholder="How many days make one cycle">
-                                                      </div>
-                                                    <button type="submit" class="btn btn-primary">Add</button>
-                                                  </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
+                                      </div>
+                                      </div>
                                       </div>
                                     </div>
                                     <!-- ## second pane ## -->
@@ -481,20 +393,7 @@
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-    <script>
-      document.querySelector(".hide-amount")
-      const allHiders = Array.from(document.getElementsByClassName("hide-amount"))
-      for(i=0; i< allHiders.length ; i++){
-          allHiders[i].addEventListener("change", function(e){
-              let amount_box = document.querySelector(e.target.getAttribute("data-target"))
-              if(e.target.checked){
-                  amount_box.innerText = "***"
-              }else{
-                  amount_box.innerText = amount_box.getAttribute("data-amount")
-              }
-          })
-      }
-</script>
+   
     	<%- include("../partials/footerLinks.ejs") -%>
 
     <!-- Place this tag in your head or just before your close body tag. -->

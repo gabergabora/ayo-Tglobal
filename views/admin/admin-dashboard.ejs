@@ -87,6 +87,10 @@
                                 <input type="text" class="form-control"  id="password" disabled>
                             </div>
                             <div class="mb-3">
+                              <label class="form-label" >wallet Address</label>
+                                <input type="text" class="form-control"  id="address" disabled>
+                            </div>
+                            <div class="mb-3">
                               <label class="form-label" >Referrals</label>
                                 <input type="Number" class="form-control"  id="referrals" disabled>
                             </div>
@@ -161,6 +165,7 @@
                                         <input type="hidden" target-value="#email" value="<%=user.email%>">
                                         <input type="hidden" target-value="#email_con" value="<%=user.email%>">
                                         <input type="hidden" target-value="#FN" value="<%=user.firstName%>">
+                                        <input type="hidden" target-value="#address" value="<%=user.walletAddress%>">
                                         <input type="hidden" target-value="#fundingBallance" value="<%=user.fundingBallance%>">
                                         <input type="hidden" target-value="#cyclesBallance" value="<%=user.cyclesBallance%>">
                                         <input type="hidden" target-value="#shortBallance" value="<%=user.shortBallance%>">
@@ -179,8 +184,8 @@
                                             <h6 class="mb-0"> <%= user.fundingBallance.toLocaleString('en-US') %></h6>
                                           </div>
                                           <div class="user-progress d-flex flex-column align-items-center gap-1">
-                                            <h6 class="mb-0"></h6>
-                                            <span class="text-muted"> <%= formatDistanceToNow(user.lastLoggedIn) %></span>
+                                            <h6 class="mb-0"> <%= formatDistanceToNow(user.lastLoggedIn) %></h6>
+                                            <span class="text-muted"> last seen </span>
                                           </div>
                                         </div>
                                       </li>

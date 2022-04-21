@@ -87,17 +87,18 @@
                                      <div class="">
                                          <p class="h4"> user: <small class="ms-auto text-end h5" id="email-con"> </small> </p>
                                          <p class="h4"> date: <small class="ms-auto text-end h5" id="createdAt"> </small> </p>
+                                         <p class="h4"> paid through: <small class="ms-auto text-end h5" id="means"> </small> </p>
                                      </div>
                                     </p>
                                   </div>
                                 </div>
                             </div>
                             <form method="POST">
-                              <input type="hidden" name="email" id="email">
                               <input type="hidden" name="amount" id="amount">
                               <input type="hidden" name="id" id="id">
+                              <input type="hidden" name="userID" id="user-id">
                                 <div class="d-flex justify-content-between">
-                                    <button type="submit" value="confirm" name="button" class="btn btn-success"> confirm</button>
+                                    <button type="submit" value="confirm" name="button" class="btn btn-success"> approve</button>
                                     <button type="submit" value="decline" name="button" class="btn btn-danger"> decline</button>
                                 </div>
                               </form>
@@ -148,11 +149,12 @@
                               </div>
                               <div class="card-body">
                                 <ul class="p-0 m-0">
-                                 <% transactionsArr.forEach(item=>{ %>
-                                    <% item.transactions.forEach(transaction=>{%>
+                                  <% if(transactions.length){ %>
+                                 <% transactions.forEach(transaction=>{ %>
                                       <li class="d-flex mb-4 pb-1 user-short" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                                        <input type="hidden" target-value='#email-con' value="<%= item.email %>" >
-                                        <input type="hidden" target-value='#email' value="<%= item.email %>" >
+                                        <input type="hidden" target-value='#email-con' value="<%= transaction.email %>" >
+                                        <input type="hidden" target-value='#user-id' value="<%= transaction.user %>" >
+                                        <input type="hidden" target-value='#means' value="<%= transaction.means %>" >
                                         <input type="hidden" target-value='#id' value="<%= transaction.id %>" >
                                         <input type="hidden" target-value='#amount' value="<%= transaction.amount %>" >
                                         <input type="hidden" target-value='#amount-con' value="<%= transaction.amount %>" >
@@ -164,7 +166,7 @@
                                         </div>
                                         <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                           <div class="me-2">
-                                            <small class="text-muted d-block mb-1"> <%= item.email %></small>
+                                            <small class="text-muted d-block mb-1"> <%= transaction.email %></small>
                                             <h6 class="mb-0"> $<%= transaction.amount.toLocaleString('en-US') %></h6>
                                           </div>
                                           <div class="user-progress d-flex flex-column align-items-center gap-1">
@@ -173,8 +175,11 @@
                                           </div>
                                         </div>
                                       </li>
-                                   <% }) %>
-                                 <% }) %>
+                                 <% })}else{ %>
+                                  <li class="mb-4 pb-1 user-short text-center text-muted" style="list-style-type: none;">
+                                    you have no withdraws to confirm
+                                    </li>
+                                <% } %>
                                 </ul>
                               </div>
                             </div>

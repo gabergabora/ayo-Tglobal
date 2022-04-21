@@ -10,7 +10,8 @@ const {addDays} =  require("date-fns")
 // local modules
 const {USER, TRANSACTION, SHORTINVS} = require("../userDB")
 const showError = require("../error.js")
-const NORMAL = require("../staticDB")
+const ADMIN = require("../adminDB")
+const { getInvestments } = require("./user_getRoute")
 var cloudinary = require('cloudinary').v2;
 
 
@@ -24,12 +25,13 @@ cloudinary.config({
 
 
 router.use(express.urlencoded({extended: true}))
-// router.use(function(req,res,next){
-//     if(!req.isAuthenticated()){
-//         return res.redirect("/login")
-//     }
-//     return next()
-// })
+const isAuth = function(req,res,next){
+    if(!req.isAuthenticated()){
+        return res.redirect("/login")
+    }
+    return next()
+}
+
 
 router.post("/register", 
 function(req,res, next){
@@ -89,7 +91,8 @@ passport.authenticate("user",{
     failureFlash : true
 }))
 
-router.post("/account", function(req,res){
+router.post("/account",isAuth,
+ function(req,res){
     const {email, walletAddress} = req.body
     if(!email.trim()) return showError(req,"/account", "email field value cannot be empty", res)
     USER.updateOne({email : req.user.email}, {email, walletAddress}, function(err, data){
@@ -98,7 +101,7 @@ router.post("/account", function(req,res){
     })
 })
 
-router.post("/withdraw", function(req,res){
+router.post("/withdraw",isAuth, function(req,res){
     const {amount} = req.body
     if(!Number(amount)) return showError(req,"/withdraw", "your Withdrawal amount value was not accepted", res)
             if(req.user.fundingBallance >= Number(amount)){
@@ -110,7 +113,8 @@ router.post("/withdraw", function(req,res){
                         return showError(req,"/withdraw", "an error occured during withdrawal", res)
                     }
                     TRANSACTION.create({
-                        user : req.user.email,
+                        user : req.user._id,
+                        email : req.user.email,
                         title : "withdraw",
                         amount : Number(amount)
                     }).then(data=>{
@@ -127,7 +131,7 @@ router.post("/withdraw", function(req,res){
 
 })
 
-router.post("/transfer", function(req,res){
+router.post("/transfer",isAuth, function(req,res){
     let update = {}
     const {amount, to, from} = req.body
     console.log(req.body)
@@ -152,7 +156,7 @@ router.post("/transfer", function(req,res){
    }
 })
 let loc = path.join(__dirname,'../../uploads')
-router.post("/deposit",function(req,res){
+router.post("/deposit", isAuth,function(req,res){
     upload(req, res, function (err) {
        const {means, amount} = req.body
         if (err instanceof multer.MulterError) {
@@ -174,7 +178,8 @@ router.post("/deposit",function(req,res){
                     return showError(req,"/deposit", "an error occured, trying to upload your file", res)
                 }
                 TRANSACTION.create({
-                    user : req.user.email,
+                    user : req.user._id,
+                    email : req.user.email,
                     title : "deposit",
                     means,
                     amount : Number(amount),
@@ -191,10 +196,11 @@ router.post("/deposit",function(req,res){
       })
 })
 
-router.post("/loan", function(req,res){
+router.post("/loan", isAuth,function(req,res){
     if(Number(req.body.amount)){
         TRANSACTION.create({
-            user : req.body.email,
+            user : req.user._id,
+            email : req.user.email,
             title : "loan", 
             amount : Number(req.body.amount)
         }).then(()=>{
@@ -210,22 +216,18 @@ router.post("/loan", function(req,res){
 })
 // getInvestments
 // haven't stopped user from investing if they have a running inv
-console.log(new Date(addDays(Date.now(), 5)).getTime())
-router.post("/invest", function(req,res){
+router.post("/invest", isAuth, getInvestments, function(req,res){
     if(req.user[req.body.type] >= Number(req.body.amount)){
         if(req.body.type == "shortBallance"){
-            NORMAL.findOne({title : req.body.title}, function(err,plan){
-                if(err){
-                 console.log(err)
-                return showError(req,"/invest", "an error occured applying trying to locate your plan, please report this", res) 
-                }
+            plan = res.locals.normalInvestments.filter(investment => investment.title == req.body.title )[0]
+            console.log(plan)
                 if(!plan) return showError(req,"/invest", "couldn't find your selected plan", res)
                 if(Number(req.body.amount) >= plan.min && Number(req.body.amount) <= plan.max){
                     USER.updateOne({email : req.user.email}, {
                         $inc : {shortBallance : - Number(req.body.amount)},
                     }).then(()=> {
                         SHORTINVS.create({
-                            user : req.user.email,
+                            user : req.user._id,
                             title : plan.title,
                             roi : plan.roi,
                             expiry : new Date(addDays(Date.now(), plan.duration)).getTime(),
@@ -244,7 +246,6 @@ router.post("/invest", function(req,res){
                 }else{
                     return showError(req,"/invest", `can't invest $${req.body.amount} in ${req.body.title} `, res) 
                 }
-            })
         }
     }else{
         return showError(req,"/invest", "insufficient ballance", res)

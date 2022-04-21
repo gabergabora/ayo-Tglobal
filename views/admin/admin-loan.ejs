@@ -72,28 +72,30 @@
                   <div class="modal-content">
                       <div class=" mb-4">
                         <div class="card-body">
-                            <div class="col-md-6 col-lg-4 mb-3">
-                                <div class="h-100">
-                                  <img class="card-img-top" src="../assets/img/elements/2.jpg" alt="Card image cap">
-                                  <div class="card-body">
-                                    <h5 class="card-title">withdrawal alert</h5>
-                                    <p class="card-text">
-                                     <div class="">
-                                         <p> user: <small class="ms-auto"> Eze-ego</small> </p>
-                                         <p> amount : <small class="ms-auto"> $2000</small> </p>
-                                     </div>
-                                    </p>
-                                  </div>
-                                </div>
+                          <div class="col-md-6 col-lg-4 mb-3">
+                            <div class="h-100">
+                              <div class="card-body">
+                                <h5 class="card-title text-center p-4">Loan Request</h5>
+                                <h1 class="display-1 text-center"  id="amount-con">
+                                  <small><sup> $</sup></small>
+                                  4000
+                                </h1>
+                                <p class="card-text">
+                                 <div class="">
+                                     <p class="h4"> user: <small class="ms-auto text-end h5" id="email-con"> </small> </p>
+                                     <p class="h4"> date: <small class="ms-auto text-end h5" id="createdAt"> </small> </p>
+                                 </div>
+                                </p>
+                              </div>
                             </div>
-                            <form>
-                                <div class="mb-3">
-                                  <label class="form-label" for="basic-default-fullname">this should be hidden</label>
-                                  <input type="text" class="form-control" id="basic-default-fullname" placeholder="slip ID">
-                                </div>
+                         </div>
+                            <form method="POST">
+                              <input type="hidden" name="amount" id="amount">
+                              <input type="hidden" name="id" id="id">
+                              <input type="hidden" name="userID" id="user-id">
                                 <div class="d-flex justify-content-between">
-                                    <button type="submit" value="confirm" class="btn btn-success"> confirm</button>
-                                    <button type="submit" value="decline" class="btn btn-danger"> decline</button>
+                                    <button type="submit" name="button" value="confirm" class="btn btn-success"> confirm</button>
+                                    <button type="submit" name="button" value="decline" class="btn btn-danger"> decline</button>
                                 </div>
                               </form>
                         </div>
@@ -143,23 +145,36 @@
                               </div>
                               <div class="card-body">
                                 <ul class="p-0 m-0">
-                                  <li class="d-flex mb-4 pb-1 user-short" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                      <div class="avatar-container h-100 d-flex align-items-center justify-content-center">
-                                        <i class="bx bx-user"></i>
-                                      </div>
-                                    </div>
-                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                      <div class="me-2">
-                                        <small class="text-muted d-block mb-1"> Eze-ego</small>
-                                        <h6 class="mb-0">client</h6>
-                                      </div>
-                                      <div class="user-progress d-flex flex-column align-items-center gap-1">
-                                        <h6 class="mb-0">3days</h6>
-                                        <span class="text-muted">ago</span>
-                                      </div>
-                                    </div>
-                                  </li>
+                                  <% if(transactions.length){ %>
+                                    <% transactions.forEach(transaction=>{ %>
+                                         <li class="d-flex mb-4 pb-1 user-short" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                           <input type="hidden" target-value='#email-con' value="<%= transaction.email %>" >
+                                           <input type="hidden" target-value='#user-id' value="<%= transaction.user %>" >
+                                           <input type="hidden" target-value='#id' value="<%= transaction.id %>" >
+                                           <input type="hidden" target-value='#amount' value="<%= transaction.amount %>" >
+                                           <input type="hidden" target-value='#amount-con' value="<%= transaction.amount %>" >
+                                           <input type="hidden" target-value='#createdAt' value="<%= format(transaction.createdAt, 'dd/MM/y') %>" >
+                                           <div class="avatar flex-shrink-0 me-3">
+                                             <div class="avatar-container h-100 d-flex align-items-center justify-content-center">
+                                               <i class="bx bx-user"></i>
+                                             </div>
+                                           </div>
+                                           <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                             <div class="me-2">
+                                               <small class="text-muted d-block mb-1"> <%= transaction.email %></small>
+                                               <h6 class="mb-0"> $<%= transaction.amount.toLocaleString('en-US') %></h6>
+                                             </div>
+                                             <div class="user-progress d-flex flex-column align-items-center gap-1">
+                                               <h6 class="mb-0"> </h6>
+                                               <span class="text-muted"> <%= formatDistanceToNow(transaction.createdAt) %> </span>
+                                             </div>
+                                           </div>
+                                         </li>
+                                    <% })}else{ %>
+                                     <li class="mb-4 pb-1 user-short text-center text-muted" style="list-style-type: none;">
+                                       No loan Request to confirm
+                                       </li>
+                                   <% } %>
                                 </ul>
                               </div>
                             </div>
@@ -183,8 +198,17 @@
 
     	<%- include("../partials/footerLinks.ejs") -%>
 
-    <script>
-    </script>
+      <script>
+        var modal = document.querySelector("#modalCenter")
+        document.querySelectorAll("li").forEach(li => {
+          li.addEventListener('click', function(){
+            li.querySelectorAll("input[type='hidden']").forEach(input=>{
+               modal.querySelector(input.getAttribute('target-value')).value = input.value
+               modal.querySelector(input.getAttribute('target-value')).innerText = input.value
+            })
+          })
+        });
+      </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>

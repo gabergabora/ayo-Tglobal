@@ -74,15 +74,15 @@
                                       </button>
                                       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID" >
                                         <div class="dropdown-item px-3 py-2 mt-3">
-                                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio1">
+                                            <input name="default-radio-1" class="form-check-input" type="radio" value="all" id="defaultRadio1" checked>
                                             <label class="form-check-label" for="defaultRadio1"> All </label>
                                           </div>
                                           <div class="dropdown-item px-3 py-2 mt-3">
-                                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio2" checked="">
+                                            <input name="default-radio-1" class="form-check-input" type="radio" value="withdraw" id="defaultRadio2" >
                                             <label class="form-check-label" for="defaultRadio2"> Withdrawal </label>
                                           </div>
                                           <div class="dropdown-item px-3 py-2 mt-3">
-                                            <input name="default-radio-1" class="form-check-input" type="radio" value="" id="defaultRadio2" checked="">
+                                            <input name="default-radio-1" class="form-check-input" type="radio" value="deposit" id="defaultRadio2" >
                                             <label class="form-check-label" for="defaultRadio2"> Deposits </label>
                                           </div>
                                       </div>
@@ -92,7 +92,7 @@
                                     <ul class="p-0 m-0">
                                       <%if(transactions.length){%>
                                         <% transactions.sort(function(a,b){ new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() }).forEach(item => { %>
-                                          <li class="d-flex mb-4 pb-1">
+                                          <li class="d-flex mb-4 pb-1" data-title="<%= item.title %>">
                                             <%if(item.title == "deposit") {%>
                                               <div class="avatar flex-shrink-0 me-3">
                                                 <img src="../assets/img/icons/unicons/cc-success.png" alt="User" class="rounded">
@@ -145,6 +145,26 @@
       <!-- hide ballances -->
       <%- include("./partials/hideBallance.ejs") -%>
       <!-- ###### -->
+      <script>
+        list = Array.from(document.querySelectorAll('.card-body li'))
+        document.querySelectorAll("input[type='radio']").forEach(input=>{
+          input.addEventListener('change', function(e){
+            if(input.checked){
+              if(input.value== 'all'){
+                 return list.forEach(li=> li.classList.remove('d-none'))
+              }else{
+                list.forEach(li=> {
+                  if(li.getAttribute('data-title') != input.value){
+                    li.classList.add("d-none")
+                  }else{
+                    li.classList.remove('d-none')
+                  }
+                })
+              }
+            }
+          })
+        })
+      </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
