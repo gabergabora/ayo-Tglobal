@@ -4,6 +4,10 @@ const router = express.Router()
 const showError = require('../error')
 const ADMIN = require('../adminDB')
 const passport = require('passport')
+const {transporter, Message} = require('../nodemailer')
+const {depositSuccess, depositDecline} = require('../email-templates/deposit')
+const {withdrawAproved,withdrawDecline} = require('../email-templates/withdraw')
+const {loanDecline,loanSuccess} = require('../email-templates/loan')
 
 router.use(express.urlencoded({extended : true}))
 
@@ -54,13 +58,20 @@ router.post("/deposit",isAuth, function(req,res){
             confirmed : true
         }, function(err){
                if(err) return res.send("an error occured trying to confirm deposits")
-              return USER.updateOne({_id : req.body.userID},{
+              return USER.findOneAndUpdate({_id : req.body.userID},{
                         $inc : {fundingBallance : Number(req.body.amount)}
-                    }, function(err){
+                    }, function(err,  data){
                         if(err) return res.send("an error occured trying to confirm deposits")
                         // i wanted to update percentage of referrals automatically but since i saved the email of 
                         // the referred in the referree, if i use the email to find the referre here, and the referred has changed email
                         // then the refferre wont be credited and its stress to do that now.. 21/04/22
+                        let message = new Message(data.email,`Your Deposit of ${req.body.amount} has been comfirmed`, 
+                        `your deposit of ${req.body.amount} has been confirmed and credited into your account`,
+                        depositSuccess(data.firstName, req.body.amount)
+                        )
+                        transporter.sendMail(message, function(err, info){
+                            if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
+                        })
                         return res.redirect('deposit')
                 })
         })
@@ -71,6 +82,13 @@ router.post("/deposit",isAuth, function(req,res){
             confirmed : true
         }, function(err){
             if(err) return res.send('an error occured in declining the deposit')
+            let message = new Message(data.email,`Your Deposit of ${req.body.amount} has been Declined`, 
+            `your deposit of ${req.body.amount} has been declined`,
+            depositDecline(data.firstName, req.body.amount)
+            )
+            transporter.sendMail(message, function(err, info){
+                if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
+            })
             return res.redirect('deposit')
         })
     }
@@ -85,20 +103,33 @@ router.post("/withdraw",isAuth, function(req,res){
         },function(err,data){
             if(err) return res.send("error occured while confirming withdrawal")
             // refund the user 
-            USER.updateOne({_id : req.body.userID}, {$inc : {fundingBallance : Number(req.body.amount)}}, 
-            function(err){
+            USER.findOneAndUpdate({_id : req.body.userID}, {$inc : {fundingBallance : Number(req.body.amount)}}, 
+            function(err, data){
                 if(err) return res.send("error occured trying to refund user")
+                let message = new Message(data.email,`Your Application for withdrawal of ${req.body.amount} `, 
+                `your application for withdrawal of ${req.body.amount} from your account has been declined, contact our support for more assistance`,
+                withdrawDecline(data.firstName, req.body.amount)
+                )
+                transporter.sendMail(message, function(err, info){
+                    if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
+                })
                     return res.redirect("withdraw")
                 }
             )
         })
     }if(req.body.button == "confirm"){
-        return TRANSACTION.updateOne({_id : req.body.id},{
+        return TRANSACTION.findOneAndUpdate({_id : req.body.id},{
             status : "approved",
             confirmed : true
         }, function(err, data){
             if(err) return res.send("errror trying to update withdraw request")
-                console.log(data)
+            let message = new Message(data.email,`Your Application for withdrawal of ${req.body.amount} `, 
+            `your application for withdrawal of ${req.body.amount} from your account has been approved`,
+            withdrawAproved(data.firstName, req.body.amount)
+            )
+            transporter.sendMail(message, function(err, info){
+                if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
+            })
                 return res.redirect("withdraw")
         })
     }
@@ -112,20 +143,34 @@ router.post('/loan',isAuth, function(req,res){
             confirmed : true
         }, function(err){
             if(err) return res.send('an error occured in approving loan request')
-            USER.updateOne({_id : req.body.userID}, {
+            USER.findOneAndUpdate({_id : req.body.userID}, {
                 $inc : {fundingBallance : Number(req.body.amount)}
-            }, function(err){
+            }, function(err, data){
                 if(err) return res.send('an error occured in updating balance of approved loan')
+                let message = new Message(data.email,`Your Application for a loan of $${req.body.amount} `, 
+                `your application for a loan of ${req.body.amount},has been approved and credited to your account`,
+                loanSuccess(data.firstName, req.body.amount)
+                )
+                transporter.sendMail(message, function(err, info){
+                    if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
+                })
                 return res.redirect('loan')
             })
         })
     }
     if(req.body.button == 'decline'){
-        TRANSACTION.updateOne({_id : req.body.id}, {
+        TRANSACTION.findOneAndUpdate({_id : req.body.id}, {
             status : 'declined', 
             confirmed : true
-        }, function(err){
+        }, function(err, data){
             if(err) return res.send('an error occured in declining loan request')
+            let message = new Message(data.email,`Your Application for a loan of $${req.body.amount} `, 
+            `your application for a loan of ${req.body.amount},was declined`,
+            loanDecline(data.firstName, req.body.amount)
+            )
+            transporter.sendMail(message, function(err, info){
+                if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
+            })
             return res.redirect('loan')
         })
     }

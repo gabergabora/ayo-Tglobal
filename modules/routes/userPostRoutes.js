@@ -13,6 +13,13 @@ const showError = require("../error.js")
 const ADMIN = require("../adminDB")
 const { getInvestments } = require("./user_getRoute")
 var cloudinary = require('cloudinary').v2;
+const {transporter, Message} = require('../nodemailer')
+const welcome = require('../email-templates/welcome')
+const {depositRequest} = require('../email-templates/deposit')
+const {withdrawRequest} = require('../email-templates/withdraw')
+const {loanRequest} = require('../email-templates/loan')
+
+
 
 
 // cloudinary config
@@ -35,7 +42,6 @@ const isAuth = function(req,res,next){
 
 router.post("/register", 
 function(req,res, next){
-    console.log(req.body)
     USER.findOne({email : req.body.email})
     .then(user=>{
         if(user) {
@@ -48,6 +54,10 @@ function(req,res, next){
                     console.log(err.message)
                     return showError(req, "/register", "make sure all inputs are filled", res)
                 }
+                let message = new Message(req.body.email, "Welcome To Temenos Global", 'Welcome to the temenos family', welcome(req.body.firstName) )
+                transporter.sendMail(message, function(err, info){
+                    if(err) console.log('an error occured sending welcome message', err.message)
+                })
                 return next()
             })
         }
@@ -79,6 +89,10 @@ function(req,res, next){
                     if(err){
                         console.log("error trying to update referral list")
                     }
+                })
+                let message = new Message(req.body.email, "Welcome To Temenos Global", 'Welcome to the temenos family', welcome(req.body.firstName) )
+                transporter.sendMail(message, function(err, info){
+                    if(err) console.log('an error occured sending welcome message', err.message)
                 })
                 return next()
             })
@@ -118,6 +132,12 @@ router.post("/withdraw",isAuth, function(req,res){
                         title : "withdraw",
                         amount : Number(amount)
                     }).then(data=>{
+                        let message = new Message(req.user.email, `You have applied for a withdrawal of ${amount}`, 
+                        `Your application for a withdrawal of ${amount} has been received and will be confirmed within 24 hours`, 
+                        withdrawRequest(req.user.firstName, amount))
+                        transporter.sendMail(message, function(err, info){
+                            if(err) console.log('an error occured sending welcome message', err.message)
+                        })
                         return res.redirect("/withdraw")
                     })
                     .catch(err=> {
@@ -186,6 +206,14 @@ router.post("/deposit", isAuth,function(req,res){
                     imageurl:  result.secure_url
                 })
                   .then(()=> {
+                        let message = new Message(req.user.email, 
+                            `You placed Deposit of $${amount}  on your account`,
+                            `Your deposit of $${amount} has been received and awaiting confirmation before being credited`,
+                            depositRequest(req.user.firstName,amount)
+                            )
+                            transporter.sendMail(message, function(err){
+                                if(err) console.log(err)
+                            })
                         return showError(req,"/deposit", "succesfully uploaded, awaiting confirmation", res)
                     }).catch(err=>{
                         console.log(err)
@@ -204,6 +232,14 @@ router.post("/loan", isAuth,function(req,res){
             title : "loan", 
             amount : Number(req.body.amount)
         }).then(()=>{
+            let message = new Message(req.user.email, 
+                `Application for a loan  of $${req.body.amount}`,
+                `Your Application for a loan of $${req.body.amount} has been received and awaiting confirmation`,
+                loanRequest(req.user.firstName,req.body.amount)
+                )
+                transporter.sendMail(message, function(err){
+                    if(err) console.log(err)
+                })
             return showError(req,"/loan", "Your application has been submitted", res)
         })
         .catch(err=> {
