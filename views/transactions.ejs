@@ -28,7 +28,7 @@
     </style>
   </head>
 
-  <body>
+  <body class="body-linear">
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -41,12 +41,12 @@
           <!-- Navbar -->
 
           <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme card-color"
             id="layout-navbar"
           >
             <div class="layout-menu-toggle navbar-nav align-items-xl-center ms-auto me-xl-0 d-xl-none">
               <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
+                <i class="bx bx-menu bx-sm text-white"></i>
               </a>
             </div>
           </nav>
@@ -65,25 +65,25 @@
                         </div> 
                         <div class="row justify-content-center">
                             <div class="col-12 mb-4">
-                                <div class="card h-100">
+                                <div class="card h-100 card-color">
                                   <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="card-title m-0 me-2"> Transaction History </h5>
+                                    <h5 class="card-title m-0 me-2 text-white"> Transaction History </h5>
                                     <div class="dropup">
                                       <button class="btn p-0 dropup" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                        <i class="bx bx-dots-vertical-rounded text-white"></i>
                                       </button>
                                       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID" >
                                         <div class="dropdown-item px-3 py-2 mt-3">
                                             <input name="default-radio-1" class="form-check-input" type="radio" value="all" id="defaultRadio1" checked>
-                                            <label class="form-check-label" for="defaultRadio1"> All </label>
+                                            <label class="form-check-label text-white" for="defaultRadio1"> All </label>
                                           </div>
                                           <div class="dropdown-item px-3 py-2 mt-3">
                                             <input name="default-radio-1" class="form-check-input" type="radio" value="withdraw" id="defaultRadio2" >
-                                            <label class="form-check-label" for="defaultRadio2"> Withdrawal </label>
+                                            <label class="form-check-label text-white for="defaultRadio2"> Withdrawal </label>
                                           </div>
                                           <div class="dropdown-item px-3 py-2 mt-3">
                                             <input name="default-radio-1" class="form-check-input" type="radio" value="deposit" id="defaultRadio2" >
-                                            <label class="form-check-label" for="defaultRadio2"> Deposits </label>
+                                            <label class="form-check-label text-white" for="defaultRadio2"> Deposits </label>
                                           </div>
                                       </div>
                                     </div>
@@ -104,7 +104,7 @@
                                               <%}%>
                                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                               <div class="me-2">
-                                                <small class="text-muted d-block mb-1"> <%= item.title %></small>
+                                                <small class="text-muted d-block mb-1 text-white"> <%= item.title %></small>
                                                 <h6 class="mb-0"> <%= item.status %></h6>
                                               </div>
                                               <div class="user-progress d-flex align-items-center gap-1">

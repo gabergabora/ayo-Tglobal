@@ -78,16 +78,16 @@
       position: relative;
       }
       .pricing_0{
-          background-color: rgba(41,72,255,.2) !important;
+          background-color: rgba(41,72,255,.5) !important;
       }
       .pricing_1{
-      background-color:rgba(41, 255, 105, 0.2)!important ;
+      background-color:rgba(41, 255, 105, 0.5)!important ;
       }
       .pricing_2{
-      background-color:rgba(255, 102, 41, 0.2)!important ;
+      background-color:rgba(255, 102, 41, 0.5)!important ;
       }
       .pricing_3{
-      background-color:rgba(0, 0, 0, 0.2)!important ;
+      background-color:rgba(0, 0, 0, 0.5)!important ;
       }
       .pricing_gold{
         background-color: rgba(255, 170, 0, 0.5) !important;
@@ -162,7 +162,7 @@
     </style>
   </head>
 
-  <body>
+  <body class="body-linear">
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -174,12 +174,12 @@
           <!-- Navbar -->
 
           <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme card-color"
             id="layout-navbar"
           >
             <div class="layout-menu-toggle navbar-nav align-items-xl-center ms-auto me-xl-0 d-xl-none">
               <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
+                <i class="bx bx-menu bx-sm text-white"></i>
               </a>
             </div>
           </nav>
@@ -207,12 +207,12 @@
                                 <div class="nav-align-top mb-4">
                                   <ul class="nav nav-pills mb-3" role="tablist">
                                     <li class="nav-item">
-                                      <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
+                                      <button type="button" class="nav-link text-white active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
                                         single plans
                                       </button>
                                     </li>
                                     <li class="nav-item">
-                                      <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
+                                      <button type="button" class="nav-link text-white" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile" aria-selected="false">
                                         marrathon cycle
                                       </button>
                                     </li>
@@ -229,24 +229,24 @@
                                         <div class="row justify-content-center">
                                          <% normalInvestments.sort((a,b)=> a.max - b.max ).forEach((investment, index)=>{%>
                                             <div class="col-md-6 col-lg-4 mb-3">
-                                              <div class="card">
+                                              <div class="card card-bg">
                                                 <div class="py-2">
                                                   <div class="pricing-grid-item-inner">
                                                     <div class="pricing-item-header py-3">
-                                                    <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> <%= investment.title %></h3>
+                                                    <h3 class="text-center px-3 text-primary"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> <%= investment.title %></h3>
                                                     </div>
                                                     <div class="pricing-item-amount pricing_<%=index%>">
                                                       <%# if min investment is less than one#%>
                                                       <% if(!investment.min){ %>
-                                                        <h4 style="font-size:20px"> < <small >$</small> <%= investment.max %> </h4>
+                                                        <h4 style="font-size:20px" class="text-white"> < <small >$</small> <%= investment.max %> </h4>
                                                       <%}else{ %>
-                                                        <h4 style="font-size:20px"><small >$</small> <%= investment.min.toLocaleString('en-US') %> - <%= investment.max.toLocaleString('en-US') %> </h4>
+                                                        <h4 style="font-size:20px" class="text-white"><small >$</small> <%= investment.min.toLocaleString('en-US') %> - <%= investment.max.toLocaleString('en-US') %> </h4>
                                                      <% } %>
                                                     </div>
                                                     <div class="pricing-item-body px-3">
                                                     <ul class="pricing-item-list">
-                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  <%= investment.roi %>% (ROI)</li>
-                                                    <li><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : <%= investment.duration %> days</li>
+                                                    <li class="text-primary"><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  <%= investment.roi %>% (ROI)</li>
+                                                    <li class="text-primary"><img src="assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration : <%= investment.duration %> days</li>
                                                     </ul>
                                                     <form method="post" class="my-2 w-100">
                                                       <input type="hidden" name="title" class="form-control" value="<%= investment.title %>">

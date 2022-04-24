@@ -105,3 +105,17 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+.control-color{
+  color: white !important;
+}
+.card-color{
+  background: #12347aad !important;
+}
+.body-linear{
+  background: linear-gradient(60deg,#123d94 40%,#db3edb 100%) !important ;
+}
+
+.card-bg{
+  background-color: rgb(235, 230, 230) !important;
+}

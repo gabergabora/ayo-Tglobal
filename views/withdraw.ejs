@@ -68,7 +68,7 @@
     </style>
   </head>
 
-  <body>
+  <body class="body-linear">
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -81,12 +81,12 @@
           <!-- Navbar -->
 
           <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme card-color"
             id="layout-navbar"
           >
             <div class="layout-menu-toggle navbar-nav align-items-xl-center ms-auto me-xl-0 d-xl-none">
               <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
+                <i class="bx bx-menu bx-sm text-white"></i>
               </a>
             </div>
           </nav>
@@ -117,23 +117,23 @@
                         </div>  
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg 8">
-                                <div class="card mb-4">
+                                <div class="card mb-4 card-color">
                                     <div class="card-body">
                                         <form method="POST">
-                                         <h3> Withdraw</h3>
+                                         <h3 class="text-white"> Withdraw</h3>
                                           <div class="mb-3">
-                                            <label class="form-label" for="withdrawalAmount">Amount</label>
+                                            <label class="form-label text-white for="withdrawalAmount">Amount</label>
                                             <input type="number" name="amount" class="form-control phone-mask" id="withdrawalAmount" placeholder="withdraw from availabe ballance">
                                           </div>
                                           <button type="submit" class="btn btn-primary"> withdraw</button>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="card mb-4">
-                                        <h4 class="card-header">
+                                <div class="card mb-4 card-color">
+                                        <h4 class="card-header text-white">
                                             Before withdrawal
                                         </h4>
-                                        <ul class="progress-group">
+                                        <ul class="progress-group text-white">
                                             <li class="progress-item"> you can only withdraw from funding ballance</li>
                                             <li class="progress-item">  fill in your wallet address in account settings</li>
                                             <li class="progress-item"> Go ahead with withdrawal</li>

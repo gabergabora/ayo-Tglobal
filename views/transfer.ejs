@@ -52,7 +52,7 @@
     </style>
   </head>
 
-  <body>
+  <body class="body-linear">
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -65,12 +65,12 @@
           <!-- Navbar -->
 
           <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme card-color"
             id="layout-navbar"
           >
             <div class="layout-menu-toggle navbar-nav align-items-xl-center ms-auto me-xl-0 d-xl-none">
               <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
+                <i class="bx bx-menu bx-sm text-white"></i>
               </a>
             </div>
           </nav>
@@ -108,12 +108,12 @@
                         </div>  
                         <div class="row justify-content-center mb-5">
                             <div class="col-md-10 col-lg 8">
-                                <div class="card mb-4">
+                                <div class="card mb-4 card-color">
                                     <div class="card-body">
                                         <form method="POST">
-                                         <h3> Transfer funds</h3>
+                                         <h3 class="text-white"> Transfer funds</h3>
                                          <div class="mb-3">
-                                            <label for="defaultSelect" class="form-label">From</label>
+                                            <label for="defaultSelect" class="form-label text-white">From</label>
                                             <select id="defaultSelect" name="from" class="form-select" required>
                                               <option value="">From wallet </option>
                                               <option value="fundingBallance"> Funding ballance</option>
@@ -122,7 +122,7 @@
                                             </select>
                                           </div>
                                           <div class="mb-3">
-                                            <label for="defaultSelect1" class="form-label">To</label>
+                                            <label for="defaultSelect1" class="form-label text-white">To</label>
                                             <select name="to" id="defaultSelect1" class="form-select" required>
                                               <option value=""> To wallet</option>
                                               <option value="fundingBallance"> Funding ballance</option>
@@ -131,8 +131,8 @@
                                             </select>
                                           </div>
                                           <div class="mb-3">
-                                            <label class="form-label" for="basic-default-phone" >Amount</label>
-                                            <input type="number" id="basic-default-phone" name="amount" required class="form-control phone-mask" placeholder="move ballance">
+                                            <label class="form-label text-white" for="basic-default-phone" >Amount</label>
+                                            <input type="number" id="basic-default-phone" name="amount" required class="form-control phone-mask" placeholder="">
                                           </div>
                                           <button type="submit" class="btn btn-primary"> Transfer</button>
                                         </form>
