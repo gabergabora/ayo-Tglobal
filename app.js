@@ -13,6 +13,7 @@ const {USER} = require("./modules/userDB")
 const passportAuth = require("./modules/auth.js")
 const userPostRoute = require("./modules/routes/userPostRoutes")
 const adminPostRoute = require("./modules/routes/adminPostRoutes")
+const homeRoute = require('./modules/routes/homeRoutes')
 
 app.set("view engine", "ejs")
 app.use("/assets",express.static("assets"))
@@ -22,14 +23,8 @@ app.use(flash())
 // ] PASSPORT SET-UP [
 passportAuth(app, session, passport, localStrategy, USER)
 
-
-app.get("/", function(req,res){
-    if(req.isAuthenticated()){
-        res.send("you're authenticated")
-    }else{
-        res.send("restricted area")
-    }
-})
+// get routes home route
+app.use('/', homeRoute)
 
 // getRoutes for user
 app.use("/", getUserRoute)
