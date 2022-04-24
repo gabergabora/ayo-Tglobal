@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+<!-- Mirrored from affixbankfx.com/portfolio.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Apr 2022 14:59:09 GMT -->
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Aila">
+<meta name="keywords" content="HTML,CSS,JavaScript">
+<meta name="author" content="@stainlezzking">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Portfolio - Temenos global</title>
+<link rel="icon" href="assets/images/favicon.png" type="image/png" sizes="16x16">
+
+<link rel="stylesheet" href="assets/home/css/bootstrap.min.css" type="text/css" media="all" />
+
+<link rel="stylesheet" href="assets/home/css/animate.min.css" type="text/css" media="all" />
+
+<link rel="stylesheet" href="assets/home/css/owl.carousel.min.css" type="text/css" media="all" />
+<link rel="stylesheet" href="assets/home/css/owl.theme.default.min.css" type="text/css" media="all" />
+
+<link rel="stylesheet" href="assets/home/css/meanmenu.min.css" type="text/css" media="all" />
+
+<link rel="stylesheet" href="assets/home/css/magnific-popup.min.css" type="text/css" media="all" />
+
+<link rel='stylesheet' href='assets/home/css/boxicons.min.css' type="text/css" media="all" />
+
+<link rel='stylesheet' href='assets/home/css/line-awesome.min.css' type="text/css" media="all" />
+
+<link rel='stylesheet' href='assets/home/css/flaticon.css' type="text/css" media="all" />
+
+<link rel="stylesheet" href="assets/home/css/style.css" type="text/css" media="all" />
+
+<link rel="stylesheet" href="assets/home/css/responsive.css" type="text/css" media="all" />
+<!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+
+<div class="preloader orange-gradient">
+<div class="preloader-wrapper">
+<div class="preloader-grid">
+<div class="preloader-grid-item preloader-grid-item-1"></div>
+<div class="preloader-grid-item preloader-grid-item-2"></div>
+<div class="preloader-grid-item preloader-grid-item-3"></div>
+<div class="preloader-grid-item preloader-grid-item-4"></div>
+<div class="preloader-grid-item preloader-grid-item-5"></div>
+<div class="preloader-grid-item preloader-grid-item-6"></div>
+<div class="preloader-grid-item preloader-grid-item-7"></div>
+<div class="preloader-grid-item preloader-grid-item-8"></div>
+<div class="preloader-grid-item preloader-grid-item-9"></div>
+</div>
+</div>
+</div>
+
+<%- include('./home-partials/navLink.ejs') -%>
+
+<header class="page-title page-bg" style="background: linear-gradient(90deg,#f20f10 0%,#ec600d 100%);">
+    <div class="logo-bg-icon">
+        <div class="logo-bg-item">
+        <img src="assets/home/images/circle.png" alt="icon">
+        </div>
+        <div class="logo-bg-item">
+        <img src="assets/home/images/square.png" alt="icon">
+        </div>
+        </div>
+    <div class="container">
+    <div class="page-title-inner">
+    <div class="section-title">
+    <h1>Investment Plans</h1>
+    <ul class="page-breadcrumbs">
+    <li><a href="/">Home</a></li>
+    <li>Investment Plans</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+</header>
+
+
+
+<section class="pricing-section p-tb-100">
+    <div class="container">
+        <h3 style="text-align:center;" class="home-about-title">
+            Investment Plans
+        </h3>
+    <div class="pricing-box-grid">
+        <% normalInvestments.forEach(investment=>{ %>
+            <div style="box-shadow: 0 1rem 3rem rgba(0,0,0,0.175) !important;" class="pricing-grid-item">
+                <div class="pricing-grid-item-inner">
+                <div class="pricing-item-header">
+                <h3><img src="assets/home/images/pricing-check.png" alt="icon"> <%= investment.title %></h3>
+                </div>
+                <div class="pricing-item-amount">
+                   <% if(!investment.min){ %>
+                        <h4 style="font-size:20px"> < <small>$</small> <%= investment.max.toLocaleString('en-US') %></h4>
+                   <% }else{ %>
+                        <h4 style="font-size:20px"><small>$</small> <%= investment.min.toLocaleString('en-US') %> -  <small>$</small> <%= investment.max.toLocaleString('en-US') %></h4>
+                   <% } %>
+                </div>
+                <div class="pricing-item-body">
+                <ul class="pricing-item-list">
+                <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Min Deposit of <span style="margin-left: .6rem;"><small>$</small>100</span></li>
+                <li><img src="assets/home/images/pricing-arrow.png" alt="icon" style="font-size:16px !important" class="pricing-list-arrow">Max Deposit of <span style="margin-left: .6rem;"><small>$</small>3,999</span></li>
+                <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Commission: 6.00%</li>
+                <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 2 days<span class="pricing-list-info"><i class='bx bxs-info-circle'></i></span></li>
+                </ul>
+                <a href="/invest" class="btn1 orange-gradient btn-with-image">
+                <i class="flaticon-login"></i>
+                <i class="flaticon-login"></i>
+                Get started
+                </a>
+                </div>
+                </div>
+                </div>  
+       <% }) %>
+    </div>
+    </div>
+    </section>
+
+<%- include('./home-partials/footer.ejs') -%>
+
+</html>

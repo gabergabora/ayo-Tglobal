@@ -15,4 +15,14 @@ router.get('/about', function(req,res){
     res.render('home/about.ejs')
 })
 
+router.get('/portfolio',getInvestments, function(req,res){
+    res.render('home/portfolio')
+})
+router.get('/how-it-works', function(req,res){
+    res.render('home/how-it-works')
+})
+
+router.get('/contact', function(req,res){
+    res.render('home/contact-us')
+})
 module.exports = router
