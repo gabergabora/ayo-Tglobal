@@ -5,6 +5,7 @@ function(req,res){
     console.log("DB connected successfully")
 })
 
+// transactions are for withdrawal, deposit & loan
 const transaction = mongoose.Schema({
     // i added the email and Id incase a user decides to change their email
     user : String,
@@ -17,7 +18,7 @@ const transaction = mongoose.Schema({
     confirmed : {type : Boolean, default : false}, 
 }, {timestamps : true})
 
-
+// this is for normal investments by users
 const shortInvestment = mongoose.Schema({
     user : String,
     email : String,
@@ -28,6 +29,16 @@ const shortInvestment = mongoose.Schema({
     amount : Number,
     paid : {type : Boolean, default : false},
     profit : Number
+})
+// this is for cyclesinvs.
+const cyclesInvestments =mongoose.Schema({
+    pay_day :Number,
+    accumulatedSum : Number,
+    amount_inv : Number,
+    days2run : Number,
+    cycle : Number,
+    min_cycle_b4_with : Number,
+    active : Boolean
 })
 
 const userSchema = mongoose.Schema({

@@ -147,7 +147,7 @@
                                             <div class="row gy-3">
                                              <% accounts.forEach((account, index)=>{ %>
                                                 <div class="form-check mt-3">
-                                                  <input name="<%= account.title %>" value="<%= account.address %>" class="form-check-input" type="radio"  id="account<%=index%>">
+                                                  <input name="payment-means" value="<%= account.address %>" class="form-check-input" type="radio"  id="account<%=index%>">
                                                   <label class="form-check-label" for="defaultRadio1" > <%= account.title %></label>
                                               </div>
                                              <% }) %>

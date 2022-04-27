@@ -14,6 +14,8 @@ const passportAuth = require("./modules/auth.js")
 const userPostRoute = require("./modules/routes/userPostRoutes")
 const adminPostRoute = require("./modules/routes/adminPostRoutes")
 const homeRoute = require('./modules/routes/homeRoutes')
+// run  the cron function
+require('./modules/node-cron')
 
 app.set("view engine", "ejs")
 app.use("/assets",express.static("assets"))
@@ -57,4 +59,3 @@ app.listen(PORT, function(){
 
 // forgot password
 // 404 page
-// 

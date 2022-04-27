@@ -265,6 +265,7 @@ router.post("/invest", isAuth, getInvestments, function(req,res){
                         SHORTINVS.create({
                             user : req.user._id,
                             title : plan.title,
+                            duration : plan.duration,
                             roi : plan.roi,
                             expiry : new Date(addDays(Date.now(), plan.duration)).getTime(),
                             amount : Number(req.body.amount),
