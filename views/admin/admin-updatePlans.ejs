@@ -307,17 +307,21 @@
                                               <div class="py-2">
                                                 <div class="pricing-grid-item-inner">
                                                   <div class="pricing-item-header py-3">
-                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> Cycles</h3>
+                                                  <h3 class="text-center px-3"><img src="/assets/images/dashboard/pricing-check.png" alt="icon"> <%= admin.cyclesInvestment.title %> </h3>
                                                   </div>
                                                   <div class="pricing-item-amount pricing_gold">
-                                                  <h4 style="font-size:20px" class="text-white"><small >$</small>50 - unlimited</h4>
+                                                   <% if(!admin.cyclesInvestment.max){ %>
+                                                      <h4 style="font-size:20px" class="text-white"><small >$</small><%= admin.cyclesInvestment.min %> - unlimited</h4>
+                                                   <% }else{ %>
+                                                    <h4 style="font-size:20px" class="text-white"><small >$</small><%= admin.cyclesInvestment.min %> - <%= admin.cyclesInvestment.max %></h4>
+                                                   <% } %>
                                                   </div>
                                                   <div class="pricing-item-body px-3">
                                                   <ul class="pricing-item-list">
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  30% (ROI)/day</li>
-                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> 10 cycles</li>
+                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  <%= admin.cyclesInvestment.roi %> (ROI)/day</li>
+                                                  <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> minimum of <%= admin.cyclesInvestment.min_cycle_b4_with %> cycles</li>
                                                   </ul>
-                                                  <form method="post" class="my-2 w-100">
+                                                  <!-- <form method="post" class="my-2 w-100">
                                                     <input type="hidden" name="roi" class="form-control" value="30">
                                                     <input type="hidden" name="min" class="form-control" value="50">
                                                     <input type="hidden" name="type" class="form-control" value="cyclesBallance">
@@ -325,14 +329,13 @@
                                                       <input type="number" name="amount" class="form-control" placeholder="put amount">
                                                     </div>
                                                     <button class="btn btn-outline-primary form-control "> invest</button>
-                                                  </form>
+                                                  </form> -->
                                                   </div>
-                                                  
                                               </div>
                                             </div>
                                           </div>
                                         </div>
-                                        </div>
+                                        </div> 
                                         <div class="row justify-content-center">
                                           <div class="col-md-12 col-lg-6 mb-3">
                                           <div class="card mb-4">
@@ -340,32 +343,33 @@
                                                 <h5 class="mb-0"> CYCLES INVESTMENTS</h5>
                                               </div>
                                               <div class="card-body">
-                                                <form>
+                                                <form method="POST">
+                                                  <input type="hidden" name="type" value="cyclesInvestment">
                                                   <div class="mb-3">
-                                                    <label class="form-label" for="basic-default-fullname"> Name</label>
-                                                    <input type="text" class="form-control" id="basic-default-fullname" placeholder="Investment title">
+                                                    <label class="form-label" for="basic-default-fullname"> title</label>
+                                                    <input type="text" name="title" class="form-control" id="basic-default-fullname" required placeholder="Investment title">
                                                   </div>
                                                   <div class="mb-3">
                                                     <label class="form-label" for="basic-default-company">min</label>
-                                                    <input type="number" class="form-control" id="basic-default-company" placeholder="minimum investment">
+                                                    <input type="number" name="min" class="form-control" id="basic-default-company" placeholder="minimum investment" required>
                                                   </div>
                                                   <div class="mb-3">
                                                     <label class="form-label" for="basic-default-max">max</label>
-                                                      <input type="number" id="basic-default-max" class="form-control" placeholder="maximum investment" aria-label="john.doe" aria-describedby="basic-default-email2">
+                                                      <input type="number" name="max" id="basic-default-max" class="form-control" placeholder="maximum investment (leave empty for unlimited)" aria-label="john.doe" aria-describedby="basic-default-email2">
                                                   </div>
                                                   <div class="mb-3">
                                                     <label class="form-label" for="basic-default-phone">Percentage</label>
-                                                    <input type="number" id="basic-default-phone" class="form-control phone-mask" placeholder="percentage return (ROI)">
+                                                    <input type="number" name="roi" id="basic-default-phone" class="form-control phone-mask" required placeholder="percentage return (ROI)">
                                                   </div>
                                                   <div class="mb-3">
-                                                      <label class="form-label" for="basic-default-cycles">number of cycles</label>
-                                                      <input type="number" id="basic-default-cycles" class="form-control phone-mask" placeholder="number of cycles">
+                                                      <label class="form-label" for="basic-default-cycles">minimum number of cycles</label>
+                                                      <input type="number" name="min_cycle_b4_with" id="basic-default-cycles" class="form-control phone-mask" required placeholder="number of cycles">
                                                     </div>
                                                     <div class="mb-3">
                                                       <label class="form-label" for="basic-default-cycles">days per cycles</label>
-                                                      <input type="number" id="basic-default-cycles" class="form-control phone-mask" placeholder="How many days make one cycle">
+                                                      <input type="number" name="days_cycle" id="basic-default-cycles" required class="form-control phone-mask" placeholder="How many days make one cycle">
                                                     </div>
-                                                  <button type="submit" class="btn btn-primary">Add</button>
+                                                  <button type="submit" class="btn btn-primary" name="button" value="add" > Update</button>
                                                 </form>
                                               </div>
                                           </div>

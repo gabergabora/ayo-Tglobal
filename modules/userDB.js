@@ -31,13 +31,15 @@ const shortInvestment = mongoose.Schema({
     profit : Number
 })
 // this is for cyclesinvs.
-const cyclesInvestments =mongoose.Schema({
+const cyclesInvestment = mongoose.Schema({
+    // pay_day => pay/day
     pay_day :Number,
     accumulatedSum : Number,
     amount_inv : Number,
     days2run : Number,
     cycle : Number,
     min_cycle_b4_with : Number,
+    days_cycle : Number,
     active : Boolean
 })
 
@@ -50,6 +52,7 @@ const userSchema = mongoose.Schema({
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
     client : {type : Boolean, default : false},
+    cyclesInvestments : [cyclesInvestment], 
     referrals : [String],
     walletAddress : String,
     lastLoggedIn : Date,

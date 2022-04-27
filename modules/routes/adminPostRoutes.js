@@ -188,7 +188,7 @@ router.post('/updateplans',isAuth, function(req,res){
                     return res.redirect('updateplans')
                 })
             }
-            // if its cycles investments
+            // since cycles contain just one plan, there is no delete option
     }
     if(req.body['button'] == 'add'){
         if(req.body['type'] == 'normalInvestments'){
@@ -199,9 +199,19 @@ router.post('/updateplans',isAuth, function(req,res){
                 return res.redirect('updateplans')
             })
         }
+        // if its cycles investments
+        if(req.body['type'] == 'cyclesInvestment'){
+            return ADMIN.updateOne({username : req.user.username},{
+                $set : { cyclesInvestment : req.body}
+            }, function(err){
+                if(err) return send('an error occured updating cycle plans')
+                return res.redirect('updateplans')
+                
+            })
+        }
+        return 
     }
     return res.send('invalid submit value')
-
 })
 
 router.post('/account:function',isAuth, function(req,res){

@@ -16,6 +16,7 @@ const getInvestments = function(req,res, next){
         if(err) return res.send("an error occured on the server, please report this problem")
         res.locals.accounts = data.accounts
         res.locals.normalInvestments = data.normalInvestments
+        res.locals.cyclesInvestment = data.cyclesInvestment
         next()
         return data
     })
