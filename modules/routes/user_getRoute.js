@@ -1,7 +1,7 @@
 const express = require("express")
 const user_getRoute = express.Router()
 const ADMIN = require("../adminDB")
-const { TRANSACTION } = require("../userDB")
+const { TRANSACTION, SHORTINVS, CYCLESINVS } = require("../userDB")
 
 const isAuth = function(req,res, next){
     if(!req.isAuthenticated()){
@@ -12,16 +12,21 @@ const isAuth = function(req,res, next){
     return next() 
 }
 const getInvestments = function(req,res, next){
-    return ADMIN.findOne({}, function(err, data){
+     return ADMIN.findOne({}, function(err, data){
         if(err) return res.send("an error occured on the server, please report this problem")
         res.locals.accounts = data.accounts
         res.locals.normalInvestments = data.normalInvestments
         res.locals.cyclesInvestment = data.cyclesInvestment
-        next()
-        return data
+        return next()
     })
 }
-
+const UserRunningCycle = function(req,res,next){
+    return CYCLESINVS.findOne({user : JSON.parse(JSON.stringify((req.user._id)))}, function(err,data){
+        if(err) return res.send("an error occured on the server, please report this problem")
+        res.locals.userRunningCycle = data
+        return next()
+    })
+}
 const getTransactions = function(req,res,next){
     return TRANSACTION.find({email : req.user.email}, function(err, data){
         if(err){
@@ -31,6 +36,16 @@ const getTransactions = function(req,res,next){
         res.locals.transactions = data
         next()
     })
+}
+const userProfits = async function(req,res,next){
+    try{
+        res.locals.shorts = await SHORTINVS.findOne({user : req.user._id, paid : false})
+        res.locals.cycle = await CYCLESINVS.findOne({user : req.user._id, active : true})
+       return next()
+    }catch(err){
+       return res.send('error trying to get profits')
+    }
+
 }
 
 user_getRoute.get("/login", function(req,res){
@@ -55,11 +70,11 @@ user_getRoute.get("/register/:id", function(req,res){
     return  res.render("register")
 })
 
-user_getRoute.get("/dashboard",isAuth, function(req,res){
+user_getRoute.get("/dashboard",isAuth,userProfits, function(req,res){
     res.render("dashboard")
 })
 
-user_getRoute.get("/invest",isAuth, getInvestments, function(req,res){
+user_getRoute.get("/invest",isAuth, getInvestments, UserRunningCycle, function(req,res){
     res.render("invest")
 })
 

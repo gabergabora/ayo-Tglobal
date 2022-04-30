@@ -12,6 +12,7 @@
     background-color: rgba(255, 166, 0, 0.178);
   }
 </style>
+<% cycle= cycle ? cycle : {accumulatedSum : 0, cycle : 0} %>
 <div class="card card-color" >
     <div class="card-body">
       <div class="card-title d-flex align-items-start justify-content-between">
@@ -43,8 +44,16 @@
       </div>
       <span class="fw-semibold d-block mb-2"> Running cycles </span>
       <div class="d-flex justify-content-between">
-        <h3 class="card-title text-nowrap mb-1 control-color" id="R-cycles" data-amount="4,679" >$4,679</h3>
-        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> 3 cycles</small>
+        <h3 class="card-title text-nowrap mb-1 control-color" id="R-cycles" data-amount="<%= cycle.accumulatedSum %>" ><%= cycle.accumulatedSum.toLocaleString("en-US", { style: "currency", currency: "USD" }) %> </h3>
+        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> <%= cycle.cycle %> cycles</small>
+      </div>
+      <div class="d-flex justify-content-between">
+        <% if(cycle.days2run < cycle.days_cycle){ %>
+          <p class="text-success mb-0"> + $<%= cycle.pay_day ? cycle.pay_day : '0.00' %></p>
+       <% }else{ %>
+        <p class="text-danger mb-0"> + $<%= cycle.pay_day ? cycle.pay_day : '0.00' %></p>
+        <% } %>
+      <p class="text-info mb-0"> <%= cycle.days2run < cycle.days_cycle ? true : false  %></p>
       </div>
     </div>
   </div>

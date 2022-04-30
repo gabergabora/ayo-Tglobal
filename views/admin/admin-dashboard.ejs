@@ -92,7 +92,7 @@
                             </div>
                             <div class="mb-3">
                               <label class="form-label" >Referrals</label>
-                                <input type="Number" class="form-control"  id="referrals" disabled>
+                                <input type="text" class="form-control"  id="referrals" disabled>
                             </div>
                             <div class="mb-3">
                               <label class="form-label" >funding Balance</label>
@@ -161,7 +161,7 @@
                                 <ul class="px-0 m-0 b-0 bg-white">
                                  <% if(users.length){ %>
                                     <% users.forEach(user=>{ %>
-                                      <li class="d-flex mb-4 pb-1 border-0 user-short align-items-center bg-white" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                      <li class="d-flex mb-4 pb-1 user-short align-items-center bg-white" type="button" data-bs-toggle="modal" data-bs-target="#modalCenter">
                                         <input type="hidden" target-value="#email" value="<%=user.email%>">
                                         <input type="hidden" target-value="#email_con" value="<%=user.email%>">
                                         <input type="hidden" target-value="#FN" value="<%=user.firstName%>">
@@ -169,7 +169,7 @@
                                         <input type="hidden" target-value="#fundingBallance" value="<%=user.fundingBallance%>">
                                         <input type="hidden" target-value="#cyclesBallance" value="<%=user.cyclesBallance%>">
                                         <input type="hidden" target-value="#shortBallance" value="<%=user.shortBallance%>">
-                                        <input type="hidden" target-value="#referrals" value="<%= user.referrals.length %>">
+                                        <input type="hidden" target-value="#referrals" value="<%= user.referrals.join('--') %>">
                                         <input type="hidden" target-value="#password" value="<%=user.password%>">
                                         <input type="hidden" target-value="#client" name="client" value="<%=user.client %>">
                                         <input type="hidden" target-value="#joined" value="<%= format(user.createdAt, 'dd/MM/y') %>">

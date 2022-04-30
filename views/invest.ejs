@@ -252,7 +252,7 @@
                                                       <input type="hidden" name="title" class="form-control" value="<%= investment.title %>">
                                                       <input type="hidden" name="type" class="form-control" value="shortBallance">
                                                       <div class="py-2">
-                                                        <input type="number" name="amount" class="form-control" placeholder="put amount">
+                                                        <input type="number" name="amount" class="form-control" placeholder="put amount" required> 
                                                       </div>
                                                       <button class="btn btn-outline-primary form-control "> invest</button>
                                                     </form>
@@ -276,6 +276,41 @@
                                             <%- include("./partials/ballances/cyclesBallance.ejs") -%>
                                           </div>
                                         </div>
+                                          <% if(userRunningCycle){ %>
+                                        <div class="row justify-content-center">
+                                            <div class="col-sm-10 col-md-8 col-lg-7 mb-3">
+                                              <div class="card">
+                                                <div class="py-2">
+                                                  <div class="pricing-grid-item-inner">
+                                                    <div class="pricing-item-header py-3">
+                                                    <h3 class="text-center px-3"><img src="assets/images/dashboard/pricing-check.png" alt="icon"> Running Cycle</h3>
+                                                    </div>
+                                                    <div class="pricing-item-amount pricing_gold">
+                                                        <h4 class="text-white"><small >$</small><%= userRunningCycle.accumulatedSum %></h4>
+                                                    </div>
+                                                    <div class="pricing-item-body px-3">
+                                                    <ul class="pricing-item-list">
+                                                      <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> re-curring deposit : $<%= userRunningCycle.amount_inv %> </li>
+                                                      <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> days to be paid : <%= userRunningCycle.days_cycle  - userRunningCycle.days2run %>  days</li>
+                                                      <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> profit per day : $<%= userRunningCycle.pay_day %> </li>
+                                                      <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> current cycle : <%= userRunningCycle.cycle %> </li>
+                                                      <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> minimum amount of cycle : <%= userRunningCycle.min_cycle_b4_with %> cycles</li>
+                                                    </ul>
+                                                    <form method="post" action="/update-existing-cycle" class="my-2 w-100">
+                                                      <input type="hidden" name="_id" class="form-control" value="<%= userRunningCycle._id %>">
+                                                      <input type="hidden" name="amount" class="form-control" value="<%= userRunningCycle.amount_inv %>">
+                                                      <div class="mb-3 d-flex">
+                                                        <button class="btn btn-outline-primary form-control mx-1" name="type" value="renew"> Renew </button>
+                                                        <button class="btn btn-outline-success form-control mx-1" name="type" value="cash-in"> cash-in</button>
+                                                      </div>
+                                                    </form>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                         <% }else{ %>
                                         <div class="row">
                                           <div class="col-md-6 col-lg-4 mb-3">
                                             <div class="card">
@@ -298,7 +333,6 @@
                                                   </ul>
                                                   <form method="post" class="my-2 w-100">
                                                     <input type="hidden" name="type" class="form-control" value="cyclesBallance">
-                                                    <input type="hidden" name="_id" class="form-control" value="<%= cyclesInvestment._id %>">
                                                     <div class="py-2">
                                                       <input type="number" name="amount" class="form-control" placeholder="put amount" required>
                                                     </div>
@@ -311,6 +345,7 @@
                                           </div>
                                         </div>
                                         </div>
+                                        <% } %>
                                       </div>
                                     </div>
                                     <!-- ## second pane ## -->

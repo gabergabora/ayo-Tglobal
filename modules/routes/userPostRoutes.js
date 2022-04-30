@@ -8,7 +8,7 @@ const path = require("path")
 const {addDays} =  require("date-fns")
 
 // local modules
-const {USER, TRANSACTION, SHORTINVS} = require("../userDB")
+const {USER, TRANSACTION, SHORTINVS, CYCLESINVS} = require("../userDB")
 const showError = require("../error.js")
 const ADMIN = require("../adminDB")
 const { getInvestments } = require("./user_getRoute")
@@ -160,6 +160,7 @@ router.post("/transfer",isAuth, function(req,res){
                if(req.user[from] == req.user[to]) return res.redirect("/transfer")
                update[from] = req.user[from] - Number(amount)
                update[to] = req.user[to] + Number(amount)
+               console.log(update)
                 USER.updateOne({email : req.user.email}, update)
                 .then(()=>{
                     res.redirect("/transfer")
@@ -250,42 +251,107 @@ router.post("/loan", isAuth,function(req,res){
         return showError(req,"/loan", "invalid amount submitted", res)
     }
 })
-// getInvestments
-// haven't stopped user from investing if they have a running inv
+
 router.post("/invest", isAuth, getInvestments, function(req,res){
-    if(req.user[req.body.type] >= Number(req.body.amount)){
+    if(req.user[req.body.type] < Number(req.body.amount)) return showError(req,"/invest", "insufficient ballance", res)
         if(req.body.type == "shortBallance"){
             plan = res.locals.normalInvestments.filter(investment => investment.title == req.body.title )[0]
-            console.log(plan)
+        //  check if user has a normal investment that has not been paid
                 if(!plan) return showError(req,"/invest", "couldn't find your selected plan", res)
-                if(Number(req.body.amount) >= plan.min && Number(req.body.amount) <= plan.max){
-                    USER.updateOne({email : req.user.email}, {
-                        $inc : {shortBallance : - Number(req.body.amount)},
-                    }).then(()=> {
-                        SHORTINVS.create({
-                            user : req.user._id,
-                            title : plan.title,
-                            duration : plan.duration,
-                            roi : plan.roi,
-                            expiry : new Date(addDays(Date.now(), plan.duration)).getTime(),
-                            amount : Number(req.body.amount),
-                            profit : (Number(req.body.amount) * (plan.roi/100))
-                        }).then(()=>  res.redirect("/invest"))
-                        .catch(err=> {
-                            console.log(err.message)
-                            return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+                if(Number(req.body.amount) < plan.min || Number(req.body.amount) > plan.max || !Boolean(Number(req.body.amount))) return showError(req,"/invest", `can't invest $${req.body.amount} in ${req.body.title} `, res) 
+                return SHORTINVS.findOne({user : JSON.parse(JSON.stringify((req.user._id))), paid : false},
+                function(err, unpaidShorts){
+                    if(err)  return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+                    if(unpaidShorts)  return showError(req,"/invest", "can't invest, you have an un matured short-term investment running", res) 
+                        USER.updateOne({email : req.user.email}, {
+                            $inc : {shortBallance : - Number(req.body.amount)},
+                        }).then(()=> {
+                            SHORTINVS.create({
+                                user : req.user._id,
+                                title : plan.title,
+                                duration : plan.duration,
+                                roi : plan.roi,
+                                expiry : new Date(addDays(Date.now(), plan.duration)).getTime(),
+                                amount : Number(req.body.amount),
+                                profit : (Number(req.body.amount) * (plan.roi/100))
+                            }).then(()=>  res.redirect("/invest"))
+                            .catch(err=> {
+                                console.log(err.message)
+                                return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+                            })
                         })
-                    })
-                    .catch(err=>{
-                            console.log(err.message)
-                            return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
-                    })
-                }else{
-                    return showError(req,"/invest", `can't invest $${req.body.amount} in ${req.body.title} `, res) 
-                }
+                        .catch(err=>{
+                                console.log(err.message)
+                                return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+                        })
+                })
         }
-    }else{
-        return showError(req,"/invest", "insufficient ballance", res)
+        if(req.body.type == "cyclesBallance"){
+            if(Number(req.body.amount) < res.locals.cyclesInvestment.min) return showError(req,"/invest", `can't invest $${req.body.amount} in ${res.locals.cyclesInvestment.title} `, res)
+            // how do i add all credits from cycleballance to the transactions
+            CYCLESINVS.findOne({user: req.user._id, active : true}, 
+                function(e,d){
+                            if(e) return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+                            if(d)  return showError(req,"/invest", "You already have a running cycle", res) 
+                           return USER.findOneAndUpdate({_id : req.user._id}, {$inc : {cyclesBallance : - Number(req.body.amount)}}, 
+                            function(err,data){
+                                if(err) return showError(req,"/invest", `error updating balance, please report this problem`, res) 
+                                CYCLESINVS.create({
+                                    //    this ._doc is unto prototype level
+                                       ...res.locals.cyclesInvestment._doc, 
+                                       pay_day : (res.locals.cyclesInvestment.roi/100) * Number(req.body.amount),
+                                       accumulatedSum : Number(req.body.amount),
+                                       amount_inv : Number(req.body.amount),
+                                       user : data._id,
+                                       email : data.email,
+                                       days2run : 0,
+                                       cycle : 1,
+                                   }, function(e, d){
+                                    if(e) return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+                                       return res.redirect('/invest')
+                                   })
+                            }
+                            )
+            })
+        }
+  
+})
+
+router.post('/update-existing-cycle', function(req,res){
+    if(req.body['type']=='renew'){
+        if(req.user.cyclesBallance < Number(req.body.amount)) return showError(req,"/invest", "insufficient ballance", res) 
+        return USER.updateOne({_id : req.user._id},{
+            $inc : {cyclesBallance : - Number(req.body.amount)}
+        } ,function(e){
+            if(e) return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+           return CYCLESINVS.updateOne({_id : req.body._id},{
+                $inc : {
+                    accumulatedSum : req.body.amount,
+                    cycle : 1,
+                    days2run : -5
+                }
+            }, function(err){
+               return res.redirect('/invest')
+            })
+        })
+    }
+    if(req.body['type']== 'cash-in'){
+        return CYCLESINVS.findOne({_id : req.body._id}, function(e,d){
+            if(e) return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
+            if(d.min_cycle_b4_with > d.cycle) return showError(req,"/invest", `your current cycle is below the minimum, ${d.min_cycle_b4_with}`, res)
+            if(d.days2run < d.days_cycle) return showError(req,"/invest", `you have ${d.days_cycle - (d.days2run)} unpaid days`, res)
+            return CYCLESINVS.findOneAndUpdate({_id : d._id}, {
+                active : false
+            }, function(er, payInvSum){
+                if(er) return showError(req,"/invest", "an error occured trying to update your investment, please report this", res) 
+                return USER.updateOne({_id : payInvSum.user},{
+                    $inc : {cyclesBallance : payInvSum.accumulatedSum}
+                }, function(e){
+                    if(e) return showError(req,"/invest", "an error occured trying to update your balance, please report this", res) 
+                    return res.redirect('/invest')
+                })
+            })
+        })
     }
 })
 
