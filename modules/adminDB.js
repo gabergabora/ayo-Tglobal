@@ -33,36 +33,3 @@ const ADMIN = mongoose.model('admin', adminSchema)
 // const NORMAL = mongoose.model('investments', normalInvestment)
 
 module.exports = ADMIN
-
-// ADMIN.create({
-//     username : "stainlezzking",
-//     password : "700633a1b0f65fa8456a18bd6053193c",
-   
-//     admin : true,
-//     accounts : [
-//             {
-//                     "title" : "bitcoin",
-//                     "address" : "thisIsYourBTCAddress"
-//             },
-//             {
-//                     "title" : "Etherium",
-//                     "address" : "ThisIsYourEthAddress",
-//             }
-//     ],
-//     name : 'ayo',
-//     cyclesInvestment : {
-//             "title" : "marathon",
-//             "roi" : 40,
-//             "min" : 500,
-//             "max" : null,
-//             "days_cycle" : 5,
-//             "min_cycle_b4_with" : 10,
-//     }
-// }, function(err, data){
-//     if(err) return console.log(err)
-//     console.log("done")
-// })
-
-
-
-
