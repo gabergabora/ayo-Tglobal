@@ -30,6 +30,14 @@ const shortInvestment = mongoose.Schema({
     paid : {type : Boolean, default : false},
     profit : Number
 })
+
+const activity = mongoose.Schema({
+    type : String,
+    from : String,
+    to : String,
+    amount : Number,
+    created_At : Date
+}, {timestamps : true})
 // this is for cyclesinvs.
 // the idea is that the max the get upto is 5,
 // every time they renew thism it reduces the days2run by 5
@@ -59,6 +67,7 @@ const userSchema = mongoose.Schema({
     shortBallance : {type : Number, default : 0},
     cyclesBallance : {type : Number, default : 0},
     client : {type : Boolean, default : false},
+    activities : [activity],
     referrals : [String],
     walletAddress : String,
     lastLoggedIn : Date,

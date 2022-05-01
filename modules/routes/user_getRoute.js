@@ -1,3 +1,4 @@
+const { format } = require("date-fns")
 const express = require("express")
 const user_getRoute = express.Router()
 const ADMIN = require("../adminDB")
@@ -9,6 +10,7 @@ const isAuth = function(req,res, next){
     }
     res.locals.reqUrl = req.url
     res.locals.user = req.user
+    res.locals.format = format
     return next() 
 }
 const getInvestments = function(req,res, next){

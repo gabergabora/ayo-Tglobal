@@ -160,8 +160,10 @@ router.post("/transfer",isAuth, function(req,res){
                if(req.user[from] == req.user[to]) return res.redirect("/transfer")
                update[from] = req.user[from] - Number(amount)
                update[to] = req.user[to] + Number(amount)
-               console.log(update)
-                USER.updateOne({email : req.user.email}, update)
+                USER.updateOne({email : req.user.email}, {
+                    ...update,
+                    $push : {activities :  {type : "transfer",from,to,amount : amount}}
+                })
                 .then(()=>{
                     res.redirect("/transfer")
                 })
@@ -293,7 +295,15 @@ router.post("/invest", isAuth, getInvestments, function(req,res){
                 function(e,d){
                             if(e) return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
                             if(d)  return showError(req,"/invest", "You already have a running cycle", res) 
-                           return USER.findOneAndUpdate({_id : req.user._id}, {$inc : {cyclesBallance : - Number(req.body.amount)}}, 
+                           return USER.findOneAndUpdate({_id : req.user._id}, {
+                               $inc : {cyclesBallance : - Number(req.body.amount)},
+                               $push : {
+                                activities  : {
+                                    title : "credit",
+                                    from : 'cycle',
+                                    amount : Number(req.body.amount),
+                                }}
+                            }, 
                             function(err,data){
                                 if(err) return showError(req,"/invest", `error updating balance, please report this problem`, res) 
                                 CYCLESINVS.create({
@@ -321,7 +331,14 @@ router.post('/update-existing-cycle', function(req,res){
     if(req.body['type']=='renew'){
         if(req.user.cyclesBallance < Number(req.body.amount)) return showError(req,"/invest", "insufficient ballance", res) 
         return USER.updateOne({_id : req.user._id},{
-            $inc : {cyclesBallance : - Number(req.body.amount)}
+            $inc : {cyclesBallance : - Number(req.body.amount)},
+            $push : {
+                activities  : {
+                    title : "credit",
+                    from : 'cycle',
+                    amount : Number(req.body.amount),
+                }
+            }
         } ,function(e){
             if(e) return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
            return CYCLESINVS.updateOne({_id : req.body._id},{

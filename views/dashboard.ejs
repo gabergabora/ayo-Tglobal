@@ -72,8 +72,7 @@
                                       <div class="card-body">
                                         <h5 class="card-title text-primary">Welcome <%= user.firstName %>! 🎉</h5>
                                         <p class="mb-4 text-white">
-                                          You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                                          your profile.
+                                          Hope your day is a blast!, let's put your money to work
                                         </p>
               
                                       </div>
@@ -116,56 +115,52 @@
                                   <div class="card-header d-flex align-items-center justify-content-between">
                                     <h5 class="card-title m-0 me-2 text-white"> Activities </h5>
                                   </div>
-                                  <div class="card-body">
-                                    <ul class="p-0 m-0">
-                                      <li class="d-flex mb-4 pb-1">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                          <!-- <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded"> -->
-                                          <i class='bx bx-transfer text-primary bg-info-light'></i>
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                          <div class="me-2">
-                                            <small class=" d-block mb-1 text-white"> fundingBalance</small>
-                                            <h6 class="mb-0 text-muted"> short-term</h6>
-                                          </div>
-                                          <div class="user-progress gap-1">
-                                            <h6 class="mb-0 text-end text-success">+82.6</h6>
-                                            <span class=""> 07/04/22</span>
-                                          </div>
-                                        </div>
-                                      </li>
-                                      <li class="d-flex mb-4 pb-1">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                          <img src="../assets/img/icons/unicons/cc-success.png" alt="User" class="rounded">
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                          <div class="me-2">
-                                            <small class="text-white d-block mb-1"> Basic </small>
-                                            <h6 class="mb-0 text-muted"> credit </h6>
-                                          </div>
-                                          <div class="user-progress gap-1">
-                                            <h6 class="mb-0 text-end text-success">+ 838.71</h6>
-                                            <span class=""> 07/04/22</span>
-                                          </div>
-                                        </div>
-                                      </li>
-                                      <li class="d-flex mb-4 pb-1">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                          <img src="../assets/img/icons/unicons/cc-success.png" alt="User" class="rounded">
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                          <div class="me-2">
-                                            <small class="text-white d-block mb-1"> cycles </small>
-                                            <h6 class="mb-0 text-muted"> credit </h6>
-                                          </div>
-                                          <div class="user-progress gap-1">
-                                            <h6 class="mb-0 text-end text-success">+ 838.71</h6>
-                                            <span class=""> 07/04/22</span>
-                                          </div>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
+                                  <% if(user.activities.length){ %>
+                                    <div class="card-body">
+                                      <ul class="p-0 m-0">
+                                        <%user.activities.forEach(activity=>{%>
+                                          <%if(activity.type == 'transfer'){%>
+                                            <li class="d-flex mb-4 pb-1">
+                                              <div class="avatar flex-shrink-0 me-3">
+                                                <!-- <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded"> -->
+                                                <i class='bx bx-transfer text-primary bg-info-light'></i>
+                                              </div>
+                                              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                <div class="me-2">
+                                                  <small class=" d-block mb-1 text-white text-capitalize"> <%=activity.from.replace('Ballance', " balance")%></small>
+                                                  <h6 class="mb-0 text-muted text-capitalize"> <%=activity.to.replace('Ballance', " balance") %></h6>
+                                                </div>
+                                                <div class="user-progress gap-1">
+                                                  <h6 class="mb-0 text-end text-success">+ $<%=activity.amount.toLocaleString()%></h6>
+                                                  <span class="small"> <%= format(activity.createdAt, 'd/MM/y') %></span>
+                                                </div>
+                                              </div>
+                                            </li>
+                                          <%}else{%>
+                                            <li class="d-flex mb-4 pb-1">
+                                              <div class="avatar flex-shrink-0 me-3">
+                                                <img src="../assets/img/icons/unicons/cc-success.png" alt="User" class="rounded">
+                                              </div>
+                                              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                <div class="me-2">
+                                                  <small class="text-white d-block mb-1 text-capitalize"> <%= activity.from %> </small>
+                                                  <h6 class="mb-0 text-muted text-capitalize"> credit </h6>
+                                                </div>
+                                                <div class="user-progress gap-1">
+                                                  <h6 class="mb-0 text-end text-success">+ $<%=activity.amount.toLocaleString()%></h6>
+                                                  <span class="small"> <%= format(activity.createdAt, 'd/MM/y') %></span>
+                                                </div>
+                                              </div>
+                                            </li>
+                                          <%}%>
+                                       <% }) %>
+                                      </ul>
+                                    </div>
+                                <%  }else{ %>
+                                    <div class="card-body">
+                                      <p class="text-center"> You have no activity yet</p>
+                                    </div>
+                                 <% } %>
                                 </div>
                               </div>
                         </div>
