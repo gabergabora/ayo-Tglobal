@@ -36,10 +36,11 @@
       <span class="fw-semibold d-block mb-2">Running shorts </span>
       <h3 class="card-title text-nowrap mb-1 control-color" id="R-inv" data-amount="<%=shorts.amount %>" ><%= shorts.amount.toLocaleString("en-US", { style: "currency", currency: "USD" }) || '0.00' %> </h3>
       <!-- <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> -->
-      <% if(shorts.profit){ %>
-        <p class="text-success mb-0"> + $<%= shorts.profit %></p>
-     <% }else{ %>
-      <p class="text-danger mb-0"> + $0.00</p>
-      <% } %>
+      <div class="d-flex justify-content-between">
+        <% if(shorts.profit){ %>
+          <p class="text-success mb-0"> + $<%= shorts.profit %></p>
+          <p class="text-info mb-0"> <%= format(shorts.expiry, 'dd/MM/y') %></p>
+       <% } %>
+      </div>
     </div>
   </div>
