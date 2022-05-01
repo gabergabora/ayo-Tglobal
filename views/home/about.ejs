@@ -1,102 +1,57 @@
 <!DOCTYPE html>
 <html lang="zxx">
-  <!-- Mirrored from affixbankfx.com/about-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Apr 2022 14:59:04 GMT -->
   <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Aila" />
-    <meta name="keywords" content="HTML,CSS,JavaScript" />
-    <meta name="author" content="@stainlezzking" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>About Us - Temenos global</title>
-    <link
-      rel="icon"
-      href="assets/images/favicon.png"
-      type="image/png"
-      sizes="16x16"
-    />
+    <title>About Us - Temenos</title>
+    <%- include('./home-partials/headLink.ejs') -%>
+   <style>
+      section ul li strong{
+      color : #0b2154;
+    }
+      .custom-shape-divider-bottom-1651409644 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
 
-    <link
-      rel="stylesheet"
-      href="assets/home/css/bootstrap.min.css"
-      type="text/css"
-      media="all"
-    />
+.custom-shape-divider-bottom-1651409644 svg {
+    position: relative;
+    display: block;
+    width: calc(166% + 1.3px);
+    height: 424px;
+}
 
-    <link
-      rel="stylesheet"
-      href="assets/home/css/animate.min.css"
-      type="text/css"
-      media="all"
-    />
+.custom-shape-divider-bottom-1651409644 .shape-fill {
+    fill: rgb(83, 142, 252,0.4);
+    
+}
+.custom-shape-divider-top-1651411576 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
 
-    <link
-      rel="stylesheet"
-      href="assets/home/css/owl.carousel.min.css"
-      type="text/css"
-      media="all"
-    />
-    <link
-      rel="stylesheet"
-      href="assets/home/css/owl.theme.default.min.css"
-      type="text/css"
-      media="all"
-    />
+.custom-shape-divider-top-1651411576 svg {
+    position: relative;
+    display: block;
+    width: calc(144% + 1.3px);
+    height: 271px;
+}
 
-    <link
-      rel="stylesheet"
-      href="assets/home/css/meanmenu.min.css"
-      type="text/css"
-      media="all"
-    />
-
-    <link
-      rel="stylesheet"
-      href="assets/home/css/magnific-popup.min.css"
-      type="text/css"
-      media="all"
-    />
-
-    <link
-      rel="stylesheet"
-      href="assets/home/css/boxicons.min.css"
-      type="text/css"
-      media="all"
-    />
-
-    <link
-      rel="stylesheet"
-      href="assets/home/css/line-awesome.min.css"
-      type="text/css"
-      media="all"
-    />
-
-    <link
-      rel="stylesheet"
-      href="assets/home/css/flaticon.css"
-      type="text/css"
-      media="all"
-    />
-
-    <link
-      rel="stylesheet"
-      href="assets/home/css/style.css"
-      type="text/css"
-      media="all"
-    />
-
-    <link
-      rel="stylesheet"
-      href="assets/home/css/responsive.css"
-      type="text/css"
-      media="all"
-    />
-    <!--[if IE]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
+.custom-shape-divider-top-1651411576 .shape-fill {
+    fill: #FFFFFF;
+}
+section.invt-plans *{
+  z-index: 100;
+}
+   </style>
+</head>
   <body>
     <div class="preloader orange-gradient">
       <div class="preloader-wrapper">
@@ -118,7 +73,7 @@
       <!-- style="background: linear-gradient(90deg, #0856e6 0%, #2f74f4 100%)" -->
     <header
       class="page-title page-bg"
-      style="background: linear-gradient(90deg,#f20f10 0%,#ec600d 100%)"
+      style="background: linear-gradient(90deg,#0856e6 0%,#2f74f4 100%);"
     >
       <div class="logo-bg-icon">
         <div class="logo-bg-item">
@@ -140,43 +95,74 @@
         </div>
       </div>
     </header>
-
-    <section style="margin-top: 3rem" class="video-section pt-100 pb-70">
+  <div class="text-end container pt-4">
+    <div class="col-md-10">
+      <ul class="list-group d-inline-block ">
+        <li class="list-group-item border-0 text-primary px-2">
+          <a href="#plans" class="d-block text-decoration-none">
+           plans
+          </a>
+        </li>
+        <li class="list-group-item border-0 text-primary px-2">
+          <a href="#risk" class="d-block text-decoration-none">
+            Risk Management
+          </a>
+        </li>
+        <li class="list-group-item border-0 text-primary px-2">
+          <a href="#tech" class="d-block text-decoration-none">
+            Technology
+          </a>
+        </li>
+        <li class="list-group-item border-0 text-primary px-2">
+          <a href="#clients" class="d-block text-decoration-none">
+            Our Clients
+          </a>
+        </li>
+        <li class="list-group-item border-0 text-primary px-2">
+          <a href="#mission" class="d-block text-decoration-none">
+            Our mission
+          </a>
+        </li>
+        <li class="list-group-item border-0 text-primary px-2">
+          <a href="#executive" class="d-block text-decoration-none">
+            Executive Committee
+          </a>
+        </li>
+        <li class="list-group-item border-0 text-primary px-2">
+          <a href="#brokers" class="d-block text-decoration-none">
+            Top Brokers
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+    <section style="margin-top: 2rem" class="video-section pt-70 pb-70">
       <div class="container">
         <div class="home-facility-content">
-          <div class="row align-items-center">
-            <div class="col-sm-12 col-md-12 col-lg-6 order-lg-2">
-              <div class="about-page-item pb-30">
-                <div
-                  class="about-img ml-20 overflow-hidden border-radius-5 img-shadow"
-                >
-                  <img src="assets/home/images/home-facility-bg-3.png" alt="about" />
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6 order-lg-1">
+          <div class="row">
+            <div class="col-12  col-md-10 order-lg-1">
               <div class="about-page-item pb-30">
                 <div class="home-service-start">
-                  <h2>About Temenos global</h2>
+                  <h2>About Temenos</h2>
                   <p>
-                    We are Professional Traders & Portfolio Managers who return
-                    profit to investors, guaranteed and Regulated by the
-                    Securities and Exchange Commission. We offer optimum trading
-                    service that is capable of delivering profit on invested
-                    funds. We Trade on a Wide Range of Assets,home/ Cryptos, Fx
-                    Options & Commodities.
+                    Temenos manages unique alternative investment solutions aside from our banking technologies that 
+                    offer investors as well as banks, private and public firms the benefits of better diversification. We target 
+                    investment strategies that are tested and applied to traditional asset classes, such as equities and 
+                    bonds, we also invest in markets such as crypto mining and NFTs, to lower overall portfolio risk.
                   </p>
                   <p>
-                    Affix Bank FX is a financial business platform developed
-                    under the control of an experienced team of highly qualified
-                    financial experts and professional traders for private
-                    highly profitable online investments. By providing access to
-                    new and innovative financial investment strategies that
-                    enhance long-term commercial benefits. Affix Bank FX intends
-                    to fulfill each client’s individual business requirements.
-                    We provide exemplary service to our clients throughout this
-                    process and aim to deliver a superior rate of return to our
-                    investors and partners.
+                    Temenos manages unique alternative investment solutions aside from our banking technologies that 
+                    offer investors as well as banks, private and public firms the benefits of better diversification. We target 
+                    investment strategies that are tested and applied to traditional asset classes, such as equities and 
+                    bonds, we also invest in markets such as crypto mining and NFTs, to lower overall portfolio risk.
+                  </p>
+                  <p>
+                    We are Portfolio Managers who make returns to investors, guaranteed and Regulated by the Securities 
+                    and Exchange Commission(SEC), Federal Deposit Insurance Corp. (FDIC) and Employee Benefits Security 
+                    Administration (EBSA). We offer an optimal trading service that is capable of delivering profit on 
+                    invested funds. We trade on a wide range of assets such as cryptocurrencies, Fx Options & Commodities 
+                    with the help of Our 90% profitable strategies, Market Analysts, Brokers and our stand by technologies 
+                    (Algo Miners & Bots) to take advantage of trends in the marketplace
                   </p>
                 </div>
               </div>
@@ -185,8 +171,115 @@
         </div>
       </div>
     </section>
+    <section class="mt-3 py-4 position-relative bg-light invt-plans" >
+      <div class="custom-shape-divider-top-1651411576">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M602.45,3.86h0S572.9,116.24,281.94,120H923C632,116.24,602.45,3.86,602.45,3.86Z" class="shape-fill"></path>
+        </svg>
+    </div>
+      <div class="custom-shape-divider-bottom-1651409644">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M602.45,3.86h0S572.9,116.24,281.94,120H923C632,116.24,602.45,3.86,602.45,3.86Z" class="shape-fill"></path>
+        </svg>
+    </div>
+      <div class="container">
+        <div class="col-sm-12 col-md-10 order-lg-1">
+          <div class="about-page-item pb-30">
+            <div class="home-service-start text-start">
+              <h2 class="text-center" id="plans">Investment plans</h2>
+              <p class="text-center">We have different methods of investment that benefit our long-term and short-term investors. Such as; </p>
+            <ul>
+              <li class="mb-3"> 
+                <strong>BASIC PLAN </strong> - This is the least plan we have in the company. It varies from $999.99 below and it 
+                reads for 3 consecutive days before it matures in profit. We believe the investors on this plan 
+                are usually newbies which is why there are usually zero charges vested on investors running on 
+                this plan.
+              </li>
+              <li class="mb-3">
+                <strong>ADVANCED PLAN</strong> - Investors who upgraded to this plan receive 15% of their investment after 7 
+                days. Charges and taxes are required for a successful withdrawal.
+              </li>
+              <li class="mb-3">
+                <strong>COOPERATIVE PLAN</strong> - This plan opens room for a single, large, and multiple portfolio(s). It allows 
+                firms or two persons to invest in either a single or paired portfolio. Firms can fix the salaries of 
+                their staff on this plan as it matures in a minimum of 7 days and it runs from 7 to 14 days. 
+                Charges and gas fees are required for a successful withdrawal. 
+              </li>
+              <li class="mb-3">
+                <strong>PLUTOCRAT PLAN</strong> - The plutocrat plan is for large investors. It also shares the concept of single -
+                Marge or multiple portfolios. This plan allows; single investors, trust funds for government and 
+                non-governmental organizations, firms, families, clubs, and multi-million-dollar companies. 
+                Investment in this plan runs from 7 to 14 days with a 50% ROI. Charges and gas fees are required 
+                for a successful withdrawal. 
+              </li>
+              <li class="mb-3">
+                <strong>MARATHON PLAN</strong> - This is a unique special plan that Temenos has created as a package for 
+                investors who intends to own a long-term investment portfolio like; specific investment cycles, 
+                long-term investments, advanced and cooperative marathon. This plan can as well serve as a 
+                replica of a 4O1k/ 4O1b retirement savings plan account but can be withdrawn in a minimum of 
+                90days with 60% ROI. Taxes and Blockchain charges are required for successful withdrawal. The 
+                benefits of this plan is to serve all our investors who are longing to save in a 4O1k or 4O1b plan 
+                account. Salary earners and business owners have the same opportunity of saving and it allows 
+                Temenos to trade bullishly on their savings annually.
+              </li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-4" style=" background: linear-gradient(1deg,rgb(19, 94, 233, 0.4) 40%,rgb(83, 142, 252, 0.4) 100%)" >
+      <div class="container">
+        <div class="col-sm-12 col-md-10">
+          <div class="home-service-start text-start text-white">
+            <div class="mb-4" id="risk">
+              <h2 >Risk Management </h2>
+              <p class="text-white"> To manage our risk, we apply the industry standard of 0.5% of capital per trade and we hedge our large 
+                positions using tested strategies to reduce our risk. Our strategies have been tested both manually and 
+                with algorithms and then fine-tuned to meet our specific needs. It allows us to deliver the best value to 
+                our clients.</p>
+            </div>
+          </div>
+            <div class="mb-4" id="tech">
+              <h2 > Technology </h2>
+              <p class="text-white">We hope to create a less tasking but reliable income stream to serve potential clients and grow their 
+            portfolio with our state-of-the-art technology. We have Bots and Algorithm-based miners that help us 
+            acquire 90% trade efficiency. They are programmed by our top engineers along and data analysts in the 
+            market. This is to ensure that it is always working at full capacity and our clients are satisfied with our 
+            work.</p>
+            </div>
+            <div class="mb-4" id="clients">
+              <h2 > Our Clients</h2>
+              <p class="text-white"> At Temenos, we understand that not all of our clients are alike. We at Temenos do not discriminate 
+              between our clients and want to serve all our clients with utmost dedication. We understand that each 
+              of our clients goes through different financial challenges. That is why we put up our best and also map 
+              out the best features in our investment plans after working amicably with the results of our clients' 
+              interviews that will suit their needs.</p>
+            </div>
+            <div class="mb-4">
+              <h2>investments</h2>
+              <p class="text-white">Temenos invests across a wide range of assets which include stocks, crypto, real estate, CFDs, Forex and 
+                Volatility trading, Cryptocurrencies, and NFT minting. Our use of Algorithm miners and Bots in Crypto 
+                gives us the cutting edge we need to perform better than most investment companies. </p>
+            </div>
+            <div class="mb-4" id="mission">
+              <h2 > Our Mission</h2>
+              <p class="text-white">Our mission is to spread the benefits of cryptocurrency CLOUD MINING and Holdings as wide as we can. 
+                We hope to make everyone a beneficiary of our in-depth knowledge of cryptocurrency and holdings by 
+                standing in between to help our investors get the best out of it. You do not need any knowledge of how 
+                any of the investments work or acquire any skills before you can invest because we are here to help 
+                you. We hope to create a less tasking but reliable income stream to serve potential clients and grow 
+                their portfolio with our state-of-the-art technology. We have Bots and Algorithm-based miners that help 
+                us acquire 90% trade efficiency. We work hard to deliver excellence in technical and fundamental 
+                analysis. The firm is always updated about the major activities and players in the market. If you have any 
+                questions, you can drop us a mail or chat with us.</p>
+            </div>
+        </div>
 
-    <section class="retail-section-bg worker-section">
+      </div>
+    </section>
+
+    <section class="retail-section-bg worker-section" id="executive">
       <div class="container">
         <div class="home-about-content">
           <div class="worker-section-shape">
@@ -212,16 +305,15 @@
             <div class="col-sm-12">
               <div class="row ">
                 <div
-                  class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height"
+                  class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height my-0"
                 >
                   <div
                     class="worker-grid-content overflow-hidden border-radius-5"
                   >
-                    <div style="height: 300px" class="worker-content-img">
+                    <div  class="worker-content-img">
                       <img
-                        style="height: 300px"
                         src="assets/home/images/headshot-max-chuard.jpg"
-                        alt="worker"
+                        alt="worker" style="max-height : 260px;"
                       />
                     </div>
                     <div class="worker-content-layout">
@@ -231,13 +323,13 @@
                   </div>
                 </div>
                 <div
-                  class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height"
+                  class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height my-0"
                 >
                   <div
                     class="worker-grid-content overflow-hidden border-radius-5"
                   >
-                    <div class="worker-content-img">
-                      <img src="assets/home/images/Martin-Haering.jpg" alt="worker" />
+                    <div class="worker-content-img" >
+                      <img src="assets/home/images/Martin-Haering.jpg" alt="worker" style="max-height : 260px;" />
                     </div>
                     <div class="worker-content-layout">
                       <h3 class="client-caption-title">  Martin Häring</h3>
@@ -246,13 +338,13 @@
                   </div>
                 </div>
                 <div
-                  class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height"
+                  class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height my-2"
                 >
                   <div
                     class="worker-grid-content overflow-hidden border-radius-5"
                   >
                     <div class="worker-content-img">
-                      <img src="assets/home/images/Prema-Headshot 768x432.jpg" alt="worker" />
+                      <img src="assets/home/images/Prema-Headshot 768x432.jpg" alt="worker" style="max-height : 260px;" />
                     </div>
                     <div class="worker-content-layout">
                       <h3 class="client-caption-title">Prema Varadhan</h3>
@@ -263,13 +355,13 @@
                   </div>
                 </div>
                 <div
-                  class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height"
+                  class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height my-2"
                 >
                   <div
                     class="worker-grid-content overflow-hidden border-radius-5"
                   >
                     <div class="worker-content-img">
-                      <img src="assets/home/images/takis.jpg" alt="worker" />
+                      <img src="assets/home/images/takis.jpg" alt="worker" style="max-height : 260px;" />
                     </div>
                     <div class="worker-content-layout">
                       <h3 class="client-caption-title">Takis Spiliopoulos</h3>
@@ -286,41 +378,32 @@
       </div>
     </section>
 
-    <section class="worker-section ">
+    <section class="worker-section mb-5" id="brokers">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-sm-12  pb-30">
+                <div class="col-sm-12 ">
                   <div class="home-service-start">
                     <h2>  Top Brokers</h2>
-                    <p>
-                      For an Internet-based marketplace with clearly defined and
-                      efficient processes, the personal relationship is often not a
-                      key priority. Nevertheless, we want to inspire and surprise
-                      our customers through professional, friendly and cooperative
-                      communication. We achieve this also through employees who can
-                      choose for themselves, when, where, what and how they work
-                      without having to bring their private life into the company.
-                    </p>
                   </div>
                 </div>
                 <div class="col-sm-12">
                   <div class="row ">
                     <div
-                      class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height"
+                      class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height my-0"
                     >
                       <div
                         class="worker-grid-content overflow-hidden border-radius-5"
                       >
-                        <div style="height: 300px" class="worker-content-img">
+                        <div  class="worker-content-img">
                           <img
-                            style="height: 300px"
-                            src="assets/home/images/headshot-max-chuard.jpg"
+                            style="max-height : 500px;"
+                            src="assets/home/images/topbroker1.JPEG"
                             alt="worker"
                           />
                         </div>
                         <div class="worker-content-layout">
-                          <h3 class="client-caption-title">Max Chuad</h3>
-                          <h4 class="client-caption-designation">CEO</h4>
+                          <h3 class="client-caption-title">Alex johnson</h3>
+                          <h4 class="client-caption-designation">Broker</h4>
                         </div>
                       </div>
                     </div>
@@ -331,45 +414,11 @@
                         class="worker-grid-content overflow-hidden border-radius-5"
                       >
                         <div class="worker-content-img">
-                          <img src="assets/home/images/Martin-Haering.jpg" alt="worker" />
+                          <img src="assets/home/images/topbroker2.JPEG" style="max-height : 500px;" alt="worker" />
                         </div>
                         <div class="worker-content-layout">
                           <h3 class="client-caption-title">  Martin Häring</h3>
-                          <h4 class="client-caption-designation"> Cheif Marketing officer</h4>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height"
-                    >
-                      <div
-                        class="worker-grid-content overflow-hidden border-radius-5"
-                      >
-                        <div class="worker-content-img">
-                          <img src="assets/home/images/Prema-Headshot 768x432.jpg" alt="worker" />
-                        </div>
-                        <div class="worker-content-layout">
-                          <h3 class="client-caption-title">Prema Varadhan</h3>
-                          <h4 class="client-caption-designation">
-                            Chief Product and Technology Officer
-                          </h4>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="col-sm-12 col-md-6 col-lg-6 worker-grid-item fluid-height"
-                    >
-                      <div
-                        class="worker-grid-content overflow-hidden border-radius-5"
-                      >
-                        <div class="worker-content-img">
-                          <img src="assets/home/images/takis.jpg" alt="worker" />
-                        </div>
-                        <div class="worker-content-layout">
-                          <h3 class="client-caption-title">Takis Spiliopoulos</h3>
-                          <h4 class="client-caption-designation">
-                            Cheif financial officer
-                          </h4>
+                          <h4 class="client-caption-designation"> Broker</h4>
                         </div>
                       </div>
                     </div>
@@ -379,38 +428,6 @@
         </div>
     </section>
 
-    <!-- <div class="counter-middle-section about-logo-section">
-      <div class="container">
-        <div class="about-logo-content">
-          <div class="home-logo-item">
-            <a href="#"><img src="assets/home/images/logo-3.svg" alt="logo" /></a>
-          </div>
-          <div class="home-logo-item">
-            <a href="#"><img src="assets/home/images/logo-6.svg" alt="logo" /></a>
-          </div>
-          <div class="home-logo-item">
-            <a href="#"><img src="assets/home/images/logo-5.svg" alt="logo" /></a>
-          </div>
-          <div class="home-logo-item">
-            <a href="#"><img src="assets/home/images/logo-1.svg" alt="logo" /></a>
-          </div>
-          <div class="home-logo-item">
-            <a href="#"><img src="assets/home/images/logo-4.svg" alt="logo" /></a>
-          </div>
-          <div class="home-logo-item">
-            <a href="#"><img src="assets/home/images/logo-2.svg" alt="logo" /></a>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <section class="review-section about-download-section">
-      <div class="container">
-        <div class="home-download-content about-download-content">
-          <div class="row align-items-center"></div>
-        </div>
-      </div>
-    </section>
     <%- include('./home-partials/footer.ejs') -%>
   </body>
 
