@@ -24,10 +24,8 @@ passport.use("user",new localStrategy(
     (req,user,password,done)=>{
         USER.findOne({email: user.toLowerCase()},
          function(err,data){
-            if(err) { return done(err)}
-            if(!data){
-                return done(null, false, {message : "no user found"})
-            }
+            if(err) return done(err)
+            if(!data) return done(null, false, {message : "wrong email or passwrord"})
             if(data){
                 try{
                     if(data.password === password){
@@ -41,7 +39,7 @@ passport.use("user",new localStrategy(
                 }catch(err){
                     console.log(err.message)
                     req.flash("error", "couldn't sign you in, please report this problem")
-                    done(err)
+                    return done(err)
                 }
             }
         })
@@ -50,26 +48,13 @@ passport.use("user",new localStrategy(
 
 passport.use("admin",new localStrategy({passReqToCallback: true},
     (req,user,password,done)=>{
-        ADMIN.findOne({email: user.toLowerCase()},
+        ADMIN.findOne({username: user.toLowerCase()},
          function(err,data){
-            if(err) { return done(err)}
-            if(!data){
-                return done(null, false, {message : "no user found"})
-            }
+            if(err) return done(err)
+            if(!data) return done(null, false, {message : "no user found"})
             if(data){
-                try{
-                    if(data.password === md5(password)){
-                        USER.updateOne({email : data.email},{lastLoggedIn : new Date()},
-                        function(err){if(err) return console.log("error trying to update user logins", err)})
-                        return done(null,data)
-                    }else{
+                    if(data.password === md5(password)) return done(null,data)
                         return done(null, false, {message : "wrong username or password"})
-                    }
-                }catch(err){
-                    console.log(err.message)
-                    req.flash("error", "couldn't sign you in, please report this problem")
-                    done(err)
-                }
             }
         })
     })
@@ -79,15 +64,14 @@ passport.serializeUser(function(user, done) {
     done(null, { id : user.id, admin : user.admin});
   });
   
-  passport.deserializeUser(function(user, done) {
-      if(user.admin){
-          return ADMIN.findById(user.id, function(err,user){
-              done(err, user)
-          })
-      }
-        return USER.findById(user.id, function (err, user) {
-            done(err, user);
-        });
-  });
-
+passport.deserializeUser(function(user, done) {
+    if(user.admin){
+        return ADMIN.findById(user.id, function(err,user){
+            done(err, user)
+        })
+    }
+    return USER.findById(user.id, function (err, user) {
+        done(err, user);
+    });
+});
 }

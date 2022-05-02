@@ -3,7 +3,7 @@ require('dotenv').config()
 // for some reason node v17 needs 127.0.0.1 in the connection instead of localhost
 let online = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@firstclauster.npogo.mongodb.net/temenosG`
 let localhost = "mongodb://127.0.0.1:27017/temenosG"
-mongoose.connect(online,
+mongoose.connect(localhost,
 function(req,res){
     console.log("DB connected successfully")
 })
