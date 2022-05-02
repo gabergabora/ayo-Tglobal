@@ -182,6 +182,10 @@
                         <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                         </div>
                     </div>
+                    <div class="form-check pb-2">
+                        <input class="form-check-input" type="checkbox" id="terms&condition">
+                        <label class="form-check-label" for="defaultCheck3"> Accept Terms<a href="/terms-condition" target="_blank"> read..</a> </label>
+                      </div>
                     <button class="btn btn-primary d-grid w-100"> sign up</button>
                     </form>
                     <button class="btn btn-info d-grid w-25 my-3" id="back" > back </button>
@@ -230,7 +234,16 @@
     return $('#carouselExampleSlidesOnly').carousel("prev");
     });
     document.querySelector("#lastform").addEventListener("submit", function (e) {
-    if (document.querySelector("#password").value.trim() !== document.querySelector("#confirmP").value.trim()) {
+        if(!document.getElementById('terms&condition').checked){
+            e.preventDefault();
+        var myAlert = document.getElementById('myAlert');
+        myAlert.innerText = "you have to accept the terms to use our service";
+        myAlert.classList.add("move");
+        return setTimeout(function () {
+        return myAlert.classList.remove("move");
+        }, 3000);
+        }
+        if(document.querySelector("#password").value.trim() !== document.querySelector("#confirmP").value.trim()) {
         e.preventDefault();
         var myAlert = document.getElementById('myAlert');
         myAlert.innerText = "Passwords don't match";
@@ -239,6 +252,7 @@
         return myAlert.classList.remove("move");
         }, 3000);
     }
+        
     });
 </script>
     <!-- Page JS -->

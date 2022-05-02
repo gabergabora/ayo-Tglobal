@@ -361,6 +361,32 @@ About Us
             </div>
             </div>  
    <% }) %>
+   <div style="box-shadow: 0 1rem 3rem rgba(0,0,0,0.175) !important;" class="pricing-grid-item">
+    <div class="pricing-grid-item-inner">
+    <div class="pricing-item-header">
+    <h3><img src="assets/home/images/pricing-check.png" alt="icon"> <%=  cyclesInvestment.title %></h3>
+    <h5 class="text-center text-primary my-2">cycles</h5>
+    </div>
+    <div class="pricing-item-amount pricing_gold">
+        <% if(!cyclesInvestment.max){ %>
+          <h4 style="font-size:20px" class="text-white"><small >$</small><%= cyclesInvestment.min %> - unlimited</h4>
+       <% }else{ %>
+        <h4 style="font-size:20px" class="text-white"><small >$</small><%= cyclesInvestment.min %> - <%= cyclesInvestment.max %></h4>
+       <% } %>
+      </div>
+    <div class="pricing-item-body">
+    <ul class="pricing-item-list">
+        <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow">  <%= cyclesInvestment.roi %> (ROI)/day</li>
+        <li><img src="/assets/images/dashboard/pricing-arrow.png" alt="icon" class="pricing-list-arrow"> <%= cyclesInvestment.days_cycle %> days/cycle</li>
+    </ul>
+    <a href="/invest" class="btn1 orange-gradient btn-with-image">
+    <i class="flaticon-login"></i>
+    <i class="flaticon-login"></i>
+    Get started
+    </a>
+    </div>
+    </div>
+    </div>  
     </div>
     </div>
     </section>

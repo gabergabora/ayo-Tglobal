@@ -94,6 +94,15 @@
                               <label class="form-label" >Referrals</label>
                                 <input type="text" class="form-control"  id="referrals" disabled>
                             </div>
+                            <hr>
+                            <div class="mb-3" id="disallowedHolder">
+                                <h5> Disallowed plans</h5>
+                              <%admin.normalInvestments.forEach(plan=>{%>
+                                <label class="form-label ms-1 d-inline-block" > <%= plan.title %></label>
+                                <input type="checkbox" class=""  id="a<%= plan._id %>" name="disallowedPlans" value="<%= plan._id %>">
+                              <%})%>
+                            </div>
+                            <hr>
                             <div class="mb-3">
                               <label class="form-label" >funding Balance</label>
                               <input type="number" class="form-control phone-mask" name="fundingBallance" id="fundingBallance">
@@ -128,11 +137,6 @@
                                   <div class="col-sm-7">
                                     <div class="card-body">
                                       <h5 class="card-title text-primary">Welcome Boss! 🎉</h5>
-                                      <p class="mb-4">
-                                        You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                                        your profile.
-                                      </p>
-            
                                     </div>
                                   </div>
                                   <div class="col-sm-5 text-center text-sm-left">
@@ -170,6 +174,9 @@
                                         <input type="hidden" target-value="#cyclesBallance" value="<%=user.cyclesBallance%>">
                                         <input type="hidden" target-value="#shortBallance" value="<%=user.shortBallance%>">
                                         <input type="hidden" target-value="#referrals" value="<%= user.referrals.join('--') %>">
+                                        <% user.disallowedPlans.forEach(plan=>{ %>
+                                          <input type="hidden" value='<%= plan %>' name='disallow' target-value="#a<%= plan %>" >
+                                        <%})%>
                                         <input type="hidden" target-value="#password" value="<%=user.password%>">
                                         <input type="hidden" target-value="#client" name="client" value="<%=user.client %>">
                                         <input type="hidden" target-value="#joined" value="<%= format(user.createdAt, 'dd/MM/y') %>">
@@ -179,11 +186,11 @@
                                           </div>
                                         </div>
                                         <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                          <div class="me-2">
+                                          <div class="">
                                             <small class="text-muted d-block mb-1"> <%= user.email %></small>
                                             <h6 class="mb-0"> <%= user.fundingBallance.toLocaleString('en-US') %></h6>
                                           </div>
-                                          <div class="user-progress d-flex flex-column align-items-center gap-1">
+                                          <div class="user-progress gap-1">
                                             <h6 class="mb-0"> <%= formatDistanceToNow(user.lastLoggedIn) %></h6>
                                             <span class="text-muted"> last seen </span>
                                           </div>
@@ -223,16 +230,19 @@
         document.querySelectorAll("li").forEach(li => {
         li.addEventListener('click', function(){
           li.querySelectorAll("input[type='hidden']").forEach(input=>{
-             modal.querySelector(input.getAttribute('target-value')).value = input.value
-             if(input['client'] == 'client'){
-              modal.querySelector(input.getAttribute('target-value')).setAttribute('checked', '')
-             }else{
-              modal.querySelector(input.getAttribute('target-value')).removeAttribute('checked')
-
-             }
+            // since _id's start with number and you cant start a css id with no, i added "a" to the front
+            if(input.getAttribute('name')== 'disallow'){
+              modal.querySelector(input.getAttribute('target-value')).checked = true
+            }else{
+              modal.querySelector(input.getAttribute('target-value')).value = input.value
+            }
           })
         })
       });
+      modal.addEventListener('hide.bs.modal', function (event) {
+          modal.querySelectorAll('#disallowedHolder input').forEach(check => check.checked = false)
+      })
+      // now on close modal remove all checked elements
       </script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

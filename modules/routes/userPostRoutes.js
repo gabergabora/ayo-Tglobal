@@ -258,13 +258,16 @@ router.post("/invest", isAuth, getInvestments, function(req,res){
     if(req.user[req.body.type] < Number(req.body.amount)) return showError(req,"/invest", "insufficient ballance", res)
         if(req.body.type == "shortBallance"){
             plan = res.locals.normalInvestments.filter(investment => investment.title == req.body.title )[0]
-        //  check if user has a normal investment that has not been paid
+            // what if its not an array but a string
+                 disallowed = req.user.disallowedPlans.filter(blocked=> blocked == JSON.parse(JSON.stringify(plan._id)))
+                 if(disallowed.length) return showError(req,"/invest", " this plan is not available to you ", res)
+                //  check if user has a normal investment that has not been paid
                 if(!plan) return showError(req,"/invest", "couldn't find your selected plan", res)
                 if(Number(req.body.amount) < plan.min || Number(req.body.amount) > plan.max || !Boolean(Number(req.body.amount))) return showError(req,"/invest", `can't invest $${req.body.amount} in ${req.body.title} `, res) 
                 return SHORTINVS.findOne({user : JSON.parse(JSON.stringify((req.user._id))), paid : false},
                 function(err, unpaidShorts){
                     if(err)  return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
-                    if(unpaidShorts)  return showError(req,"/invest", "can't invest, you have an un matured short-term investment running", res) 
+                    if(unpaidShorts)  return showError(req,"/invest", "you still have an un matured short-term investment running", res) 
                         USER.updateOne({email : req.user.email}, {
                             $inc : {shortBallance : - Number(req.body.amount)},
                         }).then(()=> {

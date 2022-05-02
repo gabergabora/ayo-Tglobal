@@ -72,6 +72,7 @@ const userSchema = mongoose.Schema({
     client : {type : Boolean, default : false},
     activities : [activity],
     referrals : [String],
+    disallowedPlans : [String],
     walletAddress : String,
     lastLoggedIn : Date,
 }, {

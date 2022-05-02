@@ -29,6 +29,9 @@ const isAuth = function(req,res,next){
 
 router.post('/dashboard',isAuth, function(req,res){
     if(req.body.button== 'update'){
+        // this is so that if no disallowed is checked, we set the disallowed to empty string
+        req.body.disallowedPlans ? null : req.body.disallowedPlans = [];
+        console.log(req.body)
        return USER.updateOne({email : req.body.email},req.body, 
             function(err,data){
                 if(err) {

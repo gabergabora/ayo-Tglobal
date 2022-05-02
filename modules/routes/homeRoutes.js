@@ -15,6 +15,10 @@ router.get('/about', function(req,res){
     res.render('home/about.ejs')
 })
 
+router.get('/terms-condition', function(req,res){
+    res.render('terms&condition')
+})
+
 router.get('/portfolio',getInvestments, function(req,res){
     res.render('home/portfolio')
 })
