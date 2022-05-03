@@ -83,7 +83,7 @@ router.post("/deposit",isAuth, function(req,res){
         return TRANSACTION.updateOne({_id : req.body.id}, {
             status: 'declined',
             confirmed : true
-        }, function(err){
+        }, function(err, data){
             if(err) return res.send('an error occured in declining the deposit')
             let message = new Message(data.email,`Your Deposit of ${req.body.amount} has been Declined`, 
             `your deposit of ${req.body.amount} has been declined`,
