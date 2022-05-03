@@ -294,11 +294,11 @@ router.post("/invest", isAuth, getInvestments, function(req,res){
         if(req.body.type == "cyclesBallance"){
             if(Number(req.body.amount) < res.locals.cyclesInvestment.min) return showError(req,"/invest", `can't invest $${req.body.amount} in ${res.locals.cyclesInvestment.title} `, res)
             // how do i add all credits from cycleballance to the transactions
-            CYCLESINVS.findOne({user: req.user._id, active : true}, 
+            return CYCLESINVS.findOne({user: JSON.parse(JSON.stringify(req.user._id)), active : true}, 
                 function(e,d){
                             if(e) return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
-                            if(d)  return showError(req,"/invest", "You already have a running cycle", res) 
-                           return USER.findOneAndUpdate({_id : req.user._id}, {
+                            if(d) return showError(req,"/invest", "You already have a running cycle", res)
+                           return USER.findOneAndUpdate({_id : JSON.parse(JSON.stringify(req.user._id))}, {
                                $inc : {cyclesBallance : - Number(req.body.amount)},
                                $push : {
                                 activities  : {
@@ -309,9 +309,12 @@ router.post("/invest", isAuth, getInvestments, function(req,res){
                             }, 
                             function(err,data){
                                 if(err) return showError(req,"/invest", `error updating balance, please report this problem`, res) 
-                                CYCLESINVS.create({
                                     //    this ._doc is unto prototype level
-                                       ...res.locals.cyclesInvestment._doc, 
+                                let doc =   {...res.locals.cyclesInvestment._doc}
+                                delete doc._id    
+                                console.log(doc)
+                                CYCLESINVS.create({
+                                    ...doc,
                                        pay_day : (res.locals.cyclesInvestment.roi/100) * Number(req.body.amount),
                                        accumulatedSum : Number(req.body.amount),
                                        amount_inv : Number(req.body.amount),
@@ -321,7 +324,7 @@ router.post("/invest", isAuth, getInvestments, function(req,res){
                                        cycle : 1,
                                    }, function(e, d){
                                     if(e) return showError(req,"/invest", "an error occured on the server, please report this problem", res) 
-                                       return res.redirect('/invest')
+                                    return res.redirect('/invest')
                                    })
                             }
                             )
