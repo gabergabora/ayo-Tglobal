@@ -3,7 +3,7 @@ const depositRequest = function(name,amount){
     return `
     <div class="container px-0 my-0 mx-auto" style=" max-width: 600px;">
     <header style=" background-color: #2f4b7a; width:100; display: flex; justify-content: center; align-items: center; padding: 16px 0;">
-        <img src="https://www.temenosglobla.com/assets/images/temenos.png" alt="Temenos global logo" 
+        <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" 
         style=" 
         height: 30px;
         display: inline-block;"
@@ -23,7 +23,7 @@ const depositRequest = function(name,amount){
         </h3>
     </div>
     <div class="getStarted">
-        <img src="https://www.temenosglobla.com/assets/email-images/deposit-awaiting.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
+        <img src="https://www.temenosglobal.com/assets/email-images/deposit-awaiting.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
     </div>
     <footer style="background-color: #2f4b7a; padding : 20px 0; display: flex; align-items: center; color: white;">
     <a href="https://temenosglobal.com"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> Home </a>
@@ -38,7 +38,7 @@ const depositSuccess = function(name,amount){
     return `
     <div class="container px-0 my-0 mx-auto" style=" max-width: 600px;">
     <header style=" background-color: #2f4b7a; width:100; display: flex; justify-content: center; align-items: center; padding: 16px 0;">
-        <img src="https://www.temenosglobla.com/assets/images/temenos.png" alt="Temenos global logo" 
+        <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" 
         style=" 
         height: 30px;
         display: inline-block;"
@@ -58,7 +58,7 @@ const depositSuccess = function(name,amount){
         </h3>
     </div>
     <div class="getStarted">
-        <img src="https://www.temenosglobla.com/assets/email-images/deposit-confirm.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
+        <img src="https://www.temenosglobal.com/assets/email-images/deposit-confirm.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
     </div>
     <footer style="background-color: #2f4b7a; padding : 20px 0; display: flex; align-items: center; color: white;">
     <a href="https://temenosglobal.com"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> Home </a>
@@ -75,7 +75,7 @@ const depositDecline = function(name,amount){
     
     <div class="container px-0 my-0 mx-auto" style=" max-width: 600px;">
         <header style=" background-color: #2f4b7a; width:100; display: flex; justify-content: center; align-items: center; padding: 16px 0;">
-            <img src="https://www.temenosglobla.com/assets/images/temenos.png" alt="Temenos global logo" 
+            <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" 
             style=" 
             height: 30px;
             display: inline-block;"
@@ -95,7 +95,7 @@ const depositDecline = function(name,amount){
             </h3>
         </div>
         <div class="getStarted">
-            <img src="https://www.temenosglobla.com/assets/email-images/deposit-decline.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
+            <img src="https://www.temenosglobal.com/assets/email-images/deposit-decline.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
         </div>
         <footer style="background-color: #2f4b7a; padding : 20px 0; display: flex; align-items: center; color: white;">
         <a href="https://temenosglobal.com"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> Home </a>

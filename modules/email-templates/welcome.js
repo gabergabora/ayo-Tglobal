@@ -5,7 +5,7 @@ const welcome = function(name){
     <body>
         <div class="container px-0 my-0 mx-auto" style="padding: 0px; margin: 0 auto; max-width: 600px;">
             <header style="padding: 1rem 2rem; display: flex; justify-content: end; align-items: center;">
-                <img src="https://www.temenosglobla.com/assets/images/temenos.png" alt="Temenos global logo" width="30px" style="display: inline-block;">
+                <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" width="30px" style="display: inline-block;">
                 <h4 style="display: inline-block;">Temenos Global</h4>
             </header>
         
@@ -15,7 +15,7 @@ const welcome = function(name){
                 <h3 style="font-weight: 400; font-size: 2rem;  color: #2f4b7a;"> Temenos Global</h3>
             </div>
             <div class="getStarted mb-4">
-                <img src="https://www.temenosglobla.com/assets/email-images/welcome-GET STARTED.png" style="display: block; width: 100%;" alt="how to get started" >
+                <img src="https://www.temenosglobal.com/assets/email-images/welcome-GET STARTED.png" style="display: block; width: 100%;" alt="how to get started" >
             </div>
             <footer style="background-color: #2f4b7a; padding : 20px 0; display: flex; align-items: center; color: white;">
                 <a href="https://temenosglobal.com"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> Home </a>
