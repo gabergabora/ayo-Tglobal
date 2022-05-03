@@ -46,8 +46,8 @@ passport.use("user",new localStrategy(
     })
 )
 
-passport.use("admin",new localStrategy({passReqToCallback: true},
-    (req,user,password,done)=>{
+passport.use("admin",new localStrategy(
+    (user,password,done)=>{
         ADMIN.findOne({username: user.toLowerCase()},
          function(err,data){
             if(err) return done(err)
