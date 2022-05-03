@@ -51,9 +51,9 @@ passport.use("admin",new localStrategy({passReqToCallback: true},
         ADMIN.findOne({username: user.toLowerCase()},
          function(err,data){
             if(err) return done(err)
-            if(!data) return done(null, false, {message : "no user found"})
+            if(!data) return done(null, false, {message : "wrong username or password"})
             if(data){
-                    if(data.password === md5(password)) return done(null,data)
+                    if(data.password == md5(password)) return done(null,data)
                         return done(null, false, {message : "wrong username or password"})
             }
         })
