@@ -347,10 +347,12 @@ About Us
             </div>
             <div class="pricing-item-body">
             <ul class="pricing-item-list">
-            <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Min Deposit of <span style="margin-left: .6rem;"><small>$</small>100</span></li>
-            <li><img src="assets/home/images/pricing-arrow.png" alt="icon" style="font-size:16px !important" class="pricing-list-arrow">Max Deposit of <span style="margin-left: .6rem;"><small>$</small>3,999</span></li>
-            <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Commission: 6.00%</li>
-            <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: 2 days<span class="pricing-list-info"><i class='bx bxs-info-circle'></i></span></li>
+              <%  if(investment.min){ %>
+                    <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Min Deposit of <span style="margin-left: .6rem;"><small>$</small><%= investment.min.toLocaleString('en-US') %></span></li>
+               <% } %>
+            <li><img src="assets/home/images/pricing-arrow.png" alt="icon" style="font-size:16px !important" class="pricing-list-arrow">Max Deposit of <span style="margin-left: .6rem;"><small>$</small><%= investment.max.toLocaleString('en-US') %></span></li>
+            <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Commission: <%= investment.roi %></li>
+            <li><img src="assets/home/images/pricing-arrow.png" alt="icon" class="pricing-list-arrow">Duration: <%= investment.duration %> days<span class="pricing-list-info"><i class='bx bxs-info-circle'></i></span></li>
             </ul>
             <a href="/invest" class="btn1 orange-gradient btn-with-image">
             <i class="flaticon-login"></i>
