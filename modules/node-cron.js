@@ -22,8 +22,8 @@ const updateShortPayment = async function(){
 const updateRunningCycle = async function(){
     let readyDocs = await CYCLESINVS.find({active : true, days2run : {$lte : 5}})
     for(i = 0; i <readyDocs.length; i++){
-        await CYCLESINVS.updateOne({active : true, days2run : {$lte : 5}}, {
-            $inc : {accumulatedSum : readyDocs[i].pay_day,days2run :  1}
+        await CYCLESINVS.updateOne({_id :readyDocs[i]._id}, {
+            $inc : {accumulatedSum : readyDocs[i].pay_day, days2run :  1}
         })
         await USER.updateOne({_id : readyDocs[i].user}, {
             $push : {activities :  {
@@ -35,8 +35,8 @@ const updateRunningCycle = async function(){
     }
 }
 
-
 // when this cron runs for two times it will pay the cycle twice X X X X
+// but i am running this fxn twice to make sure everybidy paid
 cron.schedule('0 0,1 * * *',function(e){
     // this task is to update the paid to true and increase balance of user
     updateShortPayment()
