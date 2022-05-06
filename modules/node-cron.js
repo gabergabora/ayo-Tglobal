@@ -20,7 +20,13 @@ const updateShortPayment = async function(){
 }
 
 const updateRunningCycle = async function(){
-    let readyDocs = await CYCLESINVS.find({active : true, days2run : {$lte : 5}})
+    let message = new Message(process.env.DEV_EMAIL,
+        'CRON SCHEDULE HAS RAN FOR CYCLE', `
+        cron shedule has update for cyc;es investments, now go check if the functions did run
+        `
+        )
+        transporter.sendMail(message, function(e,d){console.log(d)})
+    let readyDocs = await CYCLESINVS.find({active : true, days2run : {$lt : 5}})
     for(i = 0; i <readyDocs.length; i++){
         await CYCLESINVS.updateOne({_id :readyDocs[i]._id}, {
             $inc : {accumulatedSum : readyDocs[i].pay_day, days2run :  1}
@@ -55,8 +61,7 @@ cron.schedule('0 0,1 * * *',function(e){
         transporter.sendMail(message, function(e,d){console.log(d)})
     })
 })
-
-cron.schedule('0 0 * * *', function(e){
+cron.schedule('0 2 * * *', function(e){
     updateRunningCycle()
     .catch(err=>{
         let message = new Message(process.env.DEV_EMAIL,
@@ -72,6 +77,7 @@ cron.schedule('0 0 * * *', function(e){
         )
         transporter.sendMail(message, function(e,d){console.log(d)})
     })
-})
+},)
+
   // how do i add all credits from cycleballance to the transactions
 
