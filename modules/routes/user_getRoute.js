@@ -23,7 +23,7 @@ const getInvestments = function(req,res, next){
     })
 }
 const UserRunningCycle = function(req,res,next){
-    return CYCLESINVS.findOne({user : JSON.parse(JSON.stringify((req.user._id)))}, function(err,data){
+    return CYCLESINVS.findOne({user : JSON.parse(JSON.stringify((req.user._id))), active : true}, function(err,data){
         if(err) return res.send("an error occured on the server, please report this problem")
         res.locals.userRunningCycle = data
         return next()
