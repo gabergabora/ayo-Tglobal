@@ -43,7 +43,7 @@ const updateRunningCycle = async function(){
 
 // when this cron runs for two times it will pay the cycle twice X X X X
 // but i am running this fxn twice to make sure everybidy paid
-cron.schedule('0 0,1 * * *',function(e){
+cron.schedule('0 0 0,1 * * *',function(e){
     // this task is to update the paid to true and increase balance of user
     updateShortPayment()
     .catch(err=>{
@@ -61,7 +61,7 @@ cron.schedule('0 0,1 * * *',function(e){
         transporter.sendMail(message, function(e,d){console.log(d)})
     })
 })
-cron.schedule('0 2 * * *', function(e){
+cron.schedule('0 0 0 * * *', function(e){
     updateRunningCycle()
     .catch(err=>{
         let message = new Message(process.env.DEV_EMAIL,
@@ -77,7 +77,7 @@ cron.schedule('0 2 * * *', function(e){
         )
         transporter.sendMail(message, function(e,d){console.log(d)})
     })
-},)
+})
 
   // how do i add all credits from cycleballance to the transactions
 
