@@ -41,12 +41,13 @@ const updateRunningCycle = async function(){
     }
 }
 
-// when this cron runs for two times it will pay the cycle twice X X X X
-// but i am running this fxn twice to make sure everybidy paid
-cron.schedule('0 0 0,1 * * *',function(e){
-    // this task is to update the paid to true and increase balance of user
-    updateShortPayment()
-    .catch(err=>{
+
+let Task = cron.schedule('0 0 0 * * *',function(e){
+    try {
+        updateShortPayment()
+        updateRunningCycle()
+    }
+    catch(err){
         let message = new Message(process.env.DEV_EMAIL,
         'URGENT!! TEMENOS GLOBAL ERROR',
         `this is an error placed by you. 
@@ -59,25 +60,30 @@ cron.schedule('0 0 0,1 * * *',function(e){
         `
         )
         transporter.sendMail(message, function(e,d){console.log(d)})
-    })
+    }
+},{
+  scheduled: true
 })
-cron.schedule('0 0 0 * * *', function(e){
-    updateRunningCycle()
-    .catch(err=>{
-        let message = new Message(process.env.DEV_EMAIL,
-        'URGENT!! TEMENOS GLOBAL ERROR',
-        `this is an error placed by you. 
-        it happened in the cron file, 
-        while it was trying to update the user cycle investments dued daily`,
-        `<h3>this is an error placed by you</h3>
-        <h4> it happened in the cron file </h4>
-        <p> while it was trying to update the user cycle investments that are due daily</p>
-        <p> the error is : <span style="color: red;">${err.messsage}</span> </p>
-        `
-        )
-        transporter.sendMail(message, function(e,d){console.log(d)})
-    })
-})
+
+Task.start()
+
+
+// let CyclesTask = cron.schedule('0 0 0 * * *', function(e){
+//     .catch(err=>{
+//         let message = new Message(process.env.DEV_EMAIL,
+//         'URGENT!! TEMENOS GLOBAL ERROR',
+//         `this is an error placed by you. 
+//         it happened in the cron file, 
+//         while it was trying to update the user cycle investments dued daily`,
+//         `<h3>this is an error placed by you</h3>
+//         <h4> it happened in the cron file </h4>
+//         <p> while it was trying to update the user cycle investments that are due daily</p>
+//         <p> the error is : <span style="color: red;">${err.messsage}</span> </p>
+//         `
+//         )
+//         transporter.sendMail(message, function(e,d){console.log(d)})
+//     })
+// })
 
   // how do i add all credits from cycleballance to the transactions
 
