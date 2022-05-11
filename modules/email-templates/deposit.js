@@ -1,8 +1,8 @@
 
 const depositRequest = function(name,amount){
     return `
-    <div class="container px-0 my-0 mx-auto" style=" max-width: 600px;">
-    <header style=" background-color: #2f4b7a; width:100; display: flex; justify-content: center; align-items: center; padding: 16px 0;">
+    <div style=" max-width: 600px; margin: 0 auto;">
+    <header style=" background-color: #2f4b7a; width:100%; display: flex; text-align: center; justify-content: center; align-items: center; padding: 16px 0;">
         <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" 
         style=" 
         height: 30px;
@@ -36,8 +36,8 @@ const depositRequest = function(name,amount){
 }
 const depositSuccess = function(name,amount){
     return `
-    <div class="container px-0 my-0 mx-auto" style=" max-width: 600px;">
-    <header style=" background-color: #2f4b7a; width:100; display: flex; justify-content: center; align-items: center; padding: 16px 0;">
+    <div class="container px-0 my-0 mx-auto" style=" max-width: 600px;margin: 0 auto;">
+    <header style=" background-color: #2f4b7a; width:100%; display: flex; text-align: center; justify-content: center; align-items: center; padding: 16px 0;">
         <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" 
         style=" 
         height: 30px;
@@ -73,8 +73,8 @@ const depositSuccess = function(name,amount){
 const depositDecline = function(name,amount){
     return `
     
-    <div class="container px-0 my-0 mx-auto" style=" max-width: 600px;">
-        <header style=" background-color: #2f4b7a; width:100; display: flex; justify-content: center; align-items: center; padding: 16px 0;">
+    <div class="container px-0 my-0 mx-auto" style=" max-width: 600px;margin: 0 auto;">
+        <header style=" background-color: #2f4b7a; width:100%; display: flex; text-align: center; justify-content: center; align-items: center; padding: 16px 0;">
             <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" 
             style=" 
             height: 30px;

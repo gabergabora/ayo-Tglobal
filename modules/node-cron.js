@@ -20,12 +20,12 @@ const updateShortPayment = async function(){
 }
 
 const updateRunningCycle = async function(){
-    let message = new Message(process.env.DEV_EMAIL,
-        'CRON SCHEDULE HAS RAN FOR CYCLE', `
-        cron shedule has update for cyc;es investments, now go check if the functions did run
-        `
-        )
-        transporter.sendMail(message, function(e,d){console.log(d)})
+    // let message = new Message(process.env.DEV_EMAIL,
+    //     'CRON SCHEDULE HAS RAN FOR CYCLE', `
+    //     cron shedule has update for cyc;es investments, now go check if the functions did run
+    //     `
+    //     )
+    //     transporter.sendMail(message, function(e,d){console.log(d)})
     let readyDocs = await CYCLESINVS.find({active : true, days2run : {$lt : 5}})
     for(i = 0; i <readyDocs.length; i++){
         await CYCLESINVS.updateOne({_id :readyDocs[i]._id}, {

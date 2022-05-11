@@ -3,8 +3,8 @@
 const welcome = function(name){
     return  `
     <body>
-        <div class="container px-0 my-0 mx-auto" style="padding: 0px; margin: 0 auto; max-width: 600px;">
-            <header style="padding: 1rem 2rem; display: flex; justify-content: end; align-items: center;">
+        <div class="container px-0 my-0 mx-auto" style="padding: 0px; margin: 0 auto; max-width: 600px; margin: 0 auto ;">
+            <header style="padding: 1rem 2rem; display: flex; justify-content: end; text-align: center; align-items: center;">
                 <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" width="30px" style="display: inline-block;">
                 <h4 style="display: inline-block;">Temenos Global</h4>
             </header>

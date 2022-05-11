@@ -152,7 +152,7 @@ router.post('/loan',isAuth, function(req,res){
                 if(err) return res.send('an error occured in updating balance of approved loan')
                 let message = new Message(data.email,`Your Application for a loan of $${req.body.amount} `, 
                 `your application for a loan of ${req.body.amount},has been approved and credited to your account`,
-                loanSuccess(data.firstName, req.body.amount)
+                loanSuccess(req.body.amount)
                 )
                 transporter.sendMail(message, function(err, info){
                     if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
