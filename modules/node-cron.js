@@ -64,7 +64,7 @@ let Task = cron.schedule('0 0 0 * * *',function(e){
   scheduled: true
 })
 
-let CyclesTask = cron.schedule('0 20 7 * * *', function(){
+let CyclesTask = cron.schedule('0 25 6 * * *', function(){
     try {
         updateRunningCycle()
     }catch(err){
