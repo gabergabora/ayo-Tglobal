@@ -45,7 +45,6 @@ const updateRunningCycle = async function(){
 let Task = cron.schedule('0 0 0 * * *',function(e){
     try {
         updateShortPayment()
-        updateRunningCycle()
     }
     catch(err){
         let message = new Message(process.env.DEV_EMAIL,
@@ -65,25 +64,26 @@ let Task = cron.schedule('0 0 0 * * *',function(e){
   scheduled: true
 })
 
+let CyclesTask = cron.schedule('0 20 7 * * *', function(){
+    try {
+        updateRunningCycle()
+    }catch(err){
+        let message = new Message(process.env.DEV_EMAIL,
+            'URGENT!! TEMENOS GLOBAL ERROR',
+            `this is an error placed by you. 
+            it happened in the cron file, 
+            while it was trying to update the user investments that are due`,
+            `<h3>this is an error placed by you</h3>
+            <h4> it happened in the cron file </h4>
+            <p> while it was trying to update the user investments that are due</p>
+            <p> the error is : <span style="color: red;">${err.messsage}</span> </p>
+            `
+            )
+            transporter.sendMail(message, function(e,d){console.log(d)})
+        }
+}, {scheduled : true})
+
 Task.start()
+CyclesTask.start()
 
-
-// let CyclesTask = cron.schedule('0 0 0 * * *', function(e){
-//     .catch(err=>{
-//         let message = new Message(process.env.DEV_EMAIL,
-//         'URGENT!! TEMENOS GLOBAL ERROR',
-//         `this is an error placed by you. 
-//         it happened in the cron file, 
-//         while it was trying to update the user cycle investments dued daily`,
-//         `<h3>this is an error placed by you</h3>
-//         <h4> it happened in the cron file </h4>
-//         <p> while it was trying to update the user cycle investments that are due daily</p>
-//         <p> the error is : <span style="color: red;">${err.messsage}</span> </p>
-//         `
-//         )
-//         transporter.sendMail(message, function(e,d){console.log(d)})
-//     })
-// })
-
-  // how do i add all credits from cycleballance to the transactions
 
