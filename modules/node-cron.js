@@ -1,10 +1,20 @@
-const cron = require('node-cron')
-// note npm i cron is the real cron task, use that if this step doesnt work
-const { transporter, Message } = require('./nodemailer')
+// const cron = require('node-cron')
+// note npm i cron is the real cron task, use that if this step doe
+// const { transporter, Message } = require('./nodemailer')
 const {USER, SHORTINVS, CYCLESINVS} = require('./userDB')
-require('dotenv').config()
+// require('dotenv').config()
+
+const ADMIN = require("./adminDB")
 
 
+/*
+    (-NOTED-)
+HEROKU APPS GO TO SLEEP AFTER 30 MINS OF INACTIVITY, THIS IS TO PRESERVE THEIR 
+THIS IS TO PRESERVE THEIR 550 DYNO HOURS GIVEN TO FREE TIER, WHEN THE HEROKU APP
+SLEEPS, THE CRON-JO FUNCTION WOULD NOT RUN, AN EASY WAY WOULD BE TO HAVE AN APP SOMEWHERE
+THAT AT INTERVALS IT RUNS A GET REQUEST TO MY SITE BUT THAT WOULD ALSO WASTE THE DYNO HOURS
+    (-----)
+*/
 const updateShortPayment = async function(){
     let readyDocs = await SHORTINVS.find({expiry : {$lt : new Date().getTime()}, paid : false})
     for(i = 0; i <readyDocs.length; i++){
@@ -20,7 +30,7 @@ const updateShortPayment = async function(){
     }
 }
 
-const updateRunningCycle = async function(){
+const updateRunningCycle = async function(req){
     let readyDocs = await CYCLESINVS.find({active : true, days2run : {$lt : 5}})
     for(i = 0; i <readyDocs.length; i++){
         await CYCLESINVS.updateOne({_id :readyDocs[i]._id}, {
@@ -34,8 +44,9 @@ const updateRunningCycle = async function(){
             }}
         })
     }
+    await ADMIN.updateOne({username : req.user.username}, {lastCyclesPayday : Date()})
 }
-
+/*
 
 let Task = cron.schedule('0 0 0 * * *',function(e){
     try {
@@ -61,4 +72,6 @@ let Task = cron.schedule('0 0 0 * * *',function(e){
 })
 
 Task.start()
+*/
 
+module.exports = {updateShortPayment, updateRunningCycle}

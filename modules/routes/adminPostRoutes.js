@@ -8,6 +8,7 @@ const {transporter, Message} = require('../nodemailer')
 const {depositSuccess, depositDecline} = require('../email-templates/deposit')
 const {withdrawAproved,withdrawDecline} = require('../email-templates/withdraw')
 const {loanDecline,loanSuccess} = require('../email-templates/loan')
+const {updateShortPayment, updateRunningCycle} = require('../node-cron')
 
 router.use(express.urlencoded({extended : true}))
 
@@ -245,4 +246,29 @@ router.post('/account:function',isAuth, function(req,res){
     return res.send('invalid submit value')
 })
 
+router.post('/payday',isAuth, function(req,res){
+   if(req.body['type']== 'shorts'){
+       return updateShortPayment().then(()=> {
+            req.flash('error', 'Successfully paid')
+            return res.redirect('payday')
+        })
+        .catch(err=> {
+            req.flash("error","an error occured : "+ err.message)
+            return res.redirect('payday')
+        })
+   }
+   if(req.body['type']== 'cycles'){
+    //   if there is a method to prevent paying twice per day
+    return updateRunningCycle(req).then(()=> {
+        req.flash('error', "successfully paid due cycles")
+        return res.redirect('payday')
+    })
+    .catch(err=>{
+        req.flash("error","an error occured : "+ err.message )
+        console.log(err)
+        return res.redirect('payday')
+    })
+   }
+   return res.send('your method is unsupported, contact management..')
+})
 module.exports = router

@@ -1,7 +1,7 @@
 const express = require("express")
 const { USER , SHORTINVS} = require("../userDB")
 const adminRoute = express.Router()
-const {formatDistanceToNow, format,} = require("date-fns")
+const {formatDistanceToNow, format, isAfter} = require("date-fns")
 const { getInvestments } = require("./user_getRoute")
 
 
@@ -26,6 +26,7 @@ adminRoute.use(async function(req,res,next){
     res.locals.reqUrl = req.url
     res.locals.formatDistanceToNow = formatDistanceToNow
     res.locals.format = format
+    res.locals.isAfter = isAfter
     next()
 })
 // remember this thing with the title always returns the withdraw doc
@@ -55,6 +56,10 @@ adminRoute.get("/deposit",isAuth, getTransactions('deposit'), function(req,res){
 
 adminRoute.get("/withdraw",isAuth, getTransactions('withdraw'), function(req,res){
     res.render("admin/admin-withdraw")
+})
+
+adminRoute.get("/payday",isAuth,function(req,res){
+    res.render("admin/admin-payday")
 })
 
 adminRoute.get("/loan",isAuth,getTransactions('loan'), function(req,res){

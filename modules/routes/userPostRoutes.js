@@ -169,10 +169,10 @@ router.post("/transfer",isAuth, function(req,res){
                 })
                 .catch(err=> {
                     console.log(err.message, "error when trying to update")
-                    return showError(req,"/transfer", "an error occured, trying to update your ballances,report this problem", res)
+                    return showError(req,"/transfer", "an error occured, trying to update your balances,report this problem", res)
                 })
            }else{
-            return showError(req,"/transfer", "insufficient Ballance", res)
+            return showError(req,"/transfer", "insufficient Balance", res)
            }
    }else{
     return showError(req,"/transfer", "your transfer couldn't go through", res)
@@ -255,7 +255,7 @@ router.post("/loan", isAuth,function(req,res){
 })
 
 router.post("/invest", isAuth, getInvestments, function(req,res){
-    if(req.user[req.body.type] < Number(req.body.amount)) return showError(req,"/invest", "insufficient ballance", res)
+    if(req.user[req.body.type] < Number(req.body.amount)) return showError(req,"/invest", "insufficient balance", res)
         if(req.body.type == "shortBallance"){
             plan = res.locals.normalInvestments.filter(investment => investment.title == req.body.title )[0]
             // what if its not an array but a string
@@ -335,7 +335,7 @@ router.post("/invest", isAuth, getInvestments, function(req,res){
 
 router.post('/update-existing-cycle', function(req,res){
     if(req.body['type']=='renew'){
-        if(req.user.cyclesBallance < Number(req.body.amount)) return showError(req,"/invest", "insufficient ballance", res) 
+        if(req.user.cyclesBallance < Number(req.body.amount)) return showError(req,"/invest", "insufficient balance", res) 
         return USER.updateOne({_id : req.user._id},{
             $inc : {cyclesBallance : - Number(req.body.amount)},
             $push : {

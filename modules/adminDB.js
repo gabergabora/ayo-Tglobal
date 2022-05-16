@@ -26,11 +26,11 @@ const adminSchema = mongoose.Schema({
     accounts : [{title : String, address: String}],
     normalInvestments : [normalInvestment],
     cyclesInvestment,
+    lastCyclesPayday : Date
     // they only want one cycle
     // payment geteway
 }, {minimize : false})
 
 const ADMIN = mongoose.model('admin', adminSchema)
 // const NORMAL = mongoose.model('investments', normalInvestment)
-
 module.exports = ADMIN

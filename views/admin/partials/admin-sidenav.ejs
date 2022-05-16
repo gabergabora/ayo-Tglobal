@@ -1,3 +1,10 @@
+        <style>
+          .bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
+          color: white;
+          background-color: rgba(11, 42, 145, 0.4) !important;
+          }
+        </style>
+        
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo d-flex justify-content-center">
@@ -7,7 +14,6 @@
                 </span>
                 <span class="app-brand-text demo menu-text fw-bolder ms-2 text-capitalize"> Temenos</span>
               </a>
-  
               <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                 <i class="bx bx-chevron-left bx-sm align-middle"></i>
               </a>
@@ -28,15 +34,21 @@
                     <div data-i18n="Account Settings"> Update plans </div>
                  </a>
             </li> -->
+            <li class="menu-item">
+              <a href="/admin/payday" class="menu-link">
+                <i class='menu-icon text-info bx bx-repeat'></i>
+                 <div data-i18n="Account Settings">pay day</div>
+              </a>
+            </li>
            <li class="menu-item">
             <a href="/admin/deposit" class="menu-link">
-               <i class='text-success menu-icon tf-icons bx bxs-coin'></i>
+               <i class='text-primary menu-icon tf-icons bx bxs-coin'></i>
                <div data-i18n="Account Settings">Confirm Deposit</div>
             </a>
            </li>
            <li class="menu-item">
             <a href="/admin/withdraw" class="menu-link">
-               <i class="text-info menu-icon tf-icons bx bx-dock-top"></i>
+              <i class='text-warning menu-icon bx bxs-credit-card-alt'></i>
                <div data-i18n="Account Settings">confirm Withdraw</div>
             </a>
           </li>

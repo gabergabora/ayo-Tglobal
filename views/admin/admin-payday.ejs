@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title> Pay investments </title>
+    <!-- headLinks -->
+  <%- include("../partials/headLinks.ejs") -%>
+  <!-- ### headLinks ### -->
+    <style>
+    .app-brand-logo img, .app-brand-logo svg {
+    display: block;
+    width: 40px;
+    margin: 0 auto;
+    }
+    .bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
+    color: #696cff;
+    background-color: rgba(255, 105, 230, 0.16) !important;
+    }
+    .avatar-container{
+      background-color: rgba(120, 105, 255, 0.16) ;
+      border-radius: 10px;
+    }
+    li.user-short{
+      cursor: pointer;
+    }
+    #myAlert{
+        top: -200px;
+        -webkit-transition: top .7s ease-in-out;
+        -o-transition: top .7s ease-in-out;
+        transition: top .7s ease-in-out;
+        max-width: 500px;
+        margin: 0 auto ;
+        z-index: 10;
+    }
+    .move{
+        top: 150px !important;
+    }
+    </style>
+  </head>
+
+  <body>
+    <% if(messages.error){ %>
+      <% console.log(messages) %>
+      <div class="alert alert-primary alert-dismissible move text-center" role="alert" id="myAlert">
+          <%= messages.error %>
+        </div>
+        <script>
+      setTimeout(function () {
+      return myAlert.classList.remove("move");
+      }, 3000);
+        </script>
+    <% } %>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <%- include("./partials/admin-sidenav.ejs") -%>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center ms-auto me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper container">
+            <div class="container flex-grow-1 container-p-y">
+              <h4> CREDIT INVESTMENTS THAT ARE DUE </h4>
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                      <div class="row justify-content-between">
+                        <div class="col-sm-5 col-md-5 d-flex justify-content-center align-items-center p-3 card h-40 mb-3" style="height: 200px;">
+                          <h5 class="title text-primary"> SHORTS PAYMENT </h5>
+                          <form action="" method="post">
+                            <input type="hidden" name="type" value="shorts">
+                            <button class="btn btn-outline-primary"> PAY </button>
+                          </form>
+                        </div>
+                        <div class="col-sm-5 col-md-5 d-flex justify-content-center align-items-center p-3 card mb-3" style="height: 200px;">
+                          <h5 class="title text-primary"> CYCLES PAYMENT</h5>
+                          <%# using date fns to check if the the db date is greater than todays date at 00.00 %>
+                            <% if(isAfter(new Date().setHours(0,0,0,0), new Date(admin.lastCyclesPayday))){%>
+                              <form action="" method="post">
+                                <input type="hidden" name="type" value="cycles">
+                                <button class="btn btn-outline-success"> PAY </button>
+                              </form>
+                            <%}else{%>
+                              <button class="btn btn-primary" disabled> PAID </button>
+                            <%}%>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / Content -->
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    	<%- include("../partials/footerLinks.ejs") -%>
+
+      <script>
+        var modal = document.querySelector("#modalCenter")
+        document.querySelectorAll("li").forEach(li => {
+          li.addEventListener('click', function(){
+            li.querySelectorAll("input[type='hidden']").forEach(input=>{
+               modal.querySelector(input.getAttribute('target-value')).value = input.value
+               modal.querySelector(input.getAttribute('target-value')).innerText = input.value
+            })
+          })
+        });
+      </script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
