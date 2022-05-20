@@ -1,5 +1,4 @@
 // const cron = require('node-cron')
-// note npm i cron is the real cron task, use that if this step doe
 // const { transporter, Message } = require('./nodemailer')
 const {USER, SHORTINVS, CYCLESINVS} = require('./userDB')
 // require('dotenv').config()

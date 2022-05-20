@@ -21,7 +21,7 @@ const withdrawRequest = function(name,amount){
             <h3 style="color: #2f4b7a; font-weight: 400; font-size: 32px;"> A withdrawal of    <small> $${amount}</small>
                 <small style="display: block;">  has been placed on your account</small>
             </h3>
-            <small style="display: block;"> will be confirmed withing 24 hours</small>
+            <small style="display: block;"> will be confirmed within 24 hours</small>
         </div>
         <div class="getStarted">
             <img src="https://www.temenosglobal.com/assets/email-images/withdraw-request.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
@@ -54,8 +54,7 @@ const withdrawAproved = function(name,amount){
             padding-left: 1rem;
             max-width: 400px;
         ">
-            <h4 style="color: #2f4b7a; margin-bottom:16px; font-size:30px;"> Hey ${name},</h4>
-            <h3 style="color: #2f4b7a; font-weight: 400; font-size: 32px;"> A withdrawal of    <small style="color :green;"> $${amount}</small>
+            <h3 style="color: #2f4b7a; font-weight: 400; font-size: 24px;"> Your application for withdrawal of <small style="color :green;"> $${amount}</small>
                 <small style="display: block;">  has been approved</small>
             </h3>
         </div>
