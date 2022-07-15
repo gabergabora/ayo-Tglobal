@@ -127,7 +127,7 @@ const welcome = function(name){
            </table> 
            <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"> 
              <tr> 
-              <td align="center" style="padding:0;Margin:0;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png);background-repeat:repeat;background-position:left top" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png"> 
+              <td align="center" style="padding:0;Margin:0;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png);background-repeat:repeat;background-position:left top" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png"> 
                <table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#ffffff;width:600px" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center"> 
                  <tr> 
                   <td class="es-m-p10r es-m-p10l" align="left" bgcolor="#ffffff" style="padding:0;Margin:0;background-color:#ffffff"> 
@@ -150,7 +150,7 @@ const welcome = function(name){
            </table> 
            <table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"> 
              <tr> 
-              <td align="center" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png" style="padding:0;Margin:0;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png);background-repeat:repeat;background-position:left top"> 
+              <td align="center" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png" style="padding:0;Margin:0;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png);background-repeat:repeat;background-position:left top"> 
                <table class="es-content-body" align="center" cellpadding="0" cellspacing="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px"> 
                  <tr> 
                   <td align="left" style="padding:0;Margin:0"> 
@@ -186,10 +186,10 @@ const welcome = function(name){
            </table> 
            <table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%"> 
              <tr> 
-              <td align="center" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png" style="padding:0;Margin:0;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png);background-repeat:repeat;background-position:left top"> 
+              <td align="center" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png" style="padding:0;Margin:0;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png);background-repeat:repeat;background-position:left top"> 
                <table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#ffffff;width:600px" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center"> 
                  <tr> 
-                  <td align="left" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png" style="Margin:0;padding-top:20px;padding-bottom:20px;padding-left:40px;padding-right:40px;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png);background-repeat:repeat;background-position:left top"> 
+                  <td align="left" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png" style="Margin:0;padding-top:20px;padding-bottom:20px;padding-left:40px;padding-right:40px;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png);background-repeat:repeat;background-position:left top"> 
                    <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px"> 
                      <tr> 
                       <td valign="top" align="center" style="padding:0;Margin:0;width:520px"> 
@@ -272,7 +272,7 @@ const welcome = function(name){
            </table> 
            <table cellpadding="0" cellspacing="0" class="es-footer" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top"> 
              <tr> 
-              <td align="center" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png" style="padding:0;Margin:0;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti_1.png);background-repeat:repeat;background-position:left top"> 
+              <td align="center" background="https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png" style="padding:0;Margin:0;background-image:url(https://www.temenosglobal.com/assets/email-images/backgroundconfetti.png);background-repeat:repeat;background-position:left top"> 
                <table class="es-footer-body" align="center" cellpadding="0" cellspacing="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px"> 
                  <tr> 
                   <td align="left" style="Margin:0;padding-left:20px;padding-right:20px;padding-top:25px;padding-bottom:25px;background-color:#2f4b7a" bgcolor="#2f4b7a"> 
