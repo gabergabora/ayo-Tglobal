@@ -84,7 +84,7 @@ const loanDecline = function(name,amount){
     ">
         <p style="color: #2f4b7a; margin-bottom:16px; font-size:30px; text-transform: capitalize;"> Hi ${name},</p>
         <p style="color: #2f4b7a; font-weight: 400; font-size: 14px;"> Your application for a loan of  $${amount}
-        was declined. please contact our care support for more information on this.
+        was declined. please contact our care support for more information about this transaction.
         </p>
     </div>
     <footer style="background-color: #2f4b7a; padding : 20px 0; display: flex; align-items: center; color: white;">

@@ -771,11 +771,8 @@ const successfulDeposit = function (name, amount, id) {
                             <strong>Hi ${name}</strong
                             >&nbsp;,<br /><br />Your deposit request
                             of <strong>${amount}</strong
-                            ><strong>USD</strong> was submitted
-                            successfully via <strong>Bitcoin</strong
-                            ><span style="color: null"
-                              ><strong></strong
-                            ></span>
+                            ><strong>USD</strong> has been confirmed successfully and 
+                            credited into your account
                           </p>
                         </td>
                       </tr>

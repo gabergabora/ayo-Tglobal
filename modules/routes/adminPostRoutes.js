@@ -89,14 +89,17 @@ router.post("/deposit",isAuth, function(req,res){
             confirmed : true
         }, function(err, data){
             if(err) return res.send('an error occured in declining the deposit')
-            let message = new Message(data.email,`Your Deposit of $${req.body.amount} has been Declined`, 
-            `your deposit of ${req.body.amount} has been declined`,
-            declinedDeposit(data.firstName, req.body.amount, req.body.id)
-            )
-            transporter.sendMail(message, function(err, info){
-                if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
+            return USER.findOne({_id : req.body.userID}, function(err, user){
+                if(err) return res.send("error occured trying to find USER")
+                let message = new Message(user.email,`Your Deposit of $${req.body.amount} has been Declined`, 
+                `your deposit of ${req.body.amount} has been declined`,
+                declinedDeposit(data.firstName, req.body.amount, req.body.id)
+                )
+                transporter.sendMail(message, function(err){
+                    if(err) console.log("error occured sending email confirmation to user for deposit ",err.message )
+                })
+                return res.redirect('deposit')
             })
-            return res.redirect('deposit')
         })
     }
     return res.send("invalid submit means")
