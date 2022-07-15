@@ -21,7 +21,7 @@ const withdrawRequest = function(name,amount){
             <p style="color: #2f4b7a; font-weight: 400; font-size: 14px;"> You requested to withdrawal a total of $${amount}
              from your account. this request will be confirmed within 24 hours
             </p>
-            <small style="display: block; margin-top : 20px; color: #2f4b7a;">please report this transaction if it was not placed by you</small>
+            <small style="display: block; margin-top : 20px; color: #2f4b7a;">please report this transaction immediately if it was not placed by you</small>
         </div>
         <footer style="background-color: #2f4b7a; margin-top: 20px ; padding : 20px 0; display: flex; align-items: center; color: white;">
         <a href="https://temenosglobal.com"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> Home </a>
