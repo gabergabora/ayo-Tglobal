@@ -139,7 +139,7 @@ const welcome = function(name){
                           <td align="left" class="es-m-txt-l es-m-p5l" style="padding:0;Margin:0;padding-left:30px"><h3 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-size:20px;font-style:normal;font-weight:normal;color:#2f4b7a">Hi ${name} ,</h3></td> 
                          </tr> 
                          <tr> 
-                          <td align="left" class="es-m-txt-l es-m-p20b es-m-p5l" style="padding:0;Margin:0;padding-top:10px;padding-bottom:25px;padding-left:30px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#2f4b7a;font-size:14px">Welcome to temenosglobal<br>we're excited to have you as part of us.<br>Your account is ready and you can start using it right away.</p></td> 
+                          <td align="left" class="es-m-txt-l es-m-p20b es-m-p5l" style="padding:0;Margin:0;padding-top:10px;padding-bottom:25px;padding-left:30px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#2f4b7a;font-size:14px">Welcome to temenosglobal,<br> We're excited to have you as part of us.<br> Your account is ready, and you can start using it right away.</p></td> 
                          </tr> 
                        </table></td> 
                      </tr> 

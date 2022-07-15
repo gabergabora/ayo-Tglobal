@@ -17,7 +17,7 @@ const depositRequest = function(name,amount){
         max-width: 400px;
     ">
        
-        <p style="color: #2f4b7a; margin-bottom:16px; font-size:16px;text-transform: capitalize;"> Hi ${name},</p>
+        <p style="color: #2f4b7a;  font-size:16px;text-transform: capitalize;"> Hi ${name},</p>
         <p style="color: #2f4b7a; font-weight: 400; font-size: 14px;"> Your deposit of $${amount}
          was submitted successfully and awaiting confirmation.
         </p>

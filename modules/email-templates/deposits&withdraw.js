@@ -160,7 +160,7 @@ const declinedWithdraw = function (name, amount) {
                             "
                           >
                             <br />
-                            <strong>Hi ${name}</strong
+                            <strong>Hi ${name} ,</strong
                             >&nbsp;,<br /><br />Your withdrawal
                             request of <strong>${amount} </strong
                             ><strong>USD</strong> was declined.
@@ -337,12 +337,12 @@ const successfulWithdraw = function (name, amount, id) {
                             font-size: 14px;
                           "
                         >
-                          <strong>Hi ${name}</strong
+                          <strong>Hi ${name} ,</strong
                           >&nbsp;,<br /><br />Your withdrawal
                           request of <strong>${amount} </strong
-                          ><strong>USD</strong> has been approved
+                          ><strong>USD</strong>has been approved
                           and will be sent to your wallet shortly
-                          via bitcoin
+                          via bitcoin.
                         </p>
                       </td>
                     </tr>
@@ -553,7 +553,7 @@ const declinedDeposit = function (name, amount, id) {
                               font-size: 14px;
                             "
                           >
-                            <strong>Hi ${name}</strong
+                            <strong>Hi ${name} ,</strong
                             >&nbsp;,<br /><br />Your deposit request
                             of <strong>${amount} </strong
                             ><strong>USD</strong> was declined.
@@ -768,11 +768,11 @@ const successfulDeposit = function (name, amount, id) {
                               font-size: 14px;
                             "
                           >
-                            <strong>Hi ${name}</strong
+                            <strong>Hi ${name} ,</strong
                             >&nbsp;,<br /><br />Your deposit request
                             of <strong>${amount}</strong
                             ><strong>USD</strong> has been confirmed successfully and 
-                            credited into your account
+                            credited into your account.
                           </p>
                         </td>
                       </tr>
