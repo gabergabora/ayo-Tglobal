@@ -12,18 +12,15 @@ const loanRequest = function(name,amount){
 
     <div class="content me-4 mb-4" style="
         margin-top: 20px;
-        text-transform: capitalize;
         padding-left: 1rem;
         max-width: 400px;
     ">
-        <h4 class="mb-2 fw-normal" style="color: #2f4b7a;"> Hey ${name},</h4>
-        <h3 class="display-5 fw-normal" style="color: #2f4b7a; font-weight: 400; font-size: 32px;"> You applied for a loan of <small> $${amount}</small>
-            <small style="display: block;">your application is being processed</small>
-        </h3>
+    <p style="color: #2f4b7a; margin-bottom:16px; font-size:30px; text-transform: capitalize;"> Hi ${name},</p>
+    <p style="color: #2f4b7a; font-weight: 400; font-size: 14px;">  Your application for a loan of $${amount}
+    was placed successfully and is being processed, please wait for confirmation.
+    </p>
     </div>
-    <div class="getStarted">
-        <img src="https://www.temenosglobal.com/assets/email-images/laon-application.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
-    </div>
+  
     <footer style="background-color: #2f4b7a; padding : 20px 0; display: flex; align-items: center; color: white;">
     <a href="https://temenosglobal.com"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> Home </a>
     <a href="https://temenosglobal.com/about"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> About </a>
@@ -37,7 +34,7 @@ const loanRequest = function(name,amount){
 const loanSuccess = function(name, amount){
     return `
     <div class="container px-0 my-0 mx-auto" style=" max-width: 600px; margin: 0 auto;">
-    <header style=" background-color: #2f4b7a; width:100; display: flex; text-align : center; justify-content: center; align-items: center; padding: 16px 0;">
+    <header style=" background-color: #2f4b7a; width:100%; text-align: center; display: flex; justify-content: center; align-items: center; padding: 16px 0;">
         <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" 
         style=" 
         height: 30px;
@@ -48,17 +45,13 @@ const loanSuccess = function(name, amount){
 
     <div class="content me-4 mb-4" style="
         margin-top: 20px;
-        text-transform: capitalize;
         padding-left: 1rem;
         max-width: 400px;
     ">
-        <h4 style="color: #2f4b7a; margin-bottom:16px; font-size:30px;"> Hey ${name},</h4>
-        <h3 style="color: #2f4b7a; font-weight: 400; font-size: 32px;"> Your application for a loan of  <small style="color : green;"> $${amount}</small>
-            <small style="display: block;">has been approved</small>
-        </h3>
-    </div>
-    <div class="getStarted">
-        <img src="https://www.temenosglobal.com/assets/email-images/loan-confirm.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
+        <p style="color: #2f4b7a; margin-bottom:16px; font-size:30px; text-transform: capitalize;"> Hi ${name},</p>
+        <p style="color: #2f4b7a; font-weight: 400; font-size: 14px;"> Your application for a loan of  $${amount}
+        has been approved. <strong> $${amount} </strong> has been credited to your  <a href="https://temenosglobal.com/login"> account.</a>
+        </p>
     </div>
     <footer style="background-color: #2f4b7a; padding : 20px 0; display: flex; align-items: center; color: white;">
     <a href="https://temenosglobal.com"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> Home </a>
@@ -70,32 +63,29 @@ const loanSuccess = function(name, amount){
     `
 }
 
-const loanDecline = function(amount){
+const loanDecline = function(name,amount){
     return `
     
 <body>
 <div class="container px-0 my-0 mx-auto" style=" max-width: 600px; margin : 0 auto; ">
-    <header style=" background-color: #2f4b7a; width:100; display: flex; text-align : center; justify-content: center; align-items: center; padding: 16px 0;">
+        <header style=" background-color: #2f4b7a; width:100%; text-align: center; display: flex; justify-content: center; align-items: center; padding: 16px 0;">
         <img src="https://www.temenosglobal.com/assets/images/temenos.png" alt="Temenos global logo" 
         style=" 
         height: 30px;
         display: inline-block;"
         >
         <h4 style="color: white;">Temenos global</h4>
-    </header>
+        </header>
 
     <div class="content me-4 mb-4" style="
         margin-top: 20px;
-        text-transform: capitalize;
         padding-left: 1rem;
         max-width: 400px;
     ">
-        <h3 class="display-5 fw-normal" style="color: #2f4b7a; font-weight: 400; font-size: 32px;"> Your application for a loan of  <small style="color: red;"> $${amount}</small>
-            <small style="display: block;">was declined</small>
-        </h3>
-    </div>
-    <div class="getStarted">
-        <img src="https://www.temenosglobal.com/assets/email-images/loan-decline.png" height="60%" style="display: block; margin: 0 auto; height: 60%;" alt="how to get started" >
+        <p style="color: #2f4b7a; margin-bottom:16px; font-size:30px; text-transform: capitalize;"> Hi ${name},</p>
+        <p style="color: #2f4b7a; font-weight: 400; font-size: 14px;"> Your application for a loan of  $${amount}
+        was declined. please contact our care support for more information about this transaction.
+        </p>
     </div>
     <footer style="background-color: #2f4b7a; padding : 20px 0; display: flex; align-items: center; color: white;">
         <a href="https://temenosglobal.com"  style="margin: 0 1rem; display: block; color: white; text-decoration: none;"> Home </a>
