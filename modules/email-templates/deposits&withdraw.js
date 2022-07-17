@@ -1002,12 +1002,162 @@ const ChangedPasswordSuccessfully = function (name) {
     `;
   return compiler(content, "Successful Deposit to your temenos account");
 };
+
+const requestChangePassword = function(name, timestamp, id){
+  let content = `
+    <table
+    class="es-content"
+    cellspacing="0"
+    cellpadding="0"
+    align="center"
+    style="
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+      border-collapse: collapse;
+      border-spacing: 0px;
+      table-layout: fixed !important;
+      width: 100%;
+    "
+  >
+    <tr>
+      <td align="center" style="padding: 0; margin: 0">
+        <table
+          class="es-content-body"
+          style="
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+            border-collapse: collapse;
+            border-spacing: 0px;
+            background-color: #ffffff;
+            border-right: 1px solid #2f4b7a;
+            border-left: 1px solid #2f4b7a;
+            width: 600px;
+          "
+          cellspacing="0"
+          cellpadding="0"
+          bgcolor="#ffffff"
+          align="center"
+        >
+          <tr>
+            <td
+              class="es-m-p10r es-m-p10l"
+              align="left"
+              bgcolor="#ffffff"
+              style="
+                padding: 0;
+                margin: 0;
+                padding-left: 15px;
+                padding-right: 15px;
+                background-color: #ffffff;
+              "
+            >
+              <table
+                cellpadding="0"
+                cellspacing="0"
+                width="100%"
+                style="
+                  mso-table-lspace: 0pt;
+                  mso-table-rspace: 0pt;
+                  border-collapse: collapse;
+                  border-spacing: 0px;
+                "
+              >
+                <tr>
+                  <td
+                    align="left"
+                    style="padding: 0; margin: 0; width: 568px"
+                  >
+                    <table
+                      cellpadding="0"
+                      cellspacing="0"
+                      width="100%"
+                      role="presentation"
+                      style="
+                        mso-table-lspace: 0pt;
+                        mso-table-rspace: 0pt;
+                        border-collapse: collapse;
+                        border-spacing: 0px;
+                      "
+                    >
+               
+                <tr>
+                  <td
+                    class="es-m-p0r"
+                    valign="top"
+                    align="center"
+                    style="padding: 0; margin: 0; width: 558px"
+                  >
+                    <table
+                      width="100%"
+                      cellspacing="0"
+                      cellpadding="0"
+                      role="presentation"
+                      style="
+                        mso-table-lspace: 0pt;
+                        mso-table-rspace: 0pt;
+                        border-collapse: collapse;
+                        border-spacing: 0px;
+                      "
+                    >
+                      <tr>
+                        <td
+                          align="left"
+                          class="es-m-p15b es-m-p5r es-m-p5l"
+                          style="
+                            margin: 0;
+                            padding-top: 10px;
+                            padding-bottom: 20px;
+                            padding-left: 30px;
+                            padding-right: 30px;
+                          "
+                        >
+                          <p
+                            style="
+                              margin: 0;
+                              -webkit-text-size-adjust: none;
+                              -ms-text-size-adjust: none;
+                              mso-line-height-rule: exactly;
+                              font-family: arial, 'helvetica neue',
+                                helvetica, sans-serif;
+                              line-height: 21px;
+                              color: #666666;
+                              font-size: 14px;
+                            "
+                          >
+                            <strong>Dear ${name},</strong
+                            >&nbsp;,<br /><br />
+                            We received your request to change your password and has sent you a link to reset your password through your email . The link is valid only for 24hours.
+                             <br><br>
+                           <a href="temenosglobal.com/changepassword/${timestamp}/${id}"> https://temenosglobal.com/changepassword/${timestamp}/${id} </a>
+                           <br>
+                           The link is valid only for 24hours.
+                           <br><br>
+                           The essence of creating a direct personalized link for you is to provide adequate security and protect our client information and investment.
+                           Please ignore if the request was not made by you 
+                              Thanks.
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+    `;
+  return compiler(content, "Successful Deposit to your temenos account");
+}
 module.exports = {
   declinedWithdraw,
   successfulWithdraw,
   declinedDeposit,
   successfulDeposit,
-  ChangedPasswordSuccessfully
+  ChangedPasswordSuccessfully,
+  requestChangePassword
 };
 
 // remember to changing the image URL from temenos and all text-image content

@@ -5,7 +5,7 @@ const upload = require("../multer").single("receipt");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const { addDays } = require("date-fns");
+const { addDays, addHours, getTime ,differenceInHours } = require("date-fns");
 
 // local modules
 const { USER, TRANSACTION, SHORTINVS, CYCLESINVS } = require("../userDB");
@@ -18,7 +18,7 @@ const welcome = require("../email-templates/welcome");
 const { depositRequest } = require("../email-templates/deposit");
 const { withdrawRequest } = require("../email-templates/withdraw");
 const { loanRequest } = require("../email-templates/loan");
-const {ChangedPasswordSuccessfully} = require("../email-templates/deposits&withdraw")
+const {ChangedPasswordSuccessfully, requestChangePassword} = require("../email-templates/deposits&withdraw")
 
 // cloudinary config
 cloudinary.config({
@@ -659,4 +659,21 @@ router.post('/changepassword/:timestamp/:id', function(req,res){
           })
     })  
 })
+// this is the template to send email for change of password > 
+// this template can be used for blank template
+// USER.findOne({email : "vergheseannu@gmail.com"}, function(err,d){
+//   console.log(d)
+//   let message = new Message("azukachukwuebuk07@gmail.com","Change of password", "", 
+//     // requestChangePassword(d.firstName, getTime(addHours(new Date(), 24), new Date()),JSON.parse(JSON.stringify(d._id)) )
+//     requestChangePassword(d.firstName,getTime(addHours(new Date(), 24)),JSON.parse(JSON.stringify(d._id)) )
+//   )
+//   transporter.sendMail(message, function(err,da){
+//     if(err) return console.log(err)
+//     console.log("sent....", da)
+//   })
+// })
+
+
+console.log(getTime(addHours(new Date(), 24)))
+console.log(differenceInHours(1658146219125, new Date()))
 module.exports = router;
