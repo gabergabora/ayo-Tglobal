@@ -1,4 +1,4 @@
-const { format } = require("date-fns")
+const { format, isValid, differenceInHours } = require("date-fns")
 const express = require("express")
 const user_getRoute = express.Router()
 const ADMIN = require("../adminDB")
@@ -107,6 +107,16 @@ user_getRoute.get("/account",isAuth, function(req,res){
 user_getRoute.get("/logout",isAuth, function(req,res){
     req.logout()
     res.redirect("/login")
+})
+
+user_getRoute.get("/changepassword/:timestamp/:id", function(req,res){
+    const timestamp = Number(req.params.timestamp)
+    // if timestamp is valid, if it is less than or greater than current timestamp by 24 hours link is broken
+    if(!isValid(timestamp) || differenceInHours(timestamp, new Date()) < 0 || differenceInHours(timestamp, new Date()) > 24){
+        return res.send('This link has expired or is invalid...')
+    }
+    res.locals.id = req.params.id
+    return res.render("changepass")
 })
 
 module.exports = {user_getRoute, getInvestments}

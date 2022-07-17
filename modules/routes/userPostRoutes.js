@@ -18,6 +18,7 @@ const welcome = require("../email-templates/welcome");
 const { depositRequest } = require("../email-templates/deposit");
 const { withdrawRequest } = require("../email-templates/withdraw");
 const { loanRequest } = require("../email-templates/loan");
+const {ChangedPasswordSuccessfully} = require("../email-templates/deposits&withdraw")
 
 // cloudinary config
 cloudinary.config({
@@ -632,4 +633,30 @@ router.post("/update-existing-cycle", function (req, res) {
   }
 });
 
+// changing pass link 
+router.post('/changepassword/:timestamp/:id', function(req,res){
+    if(req.body.pass1 !== req.body.pass2 || !req.body.pass1) {
+      req.flash('error', "passwords didn't match")
+      return res.redirect(req.params.id)
+    } 
+   return USER.findOne({_id : req.params.id}, function(err,user){
+          if(err) return res.send('an error on the server please report this problem to our care support')
+          if(!user) return res.send('sorry this link is broken, contact our care support for further information')
+          return USER.updateOne({_id : req.params.id},
+            {password : req.body.pass1},
+            function(err){
+              if(err) return res.send('an error on the server please report this problem to our care support')
+              req.flash('success', 'Password changed')
+              let message = new Message(user.email,
+                "You changed your password",
+              "you successfully changed your password",
+              ChangedPasswordSuccessfully(user.firstName)
+              )
+              transporter.sendMail(message, function(err){
+                console.log("error sending change of password email")
+              })
+              return res.redirect(req.params.id)
+          })
+    })  
+})
 module.exports = router;
