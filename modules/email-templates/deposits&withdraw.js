@@ -337,12 +337,12 @@ const successfulWithdraw = function (name, amount, id) {
                             font-size: 14px;
                           "
                         >
-                          <strong>Hi ${name} ,</strong
-                          >&nbsp;,<br /><br />Your withdrawal
+                          <strong>Hi ${name},
+                          <br /><br />Your withdrawal
                           request of <strong>${amount} </strong
-                          ><strong>USD</strong>has been approved
+                          ><strong>USD</strong> has been approved
                           and will be sent to your wallet shortly
-                          via bitcoin.
+                          via <strong>Bitcoin.</strong>
                         </p>
                       </td>
                     </tr>
