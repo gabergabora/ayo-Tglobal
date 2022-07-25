@@ -337,7 +337,7 @@ const successfulWithdraw = function (name, amount, id) {
                             font-size: 14px;
                           "
                         >
-                          <strong>Hi ${name},
+                          <strong>Hi ${name}, </strong>
                           <br /><br />Your withdrawal
                           request of <strong>${amount} </strong
                           ><strong>USD</strong> has been approved
