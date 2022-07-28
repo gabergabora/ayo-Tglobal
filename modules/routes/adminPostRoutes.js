@@ -72,7 +72,7 @@ router.post("/deposit",isAuth, function(req,res){
                         // i wanted to update percentage of referrals automatically but since i saved the email of 
                         // the referred in the referree, if i use the email to find the referre here, and the referred has changed email
                         // then the refferre wont be credited and its stress to do that now.. 21/04/22
-                        let message = new Message(data.email,`Your Deposit of $${req.body.amount} has been comfirmed`, 
+                        let message = new Message(data.email,`Your Deposit of $${req.body.amount} has been confirmed`, 
                         `your deposit of ${req.body.amount} has been confirmed and credited into your account`,
                         successfulDeposit(data.firstName, req.body.amount, req.body.id)
                         )
