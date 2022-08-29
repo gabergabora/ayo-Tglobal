@@ -23,9 +23,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "16.x"
+    "node": "17.7"
   },
-  "NOTE-EBUKA" : "original version is 17.7 (just in case), changes it bcs vercel supprts just 16.x",
   "author": "",
   "license": "ISC"
 }
